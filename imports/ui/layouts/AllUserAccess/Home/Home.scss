@@ -2,13 +2,11 @@
 @import '../../../stylesheets/colors';
 
 .index {
-  padding: 2vw;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 70vh;
+  padding-top: 100px;
   .index-bg-color {
     position: absolute;
     bottom: 20%;

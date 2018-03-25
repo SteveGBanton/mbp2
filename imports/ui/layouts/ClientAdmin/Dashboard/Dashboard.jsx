@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LinkAdder from '../../../components/LinkAdder/LinkAdder'
-
-import './Dashboard.scss'
 
 const Dashboard = ({ history, user }) => (
   <div className="dashboard">
-    <LinkAdder history={history} />
+    <h1>Dashboard Page</h1>
   </div>
 );
 

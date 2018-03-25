@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import PageHeader from './PageHeader/PageHeader.jsx';
@@ -28,10 +28,10 @@ Page.propTypes = {
 
 const pageContent = new ReactiveVar('');
 
-export default createContainer(({ content, page }) => {
+export default withTracker(({ content, page }) => {
   window.scrollTo(0, 0); // Force window to top of page.
 
-  Meteor.call('utility.getPage', {page}, (error, response) => {
+  Meteor.call('utility.getPage', { page }, (error, response) => {
     if (error) {
       console.warn(error);
     } else {
@@ -42,4 +42,4 @@ export default createContainer(({ content, page }) => {
   return {
     content: content || pageContent.get(),
   };
-}, Page);
+})(Page);
