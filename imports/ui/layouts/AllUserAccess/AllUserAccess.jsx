@@ -10,10 +10,13 @@ const AllUserAccess = ({
   component,
   history,
   user,
+  classes,
   ...rest
 }) => (
-  <div className="all-access">
-    <Navigation />
+  <div className={classes.routeWrap}>
+    <Navigation
+      authenticated={authenticated}
+    />
     <Route
       {...rest}
       render={props => (

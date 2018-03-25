@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { compose } from 'recompose';
 
-import PageHeader from './PageHeader/PageHeader.jsx';
-import Content from './Content/Content.jsx';
+import { withStyles } from 'material-ui/styles';
 
-import './Page.scss';
+import PageHeader from './PageHeader/PageHeader';
+import Content from './Content/Content';
+
+import styles from './Page.styles';
 
 const Page = ({ title, subtitle, content }) => (
   <div className="Page">
@@ -28,18 +31,21 @@ Page.propTypes = {
 
 const pageContent = new ReactiveVar('');
 
-export default withTracker(({ content, page }) => {
-  window.scrollTo(0, 0); // Force window to top of page.
+export default compose(
+  withTracker(({ content, page }) => {
+    window.scrollTo(0, 0); // Force window to top of page.
 
-  Meteor.call('utility.getPage', { page }, (error, response) => {
-    if (error) {
-      console.warn(error);
-    } else {
-      pageContent.set(response);
-    }
-  });
+    Meteor.call('utility.getPage', { page }, (error, response) => {
+      if (error) {
+        console.warn(error);
+      } else {
+        pageContent.set(response);
+      }
+    });
 
-  return {
-    content: content || pageContent.get(),
-  };
-})(Page);
+    return {
+      content: content || pageContent.get(),
+    };
+  }),
+  withStyles(styles),
+)(Page);

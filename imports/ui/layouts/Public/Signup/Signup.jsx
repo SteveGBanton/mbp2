@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { debounce, kebabCase } from 'lodash';
+import { withStyles } from 'material-ui/styles';
 
+import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import Icon from 'material-ui/Icon';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
+
+import styles from './Signup.styles';
 
 import customFormValidator from '../../../../modules/custom-form-validator';
 
@@ -43,7 +47,34 @@ const signupErrorMessages = {
   },
 };
 
-export default class Signup extends React.Component {
+function signUpFacebook() {
+  Meteor.loginWithFacebook({
+    requestPermissions: ['public_profile', 'email'],
+  }, (err) => {
+    if (err) {
+      console.log(err);
+      // handle error
+    } else {
+      // console.log();
+      // successful login!
+    }
+  });
+}
+
+function signUpGoogle() {
+  Meteor.loginWithGoogle({
+    requestPermissions: ['email'],
+  }, (err) => {
+    if (err) {
+      console.log(err);
+      // handle error
+    } else {
+      // successful login!
+    }
+  });
+}
+
+export class signup extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -168,125 +199,101 @@ export default class Signup extends React.Component {
     this.setState({ "formErrors.username": "" });
   }
 
-  signUpFacebook() {
-    Meteor.loginWithFacebook({
-      requestPermissions: ['public_profile', 'email'],
-    }, (err) => {
-      if (err) {
-        console.log(err);
-        // handle error
-      } else {
-        // console.log();
-        // successful login!
-      }
-    });
-  }
-
-  signUpGoogle() {
-    Meteor.loginWithGoogle({
-      requestPermissions: ['email'],
-    }, (err) => {
-      if (err) {
-        console.log(err);
-        // handle error
-      } else {
-        // successful login!
-      }
-    });
-  }
-
   render() {
+    const { classes } = this.props;
     return (
-      <Paper className="Signup">
-
-        <h2>Create New Account</h2>
-
-        <form onSubmit={event => event.preventDefault()}>
-
-          <Button
-            type="submit"
-            fullWidth
-            onClick={this.signUpFacebook}
-          >
-            <span style={{ color: 'white' }}>
-              Facebook Sign Up
-          </span>
-          </Button>
-
-          <Button
-            type="submit"
-            fullWidth
-            onClick={this.signUpGoogle}
-          >
-            <span style={{ color: 'white' }}>Google Sign Up</span>
-          </Button>
-
-          <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexFlow: 'row nowrap', marginTop: 20 }}>
-            <Icon className="material-icons">
-              remove
-            </Icon>
-            OR
-            <Icon className="material-icons">
-              remove
-            </Icon>
-          </div>
-
-          <TextField
-            id="orgID"
-            label="Pick A Username"
-            value={this.state.username}
-            onChange={this.editUsername}
-            inputRef={(input) => { this.username = input; }}
-            error={!!this.state.formErrors.username}
-            maxLength="22"
-          />
-          {
-            (this.state.usernameLoading)
-              ? <CircularProgress
-                size={25}
-                left={10}
-                top={0}
-                status="loading"
-                style={{ display: 'inline-block', position: 'relative' }}
-              />
-              : ''
-          }
-
-          <TextField
-            id="username"
-            label="Email Address"
-            inputRef={(input) => { this.emailAddress = input; }}
-            error={!!this.state.formErrors.emailAddress}
-          /><br />
-
-          <TextField
-            id="password"
-            type="password"
-            label="Password"
-            inputRef={(password) => { this.password = password; }}
-            error={!!this.state.formErrors.password}
-          />
-
-          <div>
-
-            <Button
-              type="submit"
-              fullWidth
-              onClick={this.formValidate}
-              style={{ margin: "35px 0 35px 0" }}
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+      >
+        <Paper
+          className={classes.signupBox}
+          elevation={14}
+        >
+          <h2>Create New Account</h2>
+          <form onSubmit={event => event.preventDefault()}>
+            <Grid
+              container
+              direction="column"
             >
-              Sign Up
-        </Button>
-
-          </div>
-
+              <Button
+                type="submit"
+                fullWidth
+                onClick={signUpFacebook}
+                className={classes.facebook}
+              >
+                Facebook Sign Up
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                onClick={signUpGoogle}
+                className={classes.google}
+              >
+                Google Sign Up
+              </Button>
+              <div
+                className={classes.orText}
+              >
+                -
+                OR
+                -
+              </div>
+              <TextField
+                id="orgID"
+                label="Pick A Username"
+                autoComplete="username"
+                value={this.state.username}
+                onChange={this.editUsername}
+                inputRef={(input) => { this.username = input; }}
+                error={!!this.state.formErrors.username}
+                maxLength="22"
+              />
+              {
+                (this.state.usernameLoading)
+                  ? <CircularProgress
+                    size={25}
+                    left={10}
+                    top={0}
+                    status="loading"
+                    style={{ display: 'inline-block', position: 'relative' }}
+                  />
+                  : ''
+              }
+              <TextField
+                id="username"
+                autoComplete="email"
+                label="Email Address"
+                inputRef={(input) => { this.emailAddress = input; }}
+                error={!!this.state.formErrors.emailAddress}
+              />
+              <TextField
+                id="password"
+                type="password"
+                label="Password"
+                autoComplete="new-password"
+                inputRef={(password) => { this.password = password; }}
+                error={!!this.state.formErrors.password}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                onClick={this.formValidate}
+              >
+                Sign Up
+              </Button>
+            </Grid>
+          </form>
           <p>Already have an account? <Link to="/login">Log In</Link>.</p>
-
-        </form>
-      </Paper>);
+        </Paper>
+      </Grid>
+    );
   }
 }
 
-Signup.propTypes = {
+signup.propTypes = {
   history: PropTypes.object.isRequired,
 };
+
+export default withStyles(styles)(signup);

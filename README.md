@@ -8,6 +8,7 @@ A react/meteor boilerplate for app prototyping.
 - [X] Switch all createContainer out for withTracker
 - [ ] All SCSS to styles.js
 - [ ] Fix redirect links
+- [ ] Rename components appropriately
 - [ ] Style all pages appropriately so they are usable.
 - [ ] Edit for errors in app
 - [ ] remove unused packages in npm and meteor.

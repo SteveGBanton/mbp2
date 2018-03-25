@@ -3,8 +3,6 @@ import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 import BaseApp from './BaseApp';
 
-import '../../ui/stylesheets/app.scss';
-
 // Meteor.startup(function () {
 //     if (location.host.indexOf('yago.site') !== 0) {
 //         location = 'http://yago.site'

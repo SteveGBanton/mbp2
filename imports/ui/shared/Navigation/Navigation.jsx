@@ -55,11 +55,12 @@ export function Navigation({ classes, toggleMenu, authenticated }) {
 
 Navigation.defaultProps = {
   authenticated: false,
+  toggleMenu: () => {},
 };
 
 Navigation.propTypes = {
   authenticated: PropTypes.bool,
-  toggleMenu: PropTypes.func.isRequired,
+  toggleMenu: PropTypes.func,
   classes: PropTypes.shape({}).isRequired,
 };
 

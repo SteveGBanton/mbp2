@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-// import { Row, Col, FormGroup, ControlLabel, Button } from 'react-bootstrap';
-// import validate from '../../../modules/validate';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 
+import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import Paper from 'material-ui/Paper';
 
 import customFormValidator from '../../../../modules/custom-form-validator';
+
+import styles from './Login.styles';
 
 const rules = {
   emailAddress: {
@@ -33,7 +33,7 @@ const messages = {
   },
 };
 
-export default class Login extends Component {
+export class login extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,8 +41,8 @@ export default class Login extends Component {
 
     this.state = ({
       formErrors: {
-        password: "",
-        emailAddress: "",
+        password: '',
+        emailAddress: '',
       },
     });
   }
@@ -171,6 +171,8 @@ export default class Login extends Component {
   }
 }
 
-Login.propTypes = {
+login.propTypes = {
   history: PropTypes.shape({}).isRequired,
 };
+
+export default withStyles(styles)(login)
