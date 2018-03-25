@@ -3,19 +3,43 @@ import PropTypes from 'prop-types';
 import { Route, Redirect, Link } from 'react-router-dom';
 
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import FontIcon from 'material-ui/FontIcon';
+import Divider from 'material-ui/Divider';
+import { withStyles } from 'material-ui/styles';
+import { compose } from 'recompose';
+import { MenuItem } from 'material-ui/Menu';
+import Icon from 'material-ui/Icon';
 
-import Navigation from '../../components/Navigation/Navigation';
+import Navigation from '../../shared/Navigation/Navigation';
 
-import './ClientAdmin.scss';
+const drawerWidth = 240;
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    height: 430,
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
+  },
+  appBar: {
+    zIndex: 1000 + 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    minWidth: 0, // So the Typography noWrap works
+  },
+});
 
 const validateUser = function validateCurrentUser(role, group) {
   return (Roles.userIsInRole(Meteor.userId(), [role], group));
 };
 
-export default class ClientAdmin extends React.Component {
-
+export class ClientAdminComponent extends React.Component {
   constructor(props) {
     super(props);
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -31,72 +55,27 @@ export default class ClientAdmin extends React.Component {
   }
 
   render() {
-    const { loggingIn, authenticated, component, user, ...rest } = this.props;
+    const {
+      loggingIn, authenticated, component, user, classes, ...rest
+    } = this.props;
     return (
       <div className="dashboard">
-
-        <Navigation {...this.props} toggleMenu={this.toggleMenu} />
-
-        <div className={(this.state.menuOpen) ? "dashboard-menu" : "dashboard-menu-closed"}>
-          <Drawer
-            className="dashboard-drawer"
-            containerStyle={{
-              width: '250px',
-              zIndex: '1000',
-              marginTop: '55px',
-              backgroundColor: '#FFF',
-              paddingTop: "30px"
-            }}
-            style={{ color: 'white' }}
-            open={this.state.menuOpen}
-          >
-            <Link to="/add">
-              <MenuItem
-                primaryText="Create New Yagolink"
-                style={{ color: '#616161' }}
-                leftIcon={
-                  <FontIcon
-                    className="material-icons"
-                    style={{ color: 'rgba(0,0,0,0.5)', marginLeft: 20 }}
-                  >
-                    insert_link
-                  </FontIcon>
-                }
-              />
-            </Link>
-            <Link to="/links">
-              <MenuItem
-                primaryText="View My Yagolinks"
-                style={{ color: '#616161' }}
-                leftIcon={
-                  <FontIcon
-                    className="material-icons"
-                    style={{ color: 'rgba(0,0,0,0.5)', marginLeft: 20 }}
-                  >
-                    view_list
-                  </FontIcon>
-                }
-              />
-            </Link>
-            {/* <Divider
-              style={{ backgroundColor: "#616161", marginTop: "16px", marginBottom: "16px" }}
-            /> */}
-          </Drawer>
-        </div>
-        <div className={(this.state.menuOpen) ? "inner-route" : "inner-route-full"}>
+        <Navigation
+          toggleMenu={this.toggleMenu}
+          authenticated={authenticated}
+        />
+        <div className={this.state.menuOpen ? "inner-route" : "inner-route-full"}>
           <Route
             {...rest}
-            render={props => (
-              authenticated ?
-                (React.createElement(component, {
-                  ...props,
-                  loggingIn,
-                  authenticated,
-                  user,
-                }))
-                :
-                (<Redirect to="/" />)
-            )}
+            render={props => (authenticated ? React.createElement(
+              component,
+              {
+                ...props,
+                loggingIn,
+                authenticated,
+                user,
+              },
+            ) : <Redirect to="/" />)}
           />
         </div>
       </div>
@@ -104,13 +83,15 @@ export default class ClientAdmin extends React.Component {
   }
 }
 
-ClientAdmin.defaultProps = {
+ClientAdminComponent.defaultProps = {
   user: {},
 };
 
-ClientAdmin.propTypes = {
+ClientAdminComponent.propTypes = {
   loggingIn: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
   component: PropTypes.func.isRequired,
   user: PropTypes.shape({}),
 };
+
+export default withStyles(styles)(ClientAdminComponent);

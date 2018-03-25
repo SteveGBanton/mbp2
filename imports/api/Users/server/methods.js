@@ -30,14 +30,14 @@ export const changeCurrentOrgRole = new ValidatedMethod({
 export const createNewAdminUser = new ValidatedMethod({
   name: 'users.createNewAdminUser',
   validate: new SimpleSchema({
-    "email": { type: String },
-    "password": { type: String },
-    "username": { type: String },
-    "profile": { type: Object },
-    "profile.name": { type: Object },
-    "profile.name.first": { type: String },
-    "profile.name.last": { type: String },
-    "profile.orgName": { type: String },
+    email: { type: String },
+    password: { type: String },
+    username: { type: String },
+    // profile: { type: Object },
+    // "profile.name": { type: Object },
+    // "profile.name.first": { type: String },
+    // "profile.name.last": { type: String },
+    // "profile.orgName": { type: String },
   }).validator(),
   run(newAdmin) {
     try {

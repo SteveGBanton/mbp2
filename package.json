@@ -17,7 +17,8 @@
     "jsdom": "^11.3.0",
     "lodash": "^4.17.4",
     "match-sorter": "^2.0.2",
-    "material-ui": "^0.19.2",
+    "material-ui": "^1.0.0-beta.37",
+    "material-ui-icons": "^1.0.0-beta.36",
     "meteor-node-stubs": "~0.3.2",
     "moment": "^2.18.1",
     "prop-types": "^15.6.0",
@@ -26,6 +27,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-table": "^6.7.4",
+    "recompose": "^0.26.0",
     "simpl-schema": "^0.3.2"
   },
   "devDependencies": {
@@ -48,4 +50,3 @@
     "sinon": "^4.1.1"
   }
 }
-

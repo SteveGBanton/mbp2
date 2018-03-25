@@ -6,14 +6,14 @@ import { capitalize } from 'lodash';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 
 import TextField from 'material-ui/TextField';
-import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import Icon from 'material-ui/Icon';
+import Button from 'material-ui/Button';
 
-import Loading from '../../../components/Loading/Loading.jsx';
+import Loading from '../../../shared/Loading/Loading';
 
 import customFormValidator from '../../../../modules/custom-form-validator';
 
@@ -194,15 +194,9 @@ class Profile extends React.Component {
             /><br />
 
             <div style={{ marginTop: 20 }}>
-
-              <RaisedButton type="submit" onClick={this.formValidate}>Update</RaisedButton>
-
+              <Button type="submit" onClick={this.formValidate}>Update</Button>
             </div>
-
           </div>
-
-
-
         </form>
       </div>
   );
@@ -257,14 +251,14 @@ class Profile extends React.Component {
                 tooltipPosition="bottom-center"
                 onClick={this.resendVerification}
               >
-                <FontIcon className="material-icons">email</FontIcon>
+                <Icon>email</Icon>
               </IconButton>)
               : (<IconButton
                 touch
                 tooltip="Email Verified"
                 tooltipPosition="bottom-center"
               >
-                <FontIcon className="material-icons">checkmark</FontIcon>
+                <Icon>checkmark</Icon>
               </IconButton>)
           }
 
@@ -287,7 +281,7 @@ class Profile extends React.Component {
 
           <div>
 
-            <RaisedButton type="submit" onClick={this.formValidate}>Update</RaisedButton>
+            <Button type="submit" onClick={this.formValidate}>Update</Button>
 
           </div>
 
@@ -304,10 +298,12 @@ class Profile extends React.Component {
 
   render() {
     const { loading, user } = this.props;
-    return (<div className="Profile">
-      <h1>Edit Profile</h1>
-      {this.renderProfileForm(loading, user)}
-    </div>);
+    return (
+      <div className="Profile">
+        <h1>Edit Profile</h1>
+        {this.renderProfileForm(loading, user)}
+      </div>
+    );
   }
 }
 
@@ -316,10 +312,10 @@ Profile.propTypes = {
   user: PropTypes.shape({}).isRequired,
 };
 
-export default createContainer(() => {
+export default withTracker(() => {
   const subscription = Meteor.subscribe('users.editProfile');
 
   return {
     loading: !subscription.ready(),
   };
-}, Profile);
+})(Profile);
