@@ -7,7 +7,9 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { withTracker } from 'meteor/react-meteor-data';
+import { compose } from 'recompose';
 
+import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
@@ -17,7 +19,7 @@ import Loading from '../../../shared/Loading/Loading';
 
 import customFormValidator from '../../../../modules/custom-form-validator';
 
-import './Profile.scss';
+import styles from './Profile.styles';
 
 const rules = {
   firstName: {
@@ -312,10 +314,13 @@ Profile.propTypes = {
   user: PropTypes.shape({}).isRequired,
 };
 
-export default withTracker(() => {
-  const subscription = Meteor.subscribe('users.editProfile');
+export default compose(
+  withTracker(() => {
+    const subscription = Meteor.subscribe('users.editProfile');
 
-  return {
-    loading: !subscription.ready(),
-  };
-})(Profile);
+    return {
+      loading: !subscription.ready(),
+    };
+  }),
+  withStyles(styles),
+)(Profile);

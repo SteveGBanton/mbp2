@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './PageHeader.scss';
-
 const PageHeader = ({ title, subtitle }) => (
-  <div className="PageHeader">
-    <div className="PageHeader-container">
+  <div>
+    <div>
       <h1>{title}</h1>
       {subtitle ? <p>{subtitle}</p> : ''}
     </div>
