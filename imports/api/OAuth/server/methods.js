@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
 import { ServiceConfiguration } from 'meteor/service-configuration';
-import rateLimit from '../../../modules/rate-limit';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import rateLimit from '../../../modules/rate-limit';
 
 export const oauthVerifyConfigurationMethod = new ValidatedMethod({
   name: 'oauth.verifyConfiguration',
@@ -22,7 +21,7 @@ export const oauthVerifyConfigurationMethod = new ValidatedMethod({
       throw new Meteor.Error('500', exception);
     }
   }
-})
+});
 
 rateLimit({
   methods: [

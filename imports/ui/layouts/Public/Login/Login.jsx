@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Bert } from 'meteor/themeteorchef:bert';
 
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
@@ -9,6 +8,7 @@ import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import Paper from 'material-ui/Paper';
 
+import { snackBarOpen } from '../../../../modules/utility';
 import customFormValidator from '../../../../modules/custom-form-validator';
 
 import styles from './Login.styles';
@@ -67,9 +67,9 @@ export class login extends Component {
 
     Meteor.loginWithPassword(this.emailAddress.value, this.password.value, (error) => {
       if (error) {
-        Bert.alert('Please check your username or password.', 'danger');
+        snackBarOpen('Please check your username or password.');
       } else {
-        Bert.alert('Welcome back!', 'success');
+        snackBarOpen('Welcome back!');
         history.push('/signup');
       }
     });

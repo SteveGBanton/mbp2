@@ -1,8 +1,7 @@
 /* eslint-env mocha */
 /* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
-// Note: Arrow functions are discouraged in Mocha, which is why they were
-//       disabled here. Arrow functions mess with the `this` context of Mocha.
+// Note: Arrow functions are discouraged in Mocha
 
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
@@ -14,7 +13,7 @@ import ShortLinks from '../ShortLinks';
 import {
   linkInsert,
   linkRemove,
-} from "../methods";
+} from '../methods';
 
 if (Meteor.isServer) {
   describe('ShortLinks methods', function () {

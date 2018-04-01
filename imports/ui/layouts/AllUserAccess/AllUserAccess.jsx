@@ -13,7 +13,7 @@ const AllUserAccess = ({
   classes,
   ...rest
 }) => (
-  <div className={classes.routeWrap}>
+  <div>
     <Navigation
       authenticated={authenticated}
     />

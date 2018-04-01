@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { Bert } from 'meteor/themeteorchef:bert';
 import { withTracker } from 'meteor/react-meteor-data';
 import { compose } from 'recompose';
 
@@ -14,6 +13,8 @@ import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import Button from 'material-ui/Button';
+
+import { snackBarOpen } from '../../../../modules/utility';
 
 import Loading from '../../../shared/Loading/Loading';
 
@@ -54,6 +55,15 @@ const messages = {
   },
 };
 
+function resendVerification() {
+  Meteor.call('users.sendVerificationEmail', (err) => {
+    if (err) {
+      snackBarOpen('Error sending verification email');
+    } else {
+      snackBarOpen('Verification email sent to address on file.');
+    }
+  });
+}
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -79,16 +89,6 @@ class Profile extends React.Component {
     } else {
       return 'oauth'
     }
-  }
-
-  resendVerification() {
-    Meteor.call('users.sendVerificationEmail', (err) => {
-      if (err) {
-        Bert.alert('Error sending verification email', 'danger');
-      } else {
-        Bert.alert('Verification email sent to address on file.', 'success');
-      }
-    });
   }
 
   formValidate() {
@@ -140,12 +140,12 @@ class Profile extends React.Component {
 
     Meteor.call('users.editProfile', profile, (error) => {
       if (error) {
-        Bert.alert(error.reason, 'danger');
+        snackBarOpen(error.reason);
       } else {
         if (emailChanged || verifiedEmail === false) {
           Meteor.call('users.sendVerificationEmail');
         }
-        Bert.alert('Profile updated!', 'success');
+        snackBarOpen('Profile updated!');
       }
     });
 
@@ -155,7 +155,7 @@ class Profile extends React.Component {
         this.newPassword.input.value,
         (error) => {
           if (error) {
-            Bert.alert(error.reason, 'danger');
+            snackBarOpen(error.reason);
           } else {
             this.currentPassword.input.value = '';
             this.newPassword.input.value = '';
@@ -251,7 +251,7 @@ class Profile extends React.Component {
                 touch
                 tooltip="Not verified: click to resend verification email"
                 tooltipPosition="bottom-center"
-                onClick={this.resendVerification}
+                onClick={resendVerification}
               >
                 <Icon>email</Icon>
               </IconButton>)

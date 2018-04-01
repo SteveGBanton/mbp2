@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
-const name = 'Application Name';
+const name = 'MBP';
 const email = '<support@application.com>';
 const from = `${name} ${email}`;
-const emailTemplates = Accounts.emailTemplates;
+const { emailTemplates } = Accounts;
 
 emailTemplates.siteName = name;
 emailTemplates.from = from;
@@ -17,7 +17,7 @@ emailTemplates.verifyEmail = {
     const userEmail = user.emails[0].address;
     const urlWithoutHash = url.replace('#/', '');
     if (Meteor.isDevelopment) console.info(`Verify Email Link: ${urlWithoutHash}`); // eslint-disable-line
-    return `Hey, ${user.profile.name.first}! Welcome to ${name}.\n\nTo verify your email address (${userEmail}), click the link below:\n\n${urlWithoutHash}\n\nIf you feel something is wrong, please contact our support team: ${email}.`;
+    return `Hey! Welcome to ${name}.\n\nTo verify your email address (${userEmail}), click the link below:\n\n${urlWithoutHash}\n\nIf you feel something is wrong, please contact our support team: ${email}.`;
   },
 };
 

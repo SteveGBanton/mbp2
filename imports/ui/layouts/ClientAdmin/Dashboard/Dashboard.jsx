@@ -1,14 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { shape } from 'prop-types';
 
 const Dashboard = ({ history, user }) => (
-  <div className="dashboard">
+  <div>
     <h1>Dashboard Page</h1>
   </div>
 );
 
 Dashboard.propTypes = {
-  history: PropTypes.shape({}).isRequired,
+  history: shape({}).isRequired,
 };
 
 export default Dashboard;

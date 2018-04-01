@@ -1,6 +1,11 @@
 {
   "extends": "airbnb",
+  "plugins": ["babel","react","import"],
+  "parser": "babel-eslint",
   "rules": {
+    "babel/new-cap": 1,
+    "babel/no-invalid-this": 1,
+    "babel/semi": 1,
     "no-underscore-dangle": "off",
     "import/no-unresolved": [
       "error",

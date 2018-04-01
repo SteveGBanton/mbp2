@@ -1,7 +1,7 @@
 {
   "public": {},
   "private": {
-    "MAIL_URL": "",
+    "MAIL_URL": "smtp.sample.com",
     "OAuth": {
       "facebook": {
         "appId": "",

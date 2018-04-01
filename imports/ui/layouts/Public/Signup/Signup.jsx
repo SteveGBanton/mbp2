@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Bert } from 'meteor/themeteorchef:bert';
 import { debounce, kebabCase } from 'lodash';
 import { withStyles } from 'material-ui/styles';
 
@@ -12,6 +11,8 @@ import Paper from 'material-ui/Paper';
 import Icon from 'material-ui/Icon';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
+
+import { snackBarOpen } from '../../../../modules/utility';
 
 import styles from './Signup.styles';
 
@@ -165,23 +166,23 @@ export class signup extends React.Component {
       username: this.state.username,
     };
 
-    Meteor.call('users.createNewAdminUser', newAdmin, (error, res) => {
+    Meteor.call('users.createNewAdminUser', newAdmin, (error) => {
       if (error) {
-        Bert.alert(error.reason, 'danger');
-        console.log(error);
+        snackBarOpen(error.reason);
       } else {
         Meteor.loginWithPassword(
           this.emailAddress.value,
           this.password.value,
           (loginError) => {
             if (loginError) {
-              Bert.alert('Error Logging In', 'danger');
+              snackBarOpen('Error Logging In');
             } else {
               Meteor.call('users.sendVerificationEmail');
-              Bert.alert('Welcome!', 'success');
-              history.push(`/create-path`);
+              snackBarOpen('Welcome!');
+              history.push('/dashboard');
             }
-          });
+          },
+        );
       }
     });
   }

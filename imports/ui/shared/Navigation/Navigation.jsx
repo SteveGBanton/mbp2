@@ -40,13 +40,11 @@ export function Navigation({ classes, toggleMenu, authenticated }) {
             Logout
           </Button>
           :
-          <a href="/login">
-            <Button
-              color="inherit"
-            >
-              Login
-            </Button>
-          </a>
+          <Button
+            color="inherit"
+          >
+            Login
+          </Button>
         }
       </Toolbar>
     </AppBar>
