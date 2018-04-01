@@ -37,3 +37,4 @@ aldeed:simple-schema
 http@1.4.0
 practicalmeteor:chai
 cultofcoders:mocha
+session

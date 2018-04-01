@@ -9,10 +9,4 @@ import BaseApp from './BaseApp';
 //     }
 // })
 
-Bert.defaults = {
-  hideDelay: 3500,
-  style: 'growl-bottom-right',
-  type: 'default',
-};
-
 Meteor.startup(() => render(<BaseApp />, document.getElementById('react-root')));

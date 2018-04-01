@@ -9,14 +9,14 @@ import { compose } from 'recompose';
 import { MenuItem } from 'material-ui/Menu';
 import Icon from 'material-ui/Icon';
 
-import Navigation from '../../shared/Navigation/Navigation';
+import DrawerNavigation from '../../shared/DrawerNavigation';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 430,
+    height: '100%',
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -29,9 +29,11 @@ const styles = theme => ({
     position: 'relative',
     width: drawerWidth,
   },
+  toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    minWidth: 0, // So the Typography noWrap works
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3,
   },
 });
 
@@ -59,12 +61,10 @@ export class ClientAdminComponent extends React.Component {
       loggingIn, authenticated, component, user, classes, ...rest
     } = this.props;
     return (
-      <div className="dashboard">
-        <Navigation
-          toggleMenu={this.toggleMenu}
-          authenticated={authenticated}
-        />
-        <div className={this.state.menuOpen ? "inner-route" : "inner-route-full"}>
+      <div className={classes.root}>
+        <DrawerNavigation />
+        <div className={classes.content}>
+          <div className={classes.toolbar} />
           <Route
             {...rest}
             render={props => (authenticated ? React.createElement(
@@ -94,4 +94,4 @@ ClientAdminComponent.propTypes = {
   user: PropTypes.shape({}),
 };
 
-export default withStyles(styles)(ClientAdminComponent);
+export default withStyles(styles, { withTheme: true })(ClientAdminComponent);

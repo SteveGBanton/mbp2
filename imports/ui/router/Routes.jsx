@@ -1,14 +1,20 @@
 /* eslint-disable jsx-a11y/no-href */
 
 import React from 'react';
+import { Session } from 'meteor/session';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import { compose } from 'recompose';
 
+import IconButton from 'material-ui/IconButton';
+import Snackbar from 'material-ui/Snackbar';
+import CloseIcon from 'material-ui-icons/Close';
 import { withStyles } from 'material-ui/styles';
+
+import { snackBarClose } from '../../modules/utility';
 
 // Dashboard layouts
 import AllUserAccess from '../layouts/AllUserAccess/AllUserAccess';
@@ -48,60 +54,96 @@ class Routes extends React.Component {
 
   render() {
     const { props } = this;
+    const active = props && props.snackBar && props.snackBar.active;
+    const message = props && props.snackBar && props.snackBar.message;
     return (
-      <Router>
-        {
-          (!props.loading) ?
-            <Switch>
-              <AllUserAccess
-                exact
-                path="/"
-                component={Home}
-                {...props}
-                menuOpen={this.state.menuOpen}
-              />
-              <Public
-                exact
-                path="/login"
-                component={Login}
-                {...props}
-              />
-              <Public
-                exact
-                path="/signup"
-                component={Signup}
-                {...props}
-              />
-              <ClientAdmin
-                exact
-                path="/dashboard"
-                component={Dashboard}
-                {...props}
-              />
-              <ClientAdmin
-                exact
-                path="/profile"
-                component={Profile}
-                {...props}
-              />
-              <AllUserAccess
-                component={NotFound}
-              />
-            </Switch>
-            : ''
-        }
-      </Router>
+      <div>
+        <Router>
+          {
+            (!props.loading) ?
+              <Switch>
+                <AllUserAccess
+                  exact
+                  path="/"
+                  component={Home}
+                  {...props}
+                  menuOpen={this.state.menuOpen}
+                />
+                <Public
+                  exact
+                  path="/login"
+                  component={Login}
+                  {...props}
+                />
+                <Public
+                  exact
+                  path="/signup"
+                  component={Signup}
+                  {...props}
+                />
+                <ClientAdmin
+                  exact
+                  path="/dashboard"
+                  component={Dashboard}
+                  {...props}
+                />
+                <ClientAdmin
+                  exact
+                  path="/profile"
+                  component={Profile}
+                  {...props}
+                />
+                <AllUserAccess
+                  exact
+                  path="/verify-email/:id"
+                  component={Home}
+                  {...props}
+                  menuOpen={this.state.menuOpen}
+                />
+                <Route
+                  component={NotFound}
+                />
+              </Switch>
+              : ''
+          }
+        </Router>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={active}
+          autoHideDuration={6000}
+          onClose={snackBarClose}
+          SnackbarContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{message}</span>}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={snackBarClose}
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
+      </div>
     );
   }
 }
 
 Routes.defaultProps = {
   userId: '',
+  snackBar: {},
 };
 
 Routes.propTypes = {
   loading: PropTypes.bool.isRequired,
   userId: PropTypes.string,
+  snackBar: PropTypes.shape({}),
 };
 
 export default compose(
@@ -112,12 +154,15 @@ export default compose(
     const userId = Meteor.userId();
     const loading = !Roles.subscription.ready();
 
+    const snackBar = Session.get('snackBar');
+
     return {
       loading,
       loggingIn,
       authenticated: !loggingIn && !!userId,
       user,
       userId,
+      snackBar,
     };
   }),
 )(Routes);
