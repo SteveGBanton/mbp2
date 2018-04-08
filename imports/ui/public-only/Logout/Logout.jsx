@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape } from 'prop-types';
 
 import { withStyles } from 'material-ui/styles';
 import styles from './Logout.styles';
@@ -9,6 +10,8 @@ const Logout = ({ classes }) => (
   </div>
 );
 
-Logout.propTypes = {};
+Logout.propTypes = {
+  classes: shape({}).isRequired,
+};
 
 export default withStyles(styles)(Logout);

@@ -1,3 +1,6 @@
+/* eslint-disable babel/no-invalid-this */
+/* eslint-disable babel/new-cap */
+
 import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
 import Clicks from '../Clicks';
@@ -36,7 +39,4 @@ Meteor.publish('clicks.oneLinkTotalCount', (linkId) => {
   return Clicks.find({ linkId }).count();
 });
 
-Meteor.publish('clicks.all', () => {
-  // check(linkId, String);
-  return Clicks.find({});
-});
+Meteor.publish('clicks.all', () => Clicks.find({}));

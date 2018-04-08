@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { shape, bool } from 'prop-types';
 
 import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
@@ -22,7 +22,7 @@ const styles = {
   },
 };
 
-export function Navigation({ classes, toggleMenu, authenticated }) {
+export function NavigationComponent({ classes, authenticated }) {
   return (
     <AppBar position="static">
       <Toolbar>
@@ -51,15 +51,13 @@ export function Navigation({ classes, toggleMenu, authenticated }) {
   );
 }
 
-Navigation.defaultProps = {
+NavigationComponent.defaultProps = {
   authenticated: false,
-  toggleMenu: () => {},
 };
 
-Navigation.propTypes = {
-  authenticated: PropTypes.bool,
-  toggleMenu: PropTypes.func,
-  classes: PropTypes.shape({}).isRequired,
+NavigationComponent.propTypes = {
+  authenticated: bool,
+  classes: shape({}).isRequired,
 };
 
-export default withStyles(styles)(Navigation);
+export default withStyles(styles)(NavigationComponent);

@@ -1,3 +1,5 @@
+/* eslint-disable babel/no-invalid-this */
+
 import { Meteor } from 'meteor/meteor';
 
 Meteor.publish('users.editProfile', function usersProfile() {
@@ -10,7 +12,7 @@ Meteor.publish('users.editProfile', function usersProfile() {
   });
 });
 
-Meteor.publish(null, function () {
+Meteor.publish(null, function publishCustomFields() {
   // Publish custom fields a user should have access to on their own user obj.
   const options = {
     fields: { current: 1 },

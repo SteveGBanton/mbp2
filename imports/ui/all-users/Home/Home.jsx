@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { shape, bool } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { withStyles } from 'material-ui/styles'; 
+import { withStyles } from 'material-ui/styles';
 
 import styles from './Home.styles';
 
-const Home = ({ history, authenticated, classes }) => (
+const Home = ({ authenticated, classes }) => (
   <div className={classes.homeContainer}>
     <div>
       Welcome to Yago, a simple URL shortener service.
@@ -23,8 +23,8 @@ const Home = ({ history, authenticated, classes }) => (
 );
 
 Home.propTypes = {
-  history: PropTypes.shape({}).isRequired,
-  authenticated: PropTypes.bool.isRequired,
+  classes: shape({}).isRequired,
+  authenticated: bool.isRequired,
 };
 
 export default withStyles(styles)(Home);

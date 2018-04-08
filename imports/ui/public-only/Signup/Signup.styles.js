@@ -1,11 +1,10 @@
 const styles = theme => ({
-  signupContainer: {
-    
-  },
   signupBox: {
     borderRadius: 9,
-    padding: 40,
+    padding: '30px 50px 30px 50px',
     marginTop: 100,
+    width: 320,
+    boxSizing: 'border-box',
   },
   orText: {
     marginTop: 10,
@@ -15,6 +14,7 @@ const styles = theme => ({
     alignItems: 'center',
   },
   facebook: {
+    borderRadius: 0,
     backgroundColor: theme.palette.primary.facebook,
     color: '#FFF',
     '&:hover': {
@@ -24,11 +24,15 @@ const styles = theme => ({
   },
   google: {
     backgroundColor: theme.palette.primary.google,
+    borderRadius: 0,
     color: '#FFF',
     '&:hover': {
       backgroundColor: theme.palette.primary.google,
       opacity: 0.9,
     },
+  },
+  marginTop: {
+    marginTop: 15,
   },
 });
 

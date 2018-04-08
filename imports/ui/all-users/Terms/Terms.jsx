@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from '../../../shared/Page/Page.jsx';
+import Page from '../../shared/Page/Page';
 
 const Terms = () => (
   <div className="Terms">
