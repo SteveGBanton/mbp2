@@ -37,7 +37,7 @@ export default compose(
 
     Meteor.call('utility.getPage', { page }, (error, response) => {
       if (error) {
-        console.warn(error);
+        // console.warn(error);
       } else {
         pageContent.set(response);
       }

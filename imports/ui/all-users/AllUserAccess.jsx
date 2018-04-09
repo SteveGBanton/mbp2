@@ -1,14 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { func, bool, shape } from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import Navigation from '../../shared/Navigation/Navigation';
+import Navigation from '../shared/Navigation/Navigation';
 
 const AllUserAccess = ({
   loggingIn,
   authenticated,
   component,
-  history,
   user,
   classes,
   ...rest
@@ -26,10 +25,19 @@ const AllUserAccess = ({
   </div>
 );
 
+AllUserAccess.defaultProps = {
+  loggingIn: false,
+  authenticated: false,
+  user: null,
+  classes: {},
+};
+
 AllUserAccess.propTypes = {
-  loggingIn: PropTypes.bool,
-  authenticated: PropTypes.bool,
-  component: PropTypes.func,
+  loggingIn: bool,
+  authenticated: bool,
+  component: func.isRequired,
+  user: shape({}),
+  classes: shape({}),
 };
 
 export default AllUserAccess;

@@ -65,7 +65,7 @@ const styles = theme => ({
   },
 });
 
-class ResponsiveDrawer extends React.Component {
+class DrawerNavigationComponent extends React.Component {
   state = {
     mobileOpen: false,
   };
@@ -134,9 +134,9 @@ class ResponsiveDrawer extends React.Component {
   }
 }
 
-ResponsiveDrawer.propTypes = {
+DrawerNavigationComponent.propTypes = {
   classes: shape({}).isRequired,
   theme: shape({}).isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export default withStyles(styles, { withTheme: true })(DrawerNavigationComponent);

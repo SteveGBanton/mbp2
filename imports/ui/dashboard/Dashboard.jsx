@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Route, Redirect, Link } from 'react-router-dom';
+import { bool, func, shape } from 'prop-types';
+import { Route, Redirect } from 'react-router-dom';
 
-import Drawer from 'material-ui/Drawer';
-import Divider from 'material-ui/Divider';
 import { withStyles } from 'material-ui/styles';
-import { compose } from 'recompose';
-import { MenuItem } from 'material-ui/Menu';
-import Icon from 'material-ui/Icon';
 
-import DrawerNavigation from '../../shared/DrawerNavigation';
+import DrawerNavigation from '../shared/DrawerNavigation';
 
 const drawerWidth = 240;
 
@@ -37,24 +32,21 @@ const styles = theme => ({
   },
 });
 
-const validateUser = function validateCurrentUser(role, group) {
-  return (Roles.userIsInRole(Meteor.userId(), [role], group));
-};
+// const validateUser = function validateCurrentUser(role, group) {
+//   return (Roles.userIsInRole(Meteor.userId(), [role], group));
+// };
 
-export class ClientAdminComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.state = {
-      menuOpen: true,
-    };
-  }
+export class DashboardComponent extends React.Component {
+  state = {
+    menuOpen: true,
+  };
 
-  toggleMenu() {
+
+  toggleMenu = () => {
     this.setState({
       menuOpen: !this.state.menuOpen,
     });
-  }
+  };
 
   render() {
     const {
@@ -83,15 +75,16 @@ export class ClientAdminComponent extends React.Component {
   }
 }
 
-ClientAdminComponent.defaultProps = {
-  user: {},
+DashboardComponent.defaultProps = {
+  user: null,
 };
 
-ClientAdminComponent.propTypes = {
-  loggingIn: PropTypes.bool.isRequired,
-  authenticated: PropTypes.bool.isRequired,
-  component: PropTypes.func.isRequired,
-  user: PropTypes.shape({}),
+DashboardComponent.propTypes = {
+  loggingIn: bool.isRequired,
+  authenticated: bool.isRequired,
+  component: func.isRequired,
+  user: shape({}),
+  classes: shape({}).isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ClientAdminComponent);
+export default withStyles(styles, { withTheme: true })(DashboardComponent);

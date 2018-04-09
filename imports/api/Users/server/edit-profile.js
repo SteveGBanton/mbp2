@@ -20,7 +20,6 @@ const updateUser = (userId, { previousEmailAddress, emailAddress, profile }) => 
         },
       });
     }
-
   } catch (exception) {
     action.reject(`[editProfile.updateUser] ${exception}`);
   }
@@ -37,5 +36,5 @@ const editProfile = ({ userId, profile }, promise) => {
 };
 
 export default options =>
-new Promise((resolve, reject) =>
-editProfile(options, { resolve, reject }));
+  new Promise((resolve, reject) =>
+    editProfile(options, { resolve, reject }));

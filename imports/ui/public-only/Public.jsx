@@ -1,8 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, func, shape } from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-const Public = ({ loggingIn, authenticated, component, user, ...rest }) => (
+const Public = ({
+  loggingIn, authenticated, component, user, ...rest
+}) => (
   <div className="public">
     <Route
       {...rest}
@@ -15,10 +17,15 @@ const Public = ({ loggingIn, authenticated, component, user, ...rest }) => (
   </div>
 );
 
+Public.defaultProps = {
+  user: null,
+};
+
 Public.propTypes = {
-  loggingIn: PropTypes.bool.isRequired,
-  authenticated: PropTypes.bool.isRequired,
-  component: PropTypes.func.isRequired,
+  loggingIn: bool.isRequired,
+  authenticated: bool.isRequired,
+  component: func.isRequired,
+  user: shape({}),
 };
 
 export default Public;

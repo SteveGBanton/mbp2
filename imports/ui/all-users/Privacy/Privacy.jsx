@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from '../../../shared/Page/Page';
+import Page from '../../shared/Page/Page';
 
 const Privacy = () => (
   <div className="Privacy">

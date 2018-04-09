@@ -8,8 +8,8 @@ import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
 import Paper from 'material-ui/Paper';
 
-import { snackBarOpen } from '../../../../modules/utility';
-import customFormValidator from '../../../../modules/custom-form-validator';
+import { snackBarOpen } from '../../../modules/utility';
+import fzValidator from '../../../modules/fzValidator';
 
 import styles from './Login.styles';
 
@@ -34,35 +34,29 @@ const messages = {
 };
 
 export class login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.formValidate = this.formValidate.bind(this);
+  state = ({
+    formErrors: {
+      password: '',
+      emailAddress: '',
+    },
+  });
 
-    this.state = ({
-      formErrors: {
-        password: '',
-        emailAddress: '',
-      },
-    });
-  }
-
-  formValidate() {
+  formValidate = () => {
     const input = {
       emailAddress: this.emailAddress.value,
       password: this.password.value,
     };
 
-    const formErrors = customFormValidator(input, rules, messages);
+    const formErrors = fzValidator(input, rules, messages);
 
     if (!formErrors) {
       this.handleSubmit();
     } else {
       this.setState({ formErrors });
     }
-  }
+  };
 
-  handleSubmit() {
+  handleSubmit = () => {
     const { history } = this.props;
 
     Meteor.loginWithPassword(this.emailAddress.value, this.password.value, (error) => {
@@ -73,35 +67,33 @@ export class login extends Component {
         history.push('/signup');
       }
     });
-  }
+  };
 
-  signUpFacebook() {
+  signUpFacebook = () => {
     Meteor.loginWithFacebook({
       requestPermissions: ['public_profile', 'email'],
     }, (err) => {
       if (err) {
-        console.log(err);
+        // console.log(err);
         // handle error
       } else {
-        console.log(Meteor.user());
+        // console.log(Meteor.user());
         // successful login!
       }
     });
-  }
+  };
 
-  signUpGoogle() {
+  signUpGoogle = () => {
     Meteor.loginWithGoogle({
       requestPermissions: ['email'],
     }, (err) => {
       if (err) {
-        console.log(err);
         // handle error
       } else {
-        console.log(Meteor.user());
         // successful login!
       }
     });
-  }
+  };
 
   render() {
     return (
@@ -114,7 +106,7 @@ export class login extends Component {
             type="submit"
             fullWidth
             onClick={this.signUpFacebook}
-            style={{ margin: '10px 0 0 0', backgroundColor: "#3b5998" }}
+            style={{ margin: '10px 0 0 0', backgroundColor: '#3B5998' }}
           >
             <span style={{ color: 'white' }}>
               Facebook Sign In
@@ -125,12 +117,20 @@ export class login extends Component {
             type="submit"
             fullWidth
             onClick={this.signUpGoogle}
-            style={{ margin: '10px 0 0 0', backgroundColor: "#EA4335" }}
+            style={{ margin: '10px 0 0 0', backgroundColor: '#EA4335' }}
           >
             <span style={{ color: 'white' }}>Google Sign In</span>
           </Button>
 
-          <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexFlow: 'row nowrap', marginTop: 20 }}>
+          <div style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexFlow: 'row nowrap',
+              marginTop: 20,
+            }}
+          >
             <Icon className="material-icons">
               remove
             </Icon>
@@ -159,14 +159,11 @@ export class login extends Component {
             type="submit"
             fullWidth
             onClick={this.formValidate}
-            style={{ margin: "35px 0 20px 0" }}
+            style={{ margin: '35px 0 20px 0' }}
           >
             Log In
           </Button>
-
         </form>
-
-
       </Paper>);
   }
 }
@@ -175,4 +172,4 @@ login.propTypes = {
   history: PropTypes.shape({}).isRequired,
 };
 
-export default withStyles(styles)(login)
+export default withStyles(styles)(login);

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import camelCase from 'lodash.camelcase';
 import editProfile from './edit-profile';
 import rateLimit from '../../../modules/rate-limit';
 
@@ -28,22 +29,30 @@ export const changeCurrentOrgRole = new ValidatedMethod({
   },
 });
 
-export const createNewAdminUser = new ValidatedMethod({
-  name: 'users.createNewAdminUser',
+export const createNewUser = new ValidatedMethod({
+  name: 'users.createNewUser',
   validate: new SimpleSchema({
     email: { type: String },
     password: { type: String },
     username: { type: String },
   }).validator(),
-  run(newAdmin) {
-    const id = Accounts.createUser(newAdmin);
+  run(newUser) {
+    const { username } = newUser;
+    const id = Accounts.createUser(newUser);
+    const verifiedUsername = camelCase(username);
     try {
-      Roles.addUsersToRoles(id, ['admin'], newAdmin.username);
+      if (verifiedUsername !== username) {
+        throw new Meteor.Error(
+          'accounts.createuser.usernameError',
+          'Invalid username',
+        );
+      }
+      Roles.addUsersToRoles(id, ['user'], verifiedUsername);
       Meteor.users.update(id, {
         $set: {
           current: {
-            currentRole: 'admin',
-            currentOrg: newAdmin.username,
+            currentRole: 'user',
+            currentOrg: verifiedUsername,
           },
         },
       });
@@ -52,7 +61,7 @@ export const createNewAdminUser = new ValidatedMethod({
       Meteor.users.remove(id);
       throw new Meteor.Error(
         'accounts.createuser.error',
-        `Error creating new user. ${exception}`,
+        `Error creating new user: ${exception.reason}`,
       );
     }
   },
@@ -62,7 +71,6 @@ export const usersSendVerificationEmail = new ValidatedMethod({
   name: 'users.sendVerificationEmail',
   validate: null,
   run() {
-    console.log(this.userId);
     return Accounts.sendVerificationEmail(this.userId);
   },
 });

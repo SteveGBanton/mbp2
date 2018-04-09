@@ -17,20 +17,20 @@ import { withStyles } from 'material-ui/styles';
 import { snackBarClose } from '../../modules/utility';
 
 // Dashboard layouts
-import AllUserAccess from '../layouts/AllUserAccess/AllUserAccess';
-import ClientAdmin from '../layouts/ClientAdmin/ClientAdmin';
-import Public from '../layouts/Public/Public';
+import AllUserAccess from '../all-users/AllUserAccess';
+import Dashboard from '../dashboard/Dashboard';
+import Public from '../public-only/Public';
 
-// ClientAdmin pages
-import Dashboard from '../layouts/ClientAdmin/Dashboard/Dashboard';
-import Profile from '../layouts/ClientAdmin/Profile/Profile';
+// Dashboard pages
+import Index from '../dashboard/Index/Index';
+import Profile from '../dashboard/Profile/Profile';
 
 // Public Only pages
-import Login from '../layouts/Public/Login/Login';
-import Signup from '../layouts/Public/Signup/Signup';
+import Login from '../public-only/Login/Login';
+import Signup from '../public-only/Signup/Signup';
 
 // All users pages
-import Home from '../layouts/AllUserAccess/Home/Home';
+import Home from '../all-users/Home/Home';
 
 // Shared
 import NotFound from '../shared/NotFound/NotFound';
@@ -38,19 +38,15 @@ import NotFound from '../shared/NotFound/NotFound';
 import styles from './Routes.styles';
 
 class Routes extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.state = {
-      menuOpen: true,
-    };
-  }
+  state = {
+    menuOpen: true,
+  };
 
-  toggleMenu() {
+  toggleMenu = () => {
     this.setState({
       menuOpen: !this.state.menuOpen,
     });
-  }
+  };
 
   render() {
     const { props } = this;
@@ -81,13 +77,13 @@ class Routes extends React.Component {
                   component={Signup}
                   {...props}
                 />
-                <ClientAdmin
+                <Dashboard
                   exact
                   path="/dashboard"
-                  component={Dashboard}
+                  component={Index}
                   {...props}
                 />
-                <ClientAdmin
+                <Dashboard
                   exact
                   path="/profile"
                   component={Profile}

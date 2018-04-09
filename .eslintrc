@@ -3,6 +3,7 @@
   "plugins": ["babel","react","import"],
   "parser": "babel-eslint",
   "rules": {
+    "jsx-a11y/anchor-is-valid": 0,
     "babel/new-cap": 1,
     "babel/no-invalid-this": 1,
     "babel/semi": 1,

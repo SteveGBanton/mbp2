@@ -1,5 +1,8 @@
+/* eslint-disable no-useless-escape */
 
-export default function customFormValidator(input, rules, messages) {
+import camelCase from 'lodash.camelcase';
+
+export default function fzValidator(input, rules, messages) {
   function valString(field) {
     return (typeof field === 'string');
   }
@@ -52,17 +55,39 @@ export default function customFormValidator(input, rules, messages) {
     return true;
   }
 
-  function getField(inputField) {
-    const correctField = inputField.split('.');
-    // Only works to verify up to 2 levels deep
-    if (correctField.length === 2) {
-      return input[correctField[0]][correctField[1]];
+  function valCamelCase(camelString) {
+    if (camelString !== '' &&
+      valString(camelString) &&
+      camelCase(camelString) !== camelString) {
+      return false;
     }
-    if (correctField.length === 3) {
-      return input[correctField[0]][correctField[1]][correctField[2]];
-    }
-    return input[correctField[0]];
+    return true;
   }
+
+  function getField(path, obj = input) {
+    const paths = Array.isArray(path) ? path : path.split('.');
+
+    if (paths.length > 1 && obj[paths[0]]) {
+      return getField(paths.slice(1), obj[paths[0]]);
+    }
+
+    if (paths.length === 1) {
+      return obj[paths[0]];
+    }
+    return undefined;
+  }
+
+  // function getField(inputField) {
+  //   const correctField = inputField.split('.');
+  //   // Only works to verify up to 2 levels deep
+  //   if (correctField.length === 2) {
+  //     return input[correctField[0]][correctField[1]];
+  //   }
+  //   if (correctField.length === 3) {
+  //     return input[correctField[0]][correctField[1]][correctField[2]];
+  //   }
+  //   return input[correctField[0]];
+  // }
 
   const formErrors = {};
 
@@ -99,6 +124,13 @@ export default function customFormValidator(input, rules, messages) {
           if (getField(field)) {
             if (!valMaxValue(getField(field), rules[field][subrule])) {
               formErrors[field] = messages[field].maxValue;
+            }
+          }
+          break;
+        case 'camelCase':
+          if (getField(field)) {
+            if (!valCamelCase(getField(field), rules[field][subrule])) {
+              formErrors[field] = messages[field].camelCase;
             }
           }
           break;
@@ -151,9 +183,8 @@ export default function customFormValidator(input, rules, messages) {
   });
 
   // return false if no errors returned, return formError object if errors present
-  if (
-    Object.keys(formErrors).length === 0
-    && formErrors.constructor === Object
+  if (Object.keys(formErrors).length === 0 &&
+    formErrors.constructor === Object
   ) {
     return false;
   }

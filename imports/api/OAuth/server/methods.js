@@ -6,9 +6,9 @@ import rateLimit from '../../../modules/rate-limit';
 export const oauthVerifyConfigurationMethod = new ValidatedMethod({
   name: 'oauth.verifyConfiguration',
   validate: new SimpleSchema({
-    services: { type: [String] }
+    services: { type: [String] },
   }).validator(),
-  run({services}) {
+  run({ services }) {
     try {
       const verifiedServices = [];
       services.forEach((service) => {
@@ -20,7 +20,7 @@ export const oauthVerifyConfigurationMethod = new ValidatedMethod({
     } catch (exception) {
       throw new Meteor.Error('500', exception);
     }
-  }
+  },
 });
 
 rateLimit({
@@ -30,3 +30,5 @@ rateLimit({
   limit: 5,
   timeRange: 1000,
 });
+
+export default null;
