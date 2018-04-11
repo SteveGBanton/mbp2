@@ -31,6 +31,7 @@ import Signup from '../public-only/Signup/Signup';
 
 // All users pages
 import Home from '../all-users/Home/Home';
+import VerifyEmail from '../all-users/VerifyEmail';
 
 // Shared
 import NotFound from '../shared/NotFound/NotFound';
@@ -89,12 +90,11 @@ class Routes extends React.Component {
                   component={Profile}
                   {...props}
                 />
-                <AllUserAccess
+                <Route
                   exact
-                  path="/verify-email/:id"
-                  component={Home}
+                  path="/verify-email/:tokenId"
+                  component={VerifyEmail}
                   {...props}
-                  menuOpen={this.state.menuOpen}
                 />
                 <Route
                   component={NotFound}
