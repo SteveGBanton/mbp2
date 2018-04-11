@@ -4,12 +4,10 @@ A react/meteor boilerplate for app prototyping.
 
 ## To Dos
 
-- [ ] Fix email verification - should work with console logged Verify Email Link
-- [ ] Remove Clicks API folder, add example linksUpdate method to update existing links
-- [ ] Intro modals - first time user sees a guide to how to use app
-- [ ] Roles mgmt
+Going to work in MBP repo for Nova to build samples/tests here. When ready to deploy, make new repo and then clean up after.
+
+- [ ] All initial pages included & styled
 - [ ] Test google log in method
-- [ ] All necessary initial pages included & styled
 - [ ] Scope out errors, remove unused packages
 - [ ] Add initial tests.
 - [X] Upgrade material to v1
@@ -23,7 +21,9 @@ A react/meteor boilerplate for app prototyping.
 - [X] Add all class properties, remove constructors
 - [X] Folder organization by feature
 - [X] Initial linting
-
+- [X] Fix email verification - should work with console logged Verify Email Link
+- [X] Remove Clicks API folder
+- [X] Intro modals - first time user sees a guide to how to use app
 
 ## Nice To Have Later
 

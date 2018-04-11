@@ -2,6 +2,13 @@ import React from 'react';
 import { bool, func, shape } from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 
 import DrawerNavigation from '../shared/DrawerNavigation';
@@ -39,12 +46,20 @@ const styles = theme => ({
 export class DashboardComponent extends React.Component {
   state = {
     menuOpen: true,
+    firstTimeDialog: true, // this.props.user ? this.props.user.firstLogin : false,
   };
 
-
-  toggleMenu = () => {
+  toggleState = (property) => {
     this.setState({
-      menuOpen: !this.state.menuOpen,
+      [property]: !this.state.menuOpen,
+    });
+  };
+
+  toggleUserFirstLoginClose = () => {
+    Meteor.call('users.firstTimeUserLogged', () => {
+      this.setState({
+        firstTimeDialog: false,
+      });
     });
   };
 
@@ -52,6 +67,7 @@ export class DashboardComponent extends React.Component {
     const {
       loggingIn, authenticated, component, user, classes, ...rest
     } = this.props;
+    console.log(user)
     return (
       <div className={classes.root}>
         <DrawerNavigation />
@@ -70,6 +86,28 @@ export class DashboardComponent extends React.Component {
             ) : <Redirect to="/" />)}
           />
         </div>
+        {this.state.firstTimeDialog ?
+          <Dialog
+            open={this.state.firstTimeDialog}
+            onClose={this.toggleUserFirstLoginClose}
+          >
+            <DialogTitle>Welcome to Nova!</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Nova is a set of design thinking tools to help you and your
+                team come up with creative solutions to your business problems.
+                {"We're glad to have you on board!"}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.toggleUserFirstLoginClose} color="primary" autoFocus>
+                Use The Tools!
+              </Button>
+            </DialogActions>
+          </Dialog>
+          :
+          ''
+        }
       </div>
     );
   }
