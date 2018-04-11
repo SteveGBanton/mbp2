@@ -29,6 +29,25 @@ export const changeCurrentOrgRole = new ValidatedMethod({
   },
 });
 
+export const firstTimeUserLogged = new ValidatedMethod({
+  name: 'users.firstTimeUserLogged',
+  validate: null,
+  run() {
+    try {
+      Meteor.users.update(this.userId, {
+        $set: {
+          firstLogin: false,
+        },
+      });
+    } catch (exception) {
+      throw new Meteor.Error(
+        'accounts.firstTimeLogged.error',
+        `Error logging first login. ${exception}`,
+      );
+    }
+  },
+});
+
 export const createNewUser = new ValidatedMethod({
   name: 'users.createNewUser',
   validate: new SimpleSchema({
