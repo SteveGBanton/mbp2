@@ -39,6 +39,7 @@ import VerifyEmail from '../all-users/VerifyEmail';
 import NotFound from '../shared/NotFound/NotFound';
 
 import styles from './Routes.styles';
+import ScrollToTop from './scrollToTop';
 
 class Routes extends React.Component {
   state = {
@@ -58,70 +59,72 @@ class Routes extends React.Component {
     return (
       <div className={props.classes.root}>
         <Router>
-          {
-            (!props.loading) ?
-              <Switch>
-                <AllUserAccess
-                  exact
-                  path="/"
-                  component={Home}
-                  {...props}
-                  menuOpen={this.state.menuOpen}
-                />
-                <Public
-                  exact
-                  path="/login"
-                  component={Login}
-                  {...props}
-                />
-                <Public
-                  exact
-                  path="/signup"
-                  component={Signup}
-                  {...props}
-                />
-                <Dashboard
-                  exact
-                  path="/tools"
-                  component={Index}
-                  {...props}
-                />
-                <Dashboard
-                  exact
-                  path="/tools/:phaseId/:categoryId"
-                  component={ToolSelector}
-                  {...props}
-                />
-                <Dashboard
-                  exact
-                  path="/tools/:phaseId"
-                  component={ToolSelector}
-                  {...props}
-                />
-                <Dashboard
-                  exact
-                  path="/tool/:toolId"
-                  component={Tool}
-                  {...props}
-                />
-                <Dashboard
-                  exact
-                  path="/profile"
-                  component={Profile}
-                  {...props}
-                />
-                <Route
-                  exact
-                  path="/verify-email/:tokenId"
-                  component={VerifyEmail}
-                  {...props}
-                />
-                <Route
-                  component={NotFound}
-                />
-              </Switch>
-              : ''
-          }
+          <ScrollToTop>
+            {
+              (!props.loading) ?
+                <Switch>
+                  <AllUserAccess
+                    exact
+                    path="/"
+                    component={Home}
+                    {...props}
+                    menuOpen={this.state.menuOpen}
+                  />
+                  <Public
+                    exact
+                    path="/login"
+                    component={Login}
+                    {...props}
+                  />
+                  <Public
+                    exact
+                    path="/signup"
+                    component={Signup}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/tools"
+                    component={Index}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/tools/:phaseId/:categoryId"
+                    component={ToolSelector}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/tools/:phaseId"
+                    component={ToolSelector}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/tool/:toolId"
+                    component={Tool}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/profile"
+                    component={Profile}
+                    {...props}
+                  />
+                  <Route
+                    exact
+                    path="/verify-email/:tokenId"
+                    component={VerifyEmail}
+                    {...props}
+                  />
+                  <Route
+                    component={NotFound}
+                  />
+                </Switch>
+                : ''
+            }
+          </ScrollToTop>
         </Router>
         <Snackbar
           anchorOrigin={{
