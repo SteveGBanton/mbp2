@@ -53,9 +53,9 @@ const theme = createMuiTheme({
     },
     body2: {
       fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-      fontWeight: 400,
-      fontSize: '1.9rem',
-      color: '#000',
+      fontWeight: 300,
+      fontSize: '0.8rem',
+      color: '#757575',
     },
     subheading: {
       fontFamily: 'Roboto, Helvetica, Arial, sans-serif',

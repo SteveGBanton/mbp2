@@ -1,8 +1,9 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
-
 import Typography from 'material-ui/Typography';
+
+import MaterialsCard from './MaterialsCard';
 
 const styles = () => ({
   root: {
@@ -51,14 +52,6 @@ const styles = () => ({
     height: '100%',
     width: 'calc(100% - 90px)',
     padding: 20,
-  },
-  requiredCard: {
-    boxShadow: '0 6px 22px rgba(0,0,0,0.12), 0 6px 10px rgba(0,0,0,0.08)',
-    padding: 20,
-    borderRadius: 6,
-    margin: '30px 10px 0 10px',
-    width: 130,
-    height: 160,
   },
   image: {
     maxHeight: 300,
@@ -126,12 +119,10 @@ const ToolComponent = ({
             >
                 What You Will Need
             </Typography>
-            {tool.required &&
+            {tool.materials &&
               <Grid container justify="center">
-                {tool.required.map(item => (
-                  <Grid key={item.id} className={classes.requiredCard} item>
-                    <Typography variant="body1">{item.label}</Typography>
-                  </Grid>
+                {tool.materials.map(item => (
+                  <MaterialsCard key={item} item={item} />
                 ))}
               </Grid>
             }
