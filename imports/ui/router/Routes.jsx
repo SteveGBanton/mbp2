@@ -20,6 +20,8 @@ import { snackBarClose } from '../../modules/utility';
 import AllUserAccess from '../all-users/AllUserAccess';
 import Dashboard from '../dashboard/Dashboard';
 import Public from '../public-only/Public';
+import ToolSelector from '../dashboard/ToolSelector';
+import Tool from '../dashboard/Tool';
 
 // Dashboard pages
 import Index from '../dashboard/Index/Index';
@@ -54,7 +56,7 @@ class Routes extends React.Component {
     const active = props && props.snackBar && props.snackBar.active;
     const message = props && props.snackBar && props.snackBar.message;
     return (
-      <div>
+      <div className={props.classes.root}>
         <Router>
           {
             (!props.loading) ?
@@ -80,8 +82,26 @@ class Routes extends React.Component {
                 />
                 <Dashboard
                   exact
-                  path="/dashboard"
+                  path="/tools"
                   component={Index}
+                  {...props}
+                />
+                <Dashboard
+                  exact
+                  path="/tools/:phaseId/:categoryId"
+                  component={ToolSelector}
+                  {...props}
+                />
+                <Dashboard
+                  exact
+                  path="/tools/:phaseId"
+                  component={ToolSelector}
+                  {...props}
+                />
+                <Dashboard
+                  exact
+                  path="/tool/:toolId"
+                  component={Tool}
                   {...props}
                 />
                 <Dashboard
@@ -151,6 +171,7 @@ export default compose(
     const loading = !Roles.subscription.ready();
 
     const snackBar = Session.get('snackBar');
+    const isDashboardDrawerOpen = Session.get('isDashboardDrawerOpen');
 
     return {
       loading,
@@ -159,6 +180,7 @@ export default compose(
       user,
       userId,
       snackBar,
+      isDashboardDrawerOpen,
     };
   }),
 )(Routes);

@@ -1,7 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { bool, func, shape } from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
-
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -10,32 +10,42 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
+import classNames from 'classnames';
+import { withTracker } from 'meteor/react-meteor-data';
+import { compose } from 'recompose';
 
-import DrawerNavigation from '../shared/DrawerNavigation';
+import { designPhases, tools } from '../tool-data/toolData';
+import DrawerNavigation, { drawerWidth, drawerHeight } from '../shared/DrawerNavigation';
 
-const drawerWidth = 240;
-
-const styles = theme => ({
+const styles = () => ({
   root: {
-    flexGrow: 1,
     height: '100%',
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
     display: 'flex',
+    overflow: 'hidden',
   },
   appBar: {
     zIndex: 1000 + 1,
   },
-  drawerPaper: {
-    position: 'relative',
-    width: drawerWidth,
-  },
-  toolbar: theme.mixins.toolbar,
   content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    height: '100%',
+    width: '100%',
+    marginTop: drawerHeight,
+    padding: 0,
+    margin: 0,
+  },
+  drawerOpen: {
+    minWidth: drawerWidth,
+    height: '100%',
+    padding: 0,
+    margin: 0,
+    transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+  },
+  drawerClosed: {
+    minWidth: 1,
+    height: '100%',
+    padding: 0,
+    margin: 0,
+    transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
   },
 });
 
@@ -45,14 +55,7 @@ const styles = theme => ({
 
 export class DashboardComponent extends React.Component {
   state = {
-    menuOpen: true,
-    firstTimeDialog: true, // this.props.user ? this.props.user.firstLogin : false,
-  };
-
-  toggleState = (property) => {
-    this.setState({
-      [property]: !this.state.menuOpen,
-    });
+    firstTimeDialog: false, // this.props.user ? this.props.user.firstLogin : false,
   };
 
   toggleUserFirstLoginClose = () => {
@@ -65,14 +68,33 @@ export class DashboardComponent extends React.Component {
 
   render() {
     const {
-      loggingIn, authenticated, component, user, classes, ...rest
+      drawerOpen,
+      loggingIn,
+      authenticated,
+      component,
+      user,
+      classes,
+      history,
+      ...rest
     } = this.props;
-    console.log(user)
     return (
-      <div className={classes.root}>
-        <DrawerNavigation />
-        <div className={classes.content}>
-          <div className={classes.toolbar} />
+      <div
+        className={classes.root}
+      >
+        <div
+          className={classNames({
+            [classes.drawerClosed]: !this.props.drawerOpen,
+            [classes.drawerOpen]: !!this.props.drawerOpen,
+          })}
+        >
+          <DrawerNavigation
+            drawerOpen={this.props.drawerOpen}
+            history={this.props.history}
+          />
+        </div>
+        <div
+          className={classes.content}
+        >
           <Route
             {...rest}
             render={props => (authenticated ? React.createElement(
@@ -82,6 +104,8 @@ export class DashboardComponent extends React.Component {
                 loggingIn,
                 authenticated,
                 user,
+                designPhases,
+                tools,
               },
             ) : <Redirect to="/" />)}
           />
@@ -115,6 +139,7 @@ export class DashboardComponent extends React.Component {
 
 DashboardComponent.defaultProps = {
   user: null,
+  drawerOpen: false,
 };
 
 DashboardComponent.propTypes = {
@@ -123,6 +148,16 @@ DashboardComponent.propTypes = {
   component: func.isRequired,
   user: shape({}),
   classes: shape({}).isRequired,
+  drawerOpen: bool,
 };
 
-export default withStyles(styles, { withTheme: true })(DashboardComponent);
+export default compose(
+  withStyles(styles, { withTheme: true }),
+  withRouter,
+  withTracker(() => {
+    const drawerOpen = Session.get('isDashboardDrawerOpen');
+    return {
+      drawerOpen,
+    };
+  }),
+)(DashboardComponent);

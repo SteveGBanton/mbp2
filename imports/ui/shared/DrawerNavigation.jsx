@@ -1,61 +1,44 @@
 import React from 'react';
-import { shape } from 'prop-types';
+import { shape, bool } from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import List from 'material-ui/List';
+import { ListItemIcon, ListItemText } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
-import Divider from 'material-ui/Divider';
+import { MenuItem, MenuList } from 'material-ui/Menu';
+
 import MenuIcon from 'material-ui-icons/Menu';
+import SettingsIcon from 'material-ui-icons/Settings';
+import BuildIcon from 'material-ui-icons/Build';
+import LightbulbOutlineIcon from 'material-ui-icons/LightbulbOutline';
 
-const drawerWidth = 240;
+import { drawerDashboardOpen, drawerDashboardClose } from '../../modules/utility';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    height: 430,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-  },
+export const drawerWidth = 240;
+export const drawerHeight = 45;
+
+const styles = () => ({
   appBar: {
     backgroundColor: '#fff',
-    height: 50,
-    position: 'absolute',
-    // [theme.breakpoints.up('md')]: {
-    //   width: `calc(100% - ${drawerWidth}px)`,
-    // },
+    height: drawerHeight,
   },
-  toolbarSpacer: theme.mixins.toolbar,
   toolbar: {
-    minHeight: 50,
+    padding: '0 12px 0 12px',
+    minHeight: drawerHeight,
   },
   drawerPaperMobile: {
     zIndex: 500,
     backgroundColor: '#fff',
     width: drawerWidth,
-    // [theme.breakpoints.up('md')]: {
-    //   position: 'relative',
-    // },
   },
   drawerPaper: {
     zIndex: 500,
-    marginTop: 50,
+    marginTop: drawerHeight,
     backgroundColor: '#fff',
     width: drawerWidth,
-    // [theme.breakpoints.up('md')]: {
-    //   position: 'relative',
-    // },
-  },
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
   },
   logo: {
     width: 90,
@@ -63,32 +46,50 @@ const styles = theme => ({
     margin: 'auto',
     display: 'block',
   },
+  icon: {
+    marginLeft: 8,
+  },
 });
 
 class DrawerNavigationComponent extends React.Component {
-  state = {
-    mobileOpen: false,
-  };
-
   handleDrawerToggle = () => {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
+    if (this.props.drawerOpen) {
+      drawerDashboardClose();
+    } else {
+      drawerDashboardOpen();
+    }
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, history } = this.props;
 
     const drawer = (
-      <div>
-        <List>Item 1</List>
-        <Divider />
-        <List>Item 2</List>
-      </div>
+      <MenuList role="menu">
+        <MenuItem onClick={() => history.push('/tools')}>
+          <ListItemIcon className={classes.icon}>
+            <BuildIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Tool Finder" />
+        </MenuItem>
+        <MenuItem onClick={() => history.push('/profile')}>
+          <ListItemIcon className={classes.icon}>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Settings" />
+        </MenuItem>
+        <MenuItem onClick={() => history.push('/about')}>
+          <ListItemIcon className={classes.icon}>
+            <LightbulbOutlineIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="About Nova" />
+        </MenuItem>
+      </MenuList>
     );
 
     return (
       <div>
-        <AppBar className={classes.appBar}>
-          <Toolbar classes={{ root: classes.toolbar }}>
+        <AppBar className={classes.appBar} fixed="true">
+          <Toolbar disableGutters classes={{ root: classes.toolbar }}>
             <IconButton
               color="secondary"
               aria-label="open drawer"
@@ -105,7 +106,7 @@ class DrawerNavigationComponent extends React.Component {
           <Drawer
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={this.state.mobileOpen}
+            open={this.props.drawerOpen}
             onClose={this.handleDrawerToggle}
             classes={{
               paper: classes.drawerPaperMobile,
@@ -120,7 +121,7 @@ class DrawerNavigationComponent extends React.Component {
         <Hidden smDown implementation="css">
           <Drawer
             variant="persistent"
-            open={this.state.mobileOpen}
+            open={this.props.drawerOpen}
             onClose={this.handleDrawerToggle}
             classes={{
               paper: classes.drawerPaper,
@@ -134,9 +135,14 @@ class DrawerNavigationComponent extends React.Component {
   }
 }
 
+DrawerNavigationComponent.defaultProps = {
+  drawerOpen: false,
+};
+
 DrawerNavigationComponent.propTypes = {
   classes: shape({}).isRequired,
   theme: shape({}).isRequired,
+  drawerOpen: bool,
 };
 
 export default withStyles(styles, { withTheme: true })(DrawerNavigationComponent);

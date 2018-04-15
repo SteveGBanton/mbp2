@@ -6,9 +6,11 @@ A react/meteor boilerplate for app prototyping.
 
 Going to work in MBP repo for Nova to build samples/tests here. When ready to deploy, make new repo and then clean up after.
 
+- [ ] Drawer works correctly for mobile
 - [ ] All initial pages included & styled
 - [ ] Test google log in method
 - [ ] Scope out errors, remove unused packages
+- [ ] Change localhost:1250 calls to use env var
 - [ ] Add initial tests.
 - [X] Upgrade material to v1
 - [X] Switch all createContainer out for withTracker
