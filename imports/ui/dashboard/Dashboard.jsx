@@ -1,7 +1,6 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import { bool, func, shape } from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -13,6 +12,7 @@ import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import { withTracker } from 'meteor/react-meteor-data';
 import { compose } from 'recompose';
+import Hidden from 'material-ui/Hidden';
 
 import { designPhases, tools } from '../tool-data/toolData';
 import DrawerNavigation, { drawerWidth, drawerHeight } from '../shared/DrawerNavigation';
@@ -81,17 +81,27 @@ export class DashboardComponent extends React.Component {
       <div
         className={classes.root}
       >
-        <div
-          className={classNames({
-            [classes.drawerClosed]: !this.props.drawerOpen,
-            [classes.drawerOpen]: !!this.props.drawerOpen,
-          })}
-        >
-          <DrawerNavigation
-            drawerOpen={this.props.drawerOpen}
-            history={this.props.history}
-          />
-        </div>
+        <Hidden mdUp>
+          <div className={classes.drawerClosed}>
+            <DrawerNavigation
+              drawerOpen={this.props.drawerOpen}
+              history={this.props.history}
+            />
+          </div>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <div
+            className={classNames({
+              [classes.drawerClosed]: !this.props.drawerOpen,
+              [classes.drawerOpen]: !!this.props.drawerOpen,
+            })}
+          >
+            <DrawerNavigation
+              drawerOpen={this.props.drawerOpen}
+              history={this.props.history}
+            />
+          </div>
+        </Hidden>
         <div
           className={classes.content}
         >
@@ -149,6 +159,7 @@ DashboardComponent.propTypes = {
   user: shape({}),
   classes: shape({}).isRequired,
   drawerOpen: bool,
+  history: shape({}).isRequired,
 };
 
 export default compose(

@@ -60,8 +60,13 @@ class DrawerNavigationComponent extends React.Component {
     }
   };
 
+  handleClickMobileMenu = (url) => {
+    this.props.history.push(url);
+    drawerDashboardClose();
+  };
+
   render() {
-    const { classes, theme, history } = this.props;
+    const { classes, history } = this.props;
 
     const drawer = (
       <MenuList role="menu">
@@ -78,6 +83,29 @@ class DrawerNavigationComponent extends React.Component {
           <ListItemText inset primary="Settings" />
         </MenuItem>
         <MenuItem onClick={() => history.push('/about')}>
+          <ListItemIcon className={classes.icon}>
+            <LightbulbOutlineIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="About Nova" />
+        </MenuItem>
+      </MenuList>
+    );
+
+    const drawerMobile = (
+      <MenuList role="menu">
+        <MenuItem onClick={() => this.handleClickMobileMenu('/tools')}>
+          <ListItemIcon className={classes.icon}>
+            <BuildIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Tool Finder" />
+        </MenuItem>
+        <MenuItem onClick={() => this.handleClickMobileMenu('/profile')}>
+          <ListItemIcon className={classes.icon}>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Settings" />
+        </MenuItem>
+        <MenuItem onClick={() => this.handleClickMobileMenu('/about')}>
           <ListItemIcon className={classes.icon}>
             <LightbulbOutlineIcon />
           </ListItemIcon>
@@ -105,7 +133,7 @@ class DrawerNavigationComponent extends React.Component {
         <Hidden mdUp>
           <Drawer
             variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            anchor="left"
             open={this.props.drawerOpen}
             onClose={this.handleDrawerToggle}
             classes={{
@@ -115,7 +143,7 @@ class DrawerNavigationComponent extends React.Component {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            {drawer}
+            {drawerMobile}
           </Drawer>
         </Hidden>
         <Hidden smDown implementation="css">
@@ -141,8 +169,8 @@ DrawerNavigationComponent.defaultProps = {
 
 DrawerNavigationComponent.propTypes = {
   classes: shape({}).isRequired,
-  theme: shape({}).isRequired,
   drawerOpen: bool,
+  history: shape({}).isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(DrawerNavigationComponent);
