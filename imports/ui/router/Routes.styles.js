@@ -1,10 +1,10 @@
 const styles = theme => ({
-  // routeWrap: {
-  //   margin: 0,
-  //   padding: 0,
-  //   height: '100vh',
-  //   width: '100vw',
-  // },
+  root: {
+    margin: 0,
+    padding: 0,
+    height: '100%',
+    width: '100%',
+  },
   '@global': {
     body: {
       margin: 0,

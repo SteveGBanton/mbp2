@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Session } from 'meteor/session';
-import PropTypes from 'prop-types';
+import { bool, string, shape } from 'prop-types';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -20,6 +20,8 @@ import { snackBarClose } from '../../modules/utility';
 import AllUserAccess from '../all-users/AllUserAccess';
 import Dashboard from '../dashboard/Dashboard';
 import Public from '../public-only/Public';
+import ToolSelector from '../dashboard/ToolSelector';
+import Tool from '../dashboard/Tool';
 
 // Dashboard pages
 import Index from '../dashboard/Index/Index';
@@ -37,6 +39,7 @@ import VerifyEmail from '../all-users/VerifyEmail';
 import NotFound from '../shared/NotFound/NotFound';
 
 import styles from './Routes.styles';
+import ScrollToTop from './scrollToTop';
 
 class Routes extends React.Component {
   state = {
@@ -51,57 +54,77 @@ class Routes extends React.Component {
 
   render() {
     const { props } = this;
-    const active = props && props.snackBar && props.snackBar.active;
-    const message = props && props.snackBar && props.snackBar.message;
+    const { active, message } = this.props.snackBar;
+    console.log(this.props.snackBar)
     return (
-      <div>
+      <div className={props.classes.root}>
         <Router>
-          {
-            (!props.loading) ?
-              <Switch>
-                <AllUserAccess
-                  exact
-                  path="/"
-                  component={Home}
-                  {...props}
-                  menuOpen={this.state.menuOpen}
-                />
-                <Public
-                  exact
-                  path="/login"
-                  component={Login}
-                  {...props}
-                />
-                <Public
-                  exact
-                  path="/signup"
-                  component={Signup}
-                  {...props}
-                />
-                <Dashboard
-                  exact
-                  path="/dashboard"
-                  component={Index}
-                  {...props}
-                />
-                <Dashboard
-                  exact
-                  path="/profile"
-                  component={Profile}
-                  {...props}
-                />
-                <Route
-                  exact
-                  path="/verify-email/:tokenId"
-                  component={VerifyEmail}
-                  {...props}
-                />
-                <Route
-                  component={NotFound}
-                />
-              </Switch>
-              : ''
-          }
+          <ScrollToTop>
+            {
+              (!props.loading) ?
+                <Switch>
+                  <Dashboard
+                    exact
+                    path="/"
+                    component={Home}
+                    {...props}
+                    menuOpen={this.state.menuOpen}
+                  />
+                  <Public
+                    exact
+                    path="/login"
+                    component={Login}
+                    {...props}
+                  />
+                  <Public
+                    exact
+                    path="/signup"
+                    component={Signup}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/tools"
+                    component={Index}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/tools/:phaseId/:categoryId"
+                    component={ToolSelector}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/tools/:phaseId"
+                    component={ToolSelector}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/tool/:toolId"
+                    component={Tool}
+                    {...props}
+                  />
+                  <Dashboard
+                    exact
+                    path="/profile"
+                    component={Profile}
+                    {...props}
+                  />
+                  <Route
+                    exact
+                    path="/verify-email/:tokenId"
+                    component={VerifyEmail}
+                    {...props}
+                  />
+                  <Route
+                    component={NotFound}
+                  />
+                </Switch>
+                : ''
+            }
+          </ScrollToTop>
         </Router>
         <Snackbar
           anchorOrigin={{
@@ -133,13 +156,19 @@ class Routes extends React.Component {
 
 Routes.defaultProps = {
   userId: '',
-  snackBar: {},
+  snackBar: {
+    active: false,
+    message: '',
+  },
 };
 
 Routes.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  userId: PropTypes.string,
-  snackBar: PropTypes.shape({}),
+  loading: bool.isRequired,
+  userId: string,
+  snackBar: shape({
+    active: bool,
+    message: string,
+  }),
 };
 
 export default compose(
@@ -151,6 +180,7 @@ export default compose(
     const loading = !Roles.subscription.ready();
 
     const snackBar = Session.get('snackBar');
+    const isDashboardDrawerOpen = Session.get('isDashboardDrawerOpen');
 
     return {
       loading,
@@ -159,6 +189,7 @@ export default compose(
       user,
       userId,
       snackBar,
+      isDashboardDrawerOpen,
     };
   }),
 )(Routes);

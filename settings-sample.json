@@ -1,5 +1,8 @@
 {
-  "public": {},
+  "public": {
+    "assets": "http://localhost:1250",
+    "website": "http://localhost:3000"
+  },
   "private": {
     "MAIL_URL": "smtp.sample.com",
     "OAuth": {
