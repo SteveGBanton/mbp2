@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Session } from 'meteor/session';
-import PropTypes from 'prop-types';
+import { bool, string, shape } from 'prop-types';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -54,8 +54,8 @@ class Routes extends React.Component {
 
   render() {
     const { props } = this;
-    const active = props && props.snackBar && props.snackBar.active;
-    const message = props && props.snackBar && props.snackBar.message;
+    const { active, message } = this.props.snackBar;
+    console.log(this.props.snackBar)
     return (
       <div className={props.classes.root}>
         <Router>
@@ -63,7 +63,7 @@ class Routes extends React.Component {
             {
               (!props.loading) ?
                 <Switch>
-                  <AllUserAccess
+                  <Dashboard
                     exact
                     path="/"
                     component={Home}
@@ -156,13 +156,19 @@ class Routes extends React.Component {
 
 Routes.defaultProps = {
   userId: '',
-  snackBar: {},
+  snackBar: {
+    active: false,
+    message: '',
+  },
 };
 
 Routes.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  userId: PropTypes.string,
-  snackBar: PropTypes.shape({}),
+  loading: bool.isRequired,
+  userId: string,
+  snackBar: shape({
+    active: bool,
+    message: string,
+  }),
 };
 
 export default compose(

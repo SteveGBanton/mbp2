@@ -17,6 +17,7 @@
     "core-js": "^2.5.1",
     "express": "^4.16.3",
     "lodash.camelcase": "^4.3.0",
+    "lodash.escape": "^4.0.1",
     "match-sorter": "^2.0.2",
     "material-ui": "^1.0.0-beta.37",
     "material-ui-icons": "^1.0.0-beta.36",

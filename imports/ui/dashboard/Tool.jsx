@@ -1,70 +1,47 @@
 import React from 'react';
+import escape from 'lodash.escape';
+import classNames from 'classnames';
+
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 
 import MaterialsCard from './MaterialsCard';
+import styles from './Tool.styles';
 
-const styles = () => ({
-  root: {
-    width: '100%',
-    marginTop: '-10',
-  },
-  toolHeader: {
-    width: '100%',
-    backgroundColor: '#F5F5F5',
-  },
-  toolHeaderInner: {
-    padding: '3vw 5vw 3vw 5vw',
-    maxWidth: 1100,
-    backgroundColor: '#F5F5F5',
-  },
-  toolHeaderLeft: {
-    padding: '3vw 5vw 3vw 5vw',
-    width: '100%',
-    backgroundColor: '#F5F5F5',
-  },
-  toolHeaderRight: {
-    padding: '3vw 5vw 3vw 5vw',
-    width: '100%',
-    backgroundColor: '#F5F5F5',
-  },
-  toolBody: {
-    padding: '30px 5vw 3vw 5vw',
-    maxWidth: 900,
-  },
-  stepCard: {
-    boxShadow: '0 6px 22px rgba(0,0,0,0.12), 0 6px 10px rgba(0,0,0,0.08)',
-    padding: 0,
-    borderRadius: 6,
-    marginTop: 30,
-  },
-  stepCardLeft: {
-    borderTopLeftRadius: 6,
-    borderBottomLeftRadius: 6,
-    width: 90,
-    padding: 20,
-    backgroundColor: '#EEEEEE',
-  },
-  stepCardRight: {
-    borderTopRightRadius: 6,
-    borderBottomRightRadius: 6,
-    height: '100%',
-    width: 'calc(100% - 90px)',
-    padding: 20,
-  },
-  image: {
-    maxHeight: 300,
-    marginTop: 30,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    '& img': {
-      maxHeight: '300px',
-      maxWidth: '100%',
-    },
-  },
-});
+
+const deliverHTML = (content) => {
+  if (Object.prototype.toString.call(content) === '[object String]') {
+    return (
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{ __html: escape(content) }}
+      />);
+  }
+  const clean = content.map((item) => {
+    if (item.type === 'text') {
+      return (
+        <Typography
+          key={item.id}
+          variant="body1"
+          dangerouslySetInnerHTML={{ __html: escape(item.content) }}
+        />);
+    } else if (item.type === 'image') {
+      return (
+        <Grid
+          key={item.id}
+          container
+          justify="center"
+          alignItems="center"
+        >
+          <img style={{ maxWidth: '100%', maxHeight: 300 }} src={item.content} alt="" />
+        </Grid>
+      );
+    }
+    return null;
+  });
+  return clean;
+};
 
 const ToolComponent = ({
   history,
@@ -89,22 +66,77 @@ const ToolComponent = ({
         >
           <Grid
             container
+            alignItems="center"
             className={classes.toolHeaderInner}
-            direction="column"
           >
-            <Typography
-              variant="display2"
-              style={{ color: '#616161' }}
+            <Grid
+              container
+              className={classes.toolHeaderLeft}
+              direction="column"
             >
-              {tool.preHeader}
-            </Typography>
-            <Typography variant="headline">{tool.title}</Typography>
-            <Typography
-              style={{ marginTop: 40 }}
-              variant="body1"
+              <Typography
+                variant="display2"
+                style={{ color: '#616161' }}
+              >
+                {tool.preHeader}
+              </Typography>
+              <Typography variant="headline">{tool.title}</Typography>
+              <Typography
+                style={{ marginTop: 40 }}
+                variant="body1"
+              >
+                {tool.description}
+              </Typography>
+            </Grid>
+            <Grid
+              container
+              justify="center"
+              className={classes.toolHeaderRight}
+              direction="column"
             >
-              {tool.description}
-            </Typography>
+              <Grid
+                container
+                alignItems="center"
+                direction="row"
+                style={{ padding: 5 }}
+              >
+                <div className={classNames(classes.circle, classes.yellow)} />
+                <Typography
+                  variant="body1"
+                  style={{ color: '#616161', maxWidth: 150 }}
+                >
+                  {tool.purpose}
+                </Typography>
+              </Grid>
+              <Grid
+                container
+                alignItems="center"
+                direction="row"
+                style={{ padding: 5 }}
+              >
+                <div className={classNames(classes.circle, classes.teal)} />
+                <Typography
+                  variant="body1"
+                  style={{ color: '#616161', maxWidth: 150 }}
+                >
+                  {tool.team}
+                </Typography>
+              </Grid>
+              <Grid
+                container
+                alignItems="center"
+                direction="row"
+                style={{ padding: 5 }}
+              >
+                <div className={classNames(classes.circle, classes.grey)} />
+                <Typography
+                  variant="body1"
+                  style={{ color: '#616161', maxWidth: 150 }}
+                >
+                  {tool.time}
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
         <Grid
@@ -150,40 +182,38 @@ const ToolComponent = ({
               Steps
             </Typography>
             {tool.steps && tool.steps.map((item) => {
-              if (item.type === 'text') {
-                return (
-                  <Grid
-                    className={classes.stepCard}
-                    container
-                    key={item.id}
-                  >
-                    <Grid
-                      className={classes.stepCardLeft}
-                      container
-                      justify="center"
-                    >
-                      <Typography variant="display3">{item.stepNo}</Typography>
-                    </Grid>
-                    <Grid
-                      className={classes.stepCardRight}
-                      container
-                    >
-                      <Typography
-                        variant="body1"
-                        dangerouslySetInnerHTML={{ __html: item.content }}
-                      />
-                    </Grid>
-                  </Grid>);
-              }
               return (
                 <Grid
-                  key={item.id}
+                  className={classes.stepCard}
                   container
-                  className={classes.image}
-                  justify="center"
-                  alignItems="center"
-                  dangerouslySetInnerHTML={{ __html: item.content }}
-                />);
+                  key={item.id}
+                >
+                  <Grid
+                    className={classes.stepCardLeft}
+                    container
+                    justify="center"
+                  >
+                    <Typography variant="display3">{item.stepNo}</Typography>
+                  </Grid>
+                  <Grid
+                    className={classes.stepCardRight}
+                    container
+                  >
+                    {deliverHTML(item.content)}
+                    <a
+                      href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}&details=Nova+Tool+Reference:+${Meteor.settings.public.website}&sf=true&output=xml`}
+                      target="_blank"
+                    >
+                      <img
+                        style={{ marginTop: 10, marginRight: 5 }}
+                        alt="cal"
+                        src="http://localhost:1250/assets/icons/calendar.png"
+                        width="40"
+                        height="40"
+                      />
+                    </a>
+                  </Grid>
+                </Grid>);
             })}
           </React.Fragment>
         </Grid>

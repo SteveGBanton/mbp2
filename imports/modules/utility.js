@@ -1,7 +1,8 @@
 import { Session } from 'meteor/session';
 
 export function snackBarClose() {
-  Session.set('snackBar', { active: false, message: '' });
+  const currentSnackBar = Session.get('snackBar');
+  Session.set('snackBar', { active: false, message: currentSnackBar.message });
 }
 
 export function snackBarOpen(message) {
