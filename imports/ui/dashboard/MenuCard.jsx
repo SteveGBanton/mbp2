@@ -42,7 +42,6 @@ const MenuCard = ({
     image,
     backgroundSize,
     backgroundPosition,
-    description,
     preHeader,
     link,
   },
@@ -90,7 +89,8 @@ MenuCard.propTypes = {
     description: string,
     preHeader: string,
     link: string,
-  })
+  }),
+  history: shape({}).isRequired,
 };
 
 export default compose(

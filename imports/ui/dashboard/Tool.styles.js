@@ -50,6 +50,7 @@ export default theme => ({
     marginTop: 30,
   },
   stepCardLeft: {
+    position: 'relative',
     borderTopLeftRadius: 6,
     borderBottomLeftRadius: 6,
     width: 90,

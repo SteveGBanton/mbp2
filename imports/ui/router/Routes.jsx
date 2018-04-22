@@ -17,7 +17,7 @@ import { withStyles } from 'material-ui/styles';
 import { snackBarClose } from '../../modules/utility';
 
 // Dashboard layouts
-import AllUserAccess from '../all-users/AllUserAccess';
+// import AllUserAccess from '../all-users/AllUserAccess';
 import Dashboard from '../dashboard/Dashboard';
 import Public from '../public-only/Public';
 import ToolSelector from '../dashboard/ToolSelector';
@@ -55,7 +55,6 @@ class Routes extends React.Component {
   render() {
     const { props } = this;
     const { active, message } = this.props.snackBar;
-    console.log(this.props.snackBar)
     return (
       <div className={props.classes.root}>
         <Router>
