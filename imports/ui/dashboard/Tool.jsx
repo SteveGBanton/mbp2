@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, shape } from 'prop-types';
 import escape from 'lodash.escape';
 import classNames from 'classnames';
 
@@ -8,7 +9,6 @@ import Typography from 'material-ui/Typography';
 
 import MaterialsCard from './MaterialsCard';
 import styles from './Tool.styles';
-
 
 const deliverHTML = (content) => {
   if (Object.prototype.toString.call(content) === '[object String]') {
@@ -44,9 +44,8 @@ const deliverHTML = (content) => {
 };
 
 const ToolComponent = ({
-  history,
   tools,
-  designPhases,
+  match,
   match: { params: { toolId } },
   classes,
 }) => {
@@ -174,47 +173,46 @@ const ToolComponent = ({
                 </Typography>
               </Grid>
             }
-            
             <Typography
               variant="display4"
               style={{ marginTop: 60 }}
             >
               Steps
             </Typography>
-            {tool.steps && tool.steps.map((item) => {
-              return (
+            {tool.steps && tool.steps.map(item => (
+              <Grid
+                className={classes.stepCard}
+                container
+                key={item.id}
+              >
                 <Grid
-                  className={classes.stepCard}
+                  className={classes.stepCardLeft}
                   container
-                  key={item.id}
+                  justify="center"
                 >
-                  <Grid
-                    className={classes.stepCardLeft}
-                    container
-                    justify="center"
+                  <div id={`${item.stepNo}`} style={{ position: 'absolute', top: -65, left: 0 }} />
+                  <Typography variant="display3">{item.stepNo}</Typography>
+                </Grid>
+                <Grid
+                  className={classes.stepCardRight}
+                  container
+                >
+                  {deliverHTML(item.content)}
+                  <a
+                    href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}+Step+${item.stepNo}&details=Nova+Tool+Reference:+${Meteor.settings.public.website}${match.url}%23${item.stepNo}`}
+                    target="_blank"
                   >
-                    <Typography variant="display3">{item.stepNo}</Typography>
-                  </Grid>
-                  <Grid
-                    className={classes.stepCardRight}
-                    container
-                  >
-                    {deliverHTML(item.content)}
-                    <a
-                      href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}&details=Nova+Tool+Reference:+${Meteor.settings.public.website}&sf=true&output=xml`}
-                      target="_blank"
-                    >
-                      <img
-                        style={{ marginTop: 10, marginRight: 5 }}
-                        alt="cal"
-                        src="http://localhost:1250/assets/icons/calendar.png"
-                        width="40"
-                        height="40"
-                      />
-                    </a>
-                  </Grid>
-                </Grid>);
-            })}
+                    <img
+                      style={{ marginTop: 10, marginRight: 5 }}
+                      alt="cal"
+                      src="http://localhost:1250/assets/icons/calendar.png"
+                      width="40"
+                      height="40"
+                    />
+                  </a>
+                </Grid>
+              </Grid>
+            ))}
           </React.Fragment>
         </Grid>
       </React.Fragment>}
@@ -224,8 +222,22 @@ const ToolComponent = ({
 
 ToolComponent.defaultProps = {
   match: {
+    url: Meteor.settings.public.website,
     params: {},
   },
+  tools: {},
 };
+
+ToolComponent.propTypes = {
+  match: shape({
+    url: string,
+    params: shape({
+      toolId: string,
+    }),
+  }),
+  tools: shape({}),
+  classes: shape({}).isRequired,
+};
+
 
 export default withStyles(styles)(ToolComponent);

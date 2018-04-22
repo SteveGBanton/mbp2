@@ -6,15 +6,16 @@ A react/meteor boilerplate for app prototyping.
 
 Going to work in MBP repo for Nova to build samples/tests here. When ready to deploy, make new repo and then clean up after.
 
-- [ ] Add Calendar and Timer tools to tool page
 - [ ] Create intro page
+- [ ] Fix authorization - forwarding if not logged in etc.
 - [ ] Change localhost:1250 calls to use env var
-- [ ] Add card shuffle tool to app
 - [ ] Test google log in method
 - [ ] Add favorites function - all pages can be added
 - [ ] Add all tools to app
 - [ ] Move app to own repo
 - [ ] Launch MVP - on Nodechef?
+- [ ] Add timer to tools page
+- [ ] Add card shuffle tool to app
 - [X] Upgrade material to v1
 - [X] Switch all createContainer out for withTracker
 - [X] All SCSS to styles.js
@@ -32,6 +33,7 @@ Going to work in MBP repo for Nova to build samples/tests here. When ready to de
 - [X] Drawer works correctly for mobile
 - [X] Fix router scroll to top issue
 - [X] Finish styling Tool page
+- [X] Update Calendar link on tool page & handle on steps
 
 ## Nice To Have Later
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, shape } from 'prop-types';
 
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -82,5 +83,10 @@ const MaterialsCardComponent = ({ item, classes }) => (
     </Grid>
   </Grid>
 );
+
+MaterialsCardComponent.propTypes = {
+  item: string.isRequired,
+  classes: shape({}).isRequired,
+};
 
 export default withStyles(styles)(MaterialsCardComponent);
