@@ -1,6 +1,6 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Routes from '../../ui/router/Routes';
+import Routes from '../../client/router/Routes';
 import theme from './theme';
 
 const BaseApp = () => (

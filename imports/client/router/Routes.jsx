@@ -17,7 +17,7 @@ import { withStyles } from 'material-ui/styles';
 import { snackBarClose } from '../../modules/utility';
 
 // Dashboard layouts
-// import AllUserAccess from '../all-users/AllUserAccess';
+import AllUserAccess from '../all-users/AllUserAccess';
 import Dashboard from '../dashboard/Dashboard';
 import Public from '../public-only/Public';
 import ToolSelector from '../dashboard/ToolSelector';
@@ -62,12 +62,11 @@ class Routes extends React.Component {
             {
               (!props.loading) ?
                 <Switch>
-                  <Dashboard
+                  <AllUserAccess
                     exact
                     path="/"
                     component={Home}
                     {...props}
-                    menuOpen={this.state.menuOpen}
                   />
                   <Public
                     exact

@@ -6,14 +6,22 @@ const theme = createMuiTheme({
     fontSize: 14,
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
     fontWeight: 400,
-    medium: {
+    frontPageHeader: {
       fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
       fontWeight: 400,
       fontSize: '0.5rem',
     },
-    display1: {
+    preHeaderText: {
       fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
       fontWeight: 400,
+      color: '#EEE',
+      fontSize: '1rem',
+      textTransform: 'uppercase',
+      margin: '5px 0 5px 0',
+    },
+    display1: {
+      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+      fontWeight: 300,
       fontSize: '1.6rem',
       color: '#fff',
     },
@@ -83,11 +91,14 @@ const theme = createMuiTheme({
       contrastText: '#444444',
     },
     colors: {
-      novaTeal: '#06eed0',
-      novaYellow: '#e1fe1c',
+      novaTeal: '#0bebce',
+      novaTealDark: '#0cd2b9',
+      novaYellow: '#e4ff04',
+      novaYellowDark: '#e0f816',
       grey: '#9E9E9E',
-      darkgrey: '#424242',
-      lightgrey: '#E0E0E0',
+      darkGrey: '#424242',
+      lightGrey: '#EEEEEE',
+      lighterGrey: '#f9f9f9',
     },
   },
 });

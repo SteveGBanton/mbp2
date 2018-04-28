@@ -41,7 +41,7 @@ const styles = () => ({
     transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
   },
   drawerClosed: {
-    minWidth: 1,
+    minWidth: 0,
     height: '100%',
     padding: 0,
     margin: 0,
@@ -78,9 +78,7 @@ export class DashboardComponent extends React.Component {
       ...rest
     } = this.props;
     return (
-      <div
-        className={classes.root}
-      >
+      <div className={classes.root}>
         <Hidden mdUp>
           <div className={classes.drawerClosed}>
             <DrawerNavigation
