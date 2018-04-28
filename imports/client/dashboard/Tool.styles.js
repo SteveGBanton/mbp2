@@ -75,4 +75,5 @@ export default theme => ({
       maxWidth: '100%',
     },
   },
+  preHeaderText: theme.typography.preHeaderText,
 });

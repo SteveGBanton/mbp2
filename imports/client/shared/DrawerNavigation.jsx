@@ -1,53 +1,49 @@
 import React from 'react';
 import { shape, bool } from 'prop-types';
+
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
 import { ListItemIcon, ListItemText } from 'material-ui/List';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
 import { MenuItem, MenuList } from 'material-ui/Menu';
 
-import MenuIcon from 'material-ui-icons/Menu';
 import SettingsIcon from 'material-ui-icons/Settings';
 import BuildIcon from 'material-ui-icons/Build';
 import LightbulbOutlineIcon from 'material-ui-icons/LightbulbOutline';
 
+import NovaAppBar from './NovaAppBar';
 import { drawerDashboardOpen, drawerDashboardClose } from '../../modules/utility';
 
 export const drawerWidth = 240;
 export const drawerHeight = 45;
 
 const styles = () => ({
-  appBar: {
-    backgroundColor: '#fff',
-    height: drawerHeight,
-  },
-  toolbar: {
-    padding: '0 12px 0 12px',
-    minHeight: drawerHeight,
-  },
   drawerPaperMobile: {
     zIndex: 500,
-    backgroundColor: '#fff',
+    backgroundColor: '#EEE',
     width: drawerWidth,
   },
   drawerPaper: {
     zIndex: 500,
     marginTop: drawerHeight,
-    backgroundColor: '#fff',
+    backgroundColor: '#EEE',
     width: drawerWidth,
   },
-  logo: {
-    width: 90,
-    padding: 10,
-    margin: 'auto',
-    display: 'block',
-  },
   icon: {
+    color: 'inherit',
     marginLeft: 8,
+    height: 18,
+  },
+  listItem: {
+    marginLeft: -14,
+  },
+  menuItem: {
+    transition: 'all .7s cubic-bezier(0.25, 0.8, 0.25, 1)',
+    fontWeight: 400,
+    color: 'rgba(0,0,0,.60)',
+    '&:hover': {
+      color: 'rgba(0,0,0,.99)',
+    },
   },
 });
 
@@ -70,23 +66,23 @@ class DrawerNavigationComponent extends React.Component {
 
     const drawer = (
       <MenuList role="menu">
-        <MenuItem onClick={() => history.push('/tools')}>
+        <MenuItem onClick={() => history.push('/tools')} className={classes.menuItem} >
           <ListItemIcon className={classes.icon}>
             <BuildIcon />
           </ListItemIcon>
-          <ListItemText inset primary="Tool Finder" />
+          <ListItemText disableTypography inset primary="Tool Finder" className={classes.listItem} />
         </MenuItem>
-        <MenuItem onClick={() => history.push('/profile')}>
+        <MenuItem onClick={() => history.push('/profile')} className={classes.menuItem} >
           <ListItemIcon className={classes.icon}>
             <SettingsIcon />
           </ListItemIcon>
-          <ListItemText inset primary="Settings" />
+          <ListItemText disableTypography inset primary="Settings" className={classes.listItem} />
         </MenuItem>
-        <MenuItem onClick={() => history.push('/about')}>
+        <MenuItem onClick={() => history.push('/about')} className={classes.menuItem} >
           <ListItemIcon className={classes.icon}>
             <LightbulbOutlineIcon />
           </ListItemIcon>
-          <ListItemText inset primary="About Nova" />
+          <ListItemText disableTypography inset primary="About Nova" className={classes.listItem} />
         </MenuItem>
       </MenuList>
     );
@@ -115,21 +111,8 @@ class DrawerNavigationComponent extends React.Component {
     );
 
     return (
-      <div>
-        <AppBar className={classes.appBar} fixed="true">
-          <Toolbar disableGutters classes={{ root: classes.toolbar }}>
-            <IconButton
-              color="secondary"
-              aria-label="open drawer"
-              onClick={this.handleDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              <img className={classes.logo} src="http://localhost:1250/assets/logo.png" alt="logo" />
-            </Typography>
-          </Toolbar>
-        </AppBar>
+      <React.Fragment>
+        <NovaAppBar handleDrawerToggle={this.handleDrawerToggle} />
         <Hidden mdUp>
           <Drawer
             variant="temporary"
@@ -158,7 +141,7 @@ class DrawerNavigationComponent extends React.Component {
             {drawer}
           </Drawer>
         </Hidden>
-      </div>
+      </React.Fragment>
     );
   }
 }

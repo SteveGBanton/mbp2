@@ -7,15 +7,16 @@ export const designPhases = {
     id: 'card1',
     link: `${TOOLS_BROWSE_FOLDER}/market`,
     title: 'Identify Market Problems',
-    image: `${ASSETS_FOLDER}/market-problems.png`,
+    image: `${ASSETS_FOLDER}/market.png`,
     backgroundSize: '90px 175px',
     backgroundPosition: 'right top',
-    preHeader: 'Design Phase',
+    preHeader: 'Innovation Phase',
     categories: {
       define: {
         id: 'cat1',
         link: `${TOOLS_BROWSE_FOLDER}/market/define`,
         title: 'Define Your Market',
+        preHeader: 'Tool Category',
         tools: [
           'em',
           'unst',
@@ -25,6 +26,7 @@ export const designPhases = {
         id: 'cat2',
         link: `${TOOLS_BROWSE_FOLDER}/market/analyze`,
         title: 'Analyze Problems',
+        preHeader: 'Tool Category',
         tools: [
           'rsc',
           'rflw',
@@ -35,6 +37,7 @@ export const designPhases = {
         id: 'cat3',
         link: `${TOOLS_BROWSE_FOLDER}/market/psych`,
         title: 'Understand User Psychology',
+        preHeader: 'Tool Category',
         tools: [
           'dirh',
           'rflw',
@@ -47,6 +50,7 @@ export const designPhases = {
         id: 'cat4',
         link: `${TOOLS_BROWSE_FOLDER}/market/feedback`,
         title: 'Get Feedback & Opinions',
+        preHeader: 'Tool Category',
         tools: [
           'dirh',
           'csrt',
@@ -56,6 +60,7 @@ export const designPhases = {
         id: 'cat5',
         link: `${TOOLS_BROWSE_FOLDER}/market/env`,
         title: 'Define Your Market Environment',
+        preHeader: 'Tool Category',
         tools: [
           'sere',
         ],
@@ -66,11 +71,14 @@ export const designPhases = {
     id: 'card2',
     link: `${TOOLS_BROWSE_FOLDER}/brainstorming`,
     title: 'Brainstorming',
+    image: `${ASSETS_FOLDER}/brainstorming.png`,
+    preHeader: 'Innovation Phase',
     categories: {
       ideation: {
         id: 'cat6',
         link: `${TOOLS_BROWSE_FOLDER}/brainstorming/ideation`,
         title: 'Start the Ideation Process',
+        preHeader: 'Tool Category',
         tools: [
           'cra',
           'bci',
@@ -80,6 +88,7 @@ export const designPhases = {
         id: 'cat7',
         link: `${TOOLS_BROWSE_FOLDER}/brainstorming/develop`,
         title: 'Develop Ideas',
+        preHeader: 'Tool Category',
         tools: [
           'mac',
         ],
@@ -90,11 +99,15 @@ export const designPhases = {
     id: 'card3',
     link: `${TOOLS_BROWSE_FOLDER}/discuss`,
     title: 'Discussion',
+    image: `${ASSETS_FOLDER}/discussion.png`,
+    preHeader: 'Innovation Phase',
+    // backgroundColor: '#7a7a7a',
     categories: {
       new: {
         id: 'cat8',
         link: `${TOOLS_BROWSE_FOLDER}/discuss/new`,
         title: 'Find New Ideas And Opportunities',
+        preHeader: 'Tool Category',
         tools: [
           'act',
           'sth',
@@ -104,6 +117,7 @@ export const designPhases = {
         id: 'cat10',
         link: `${TOOLS_BROWSE_FOLDER}/discuss/evaluate`,
         title: 'Evaluate Ideas Reduce Business Risk',
+        preHeader: 'Tool Category',
         tools: [
           'ev',
           'sth',
@@ -116,11 +130,14 @@ export const designPhases = {
     id: 'card4',
     link: `${TOOLS_BROWSE_FOLDER}/project`,
     title: 'Project Planning',
+    image: `${ASSETS_FOLDER}/project-management.png`,
+    preHeader: 'Innovation Phase',
     categories: {
       identify: {
         id: 'cat11',
         link: `${TOOLS_BROWSE_FOLDER}/project/identify`,
         title: 'Identify Project Problems/Risks',
+        preHeader: 'Tool Category',
         tools: [
           'ev',
         ],
@@ -129,6 +146,7 @@ export const designPhases = {
         id: 'cat12',
         link: `${TOOLS_BROWSE_FOLDER}/project/prioritization`,
         title: 'Prioritization',
+        preHeader: 'Tool Category',
         tools: [
           'kano',
         ],
@@ -139,11 +157,14 @@ export const designPhases = {
     id: 'card5',
     link: `${TOOLS_BROWSE_FOLDER}/team`,
     title: 'Team Building',
+    image: `${ASSETS_FOLDER}/team-building.png`,
+    preHeader: 'Innovation Phase',
     categories: {
       teamwork: {
         id: 'cat13',
         link: `${TOOLS_BROWSE_FOLDER}/team/teamwork`,
         title: 'Reinforce Teamwork',
+        preHeader: 'Tool Category',
         tools: [
           'cnnb',
         ],
@@ -152,6 +173,7 @@ export const designPhases = {
         id: 'cat14',
         link: `${TOOLS_BROWSE_FOLDER}/team/culture`,
         title: 'Create Team Culture',
+        preHeader: 'Tool Category',
         tools: [
           'tmb',
         ],

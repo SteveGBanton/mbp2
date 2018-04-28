@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
+import Tooltip from 'material-ui/Tooltip';
 
 import MaterialsCard from './MaterialsCard';
 import styles from './Tool.styles';
@@ -73,12 +74,12 @@ const ToolComponent = ({
               className={classes.toolHeaderLeft}
               direction="column"
             >
-              <Typography
-                variant="display2"
+              <div
+                className={classes.preHeaderText}
                 style={{ color: '#616161' }}
               >
                 {tool.preHeader}
-              </Typography>
+              </div>
               <Typography variant="headline">{tool.title}</Typography>
               <Typography
                 style={{ marginTop: 40 }}
@@ -198,18 +199,24 @@ const ToolComponent = ({
                   container
                 >
                   {deliverHTML(item.content)}
-                  <a
-                    href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}+Step+${item.stepNo}&details=Nova+Tool+Reference:+${Meteor.settings.public.website}${match.url}%23${item.stepNo}`}
-                    target="_blank"
+                  <Tooltip
+                    id="calendar-tooltip"
+                    title="Add Step To Google Calendar"
+                    enterDelay={200}
                   >
-                    <img
-                      style={{ marginTop: 10, marginRight: 5 }}
-                      alt="cal"
-                      src="http://localhost:1250/assets/icons/calendar.png"
-                      width="40"
-                      height="40"
-                    />
-                  </a>
+                    <a
+                      href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}+Step+${item.stepNo}&details=Nova+Tool+Reference:+${Meteor.settings.public.website}${match.url}%23${item.stepNo}`}
+                      target="_blank"
+                    >
+                      <img
+                        style={{ marginTop: 10, marginRight: 5 }}
+                        alt="cal"
+                        src="http://localhost:1250/assets/icons/calendar.png"
+                        width="40"
+                        height="40"
+                      />
+                    </a>
+                  </Tooltip>
                 </Grid>
               </Grid>
             ))}

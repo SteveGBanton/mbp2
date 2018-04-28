@@ -14,6 +14,8 @@ const styles = theme => ({
       fontSize: theme.typography.fontSize,
       fontWeight: theme.typography.fontWeight,
       fontFamily: theme.typography.fontFamily,
+      maxWidth: '100%',
+      overflowX: 'hidden',
     },
     html: {
       height: '100%',

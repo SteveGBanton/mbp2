@@ -17,7 +17,10 @@ export function drawerDashboardOpen() {
   Session.set('isDashboardDrawerOpen', true);
 }
 
-
 export function pro() {
   return null;
+}
+
+export function noop() {
+  return () => {};
 }
