@@ -7,12 +7,13 @@ import Grid from 'material-ui/Grid';
 import MenuCard from '../../shared/MenuCard';
 import styles from './Home.styles';
 import DescriptionCard from './DescriptionCard';
+import { ASSET_FOLDER } from '../../../startup/configuration';
 
 const Home = ({ classes, designPhases, history }) => (
   <Grid className={classes.root}>
     <Grid className={classes.splash} container justify="center" alignItems="center">
       <Grid className={classes.splashImage} container justify="center" alignItems="center">
-        <img src="http://localhost:1250/assets/bk.png" alt="" />
+        <img src={`${ASSET_FOLDER}/bk.png`} alt="" />
       </Grid>
       <Grid className={classes.intro}>
         <div className={classes.textHeader}>Tools to Spark Innovation</div>
@@ -20,7 +21,7 @@ const Home = ({ classes, designPhases, history }) => (
           Welcome to Nova, the design thinking tool library.
         </div>
         <div className={classes.textHeaderDescription}>
-          Click below to sign in start solving problems:
+          Click below to sign in and start solving problems:
         </div>
         <Button
           variant="raised"

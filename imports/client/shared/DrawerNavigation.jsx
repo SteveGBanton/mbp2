@@ -9,6 +9,7 @@ import { MenuItem, MenuList } from 'material-ui/Menu';
 
 import NovaAppBar from './NovaAppBar';
 import { drawerDashboardOpen, drawerDashboardClose } from '../../modules/utility';
+import { ASSET_FOLDER } from '../../startup/configuration';
 
 export const drawerWidth = 240;
 export const drawerHeight = 45;
@@ -92,7 +93,7 @@ class DrawerNavigationComponent extends React.Component {
 
     const drawerMobile = (
       <MenuList role="menu">
-        <img className={classes.logo} src="http://localhost:1250/assets/logo.png" alt="logo" />
+        <img className={classes.logo} src={`${ASSET_FOLDER}/logo.png`} alt="logo" />
         <MenuItem onClick={() => this.handleClickMobileMenu('/tools')}>
           <ListItemText disableTypography inset primary="Tool Finder" className={classes.listItem} />
         </MenuItem>

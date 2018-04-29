@@ -5,6 +5,8 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 
+import { ASSET_FOLDER } from '../../startup/configuration';
+
 const styles = () => ({
   root: {
     boxShadow: '0 6px 22px rgba(0,0,0,0.12), 0 6px 10px rgba(0,0,0,0.08)',
@@ -74,7 +76,7 @@ const MaterialsCardComponent = ({ item, classes }) => (
   <Grid className={classes.root} container direction="column" justify="center" alignItems="center">
     <Grid container className={classes.image} justify="center" alignItems="center">
       <img
-        src={`http://localhost:1250/assets/materials/${getCard[item].image}`}
+        src={`${ASSET_FOLDER}/materials/${getCard[item].image}`}
         alt={getCard[item].text}
       />
     </Grid>

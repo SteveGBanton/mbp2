@@ -10,6 +10,7 @@ import Tooltip from 'material-ui/Tooltip';
 
 import MaterialsCard from './MaterialsCard';
 import styles from './Tool.styles';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../startup/configuration';
 
 const deliverHTML = (content) => {
   if (Object.prototype.toString.call(content) === '[object String]') {
@@ -205,13 +206,13 @@ const ToolComponent = ({
                     enterDelay={200}
                   >
                     <a
-                      href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}+Step+${item.stepNo}&details=Nova+Tool+Reference:+${Meteor.settings.public.website}${match.url}%23${item.stepNo}`}
+                      href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}+Step+${item.stepNo}&details=Nova+Tool+Reference:+${WEBSITE_URL}${match.url}%23${item.stepNo}`}
                       target="_blank"
                     >
                       <img
                         style={{ marginTop: 10, marginRight: 5 }}
                         alt="cal"
-                        src="http://localhost:1250/assets/icons/calendar.png"
+                        src={`${ASSET_FOLDER}/icons/calendar.png`}
                         width="40"
                         height="40"
                       />
@@ -229,7 +230,7 @@ const ToolComponent = ({
 
 ToolComponent.defaultProps = {
   match: {
-    url: Meteor.settings.public.website,
+    url: WEBSITE_URL,
     params: {},
   },
   tools: {},

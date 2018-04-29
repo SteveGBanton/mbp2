@@ -1,13 +1,14 @@
+import { ASSET_FOLDER } from '../../startup/configuration';
+
 const TOOLS_BROWSE_FOLDER = '/tools';
 const TOOL_FOLDER = '/tool';
-const ASSETS_FOLDER = 'http://localhost:1250/assets';
 
 export const designPhases = {
   market: {
     id: 'card1',
     link: `${TOOLS_BROWSE_FOLDER}/market`,
     title: 'Identify Market Problems',
-    image: `${ASSETS_FOLDER}/market.png`,
+    image: `${ASSET_FOLDER}/market.png`,
     backgroundSize: '90px 175px',
     backgroundPosition: 'right top',
     preHeader: 'Innovation Phase',
@@ -71,7 +72,7 @@ export const designPhases = {
     id: 'card2',
     link: `${TOOLS_BROWSE_FOLDER}/brainstorming`,
     title: 'Brainstorming',
-    image: `${ASSETS_FOLDER}/brainstorming.png`,
+    image: `${ASSET_FOLDER}/brainstorming.png`,
     preHeader: 'Innovation Phase',
     categories: {
       ideation: {
@@ -99,7 +100,7 @@ export const designPhases = {
     id: 'card3',
     link: `${TOOLS_BROWSE_FOLDER}/discuss`,
     title: 'Discussion',
-    image: `${ASSETS_FOLDER}/discussion.png`,
+    image: `${ASSET_FOLDER}/discussion.png`,
     preHeader: 'Innovation Phase',
     // backgroundColor: '#7a7a7a',
     categories: {
@@ -130,7 +131,7 @@ export const designPhases = {
     id: 'card4',
     link: `${TOOLS_BROWSE_FOLDER}/project`,
     title: 'Project Planning',
-    image: `${ASSETS_FOLDER}/project-management.png`,
+    image: `${ASSET_FOLDER}/project-management.png`,
     preHeader: 'Innovation Phase',
     categories: {
       identify: {
@@ -157,7 +158,7 @@ export const designPhases = {
     id: 'card5',
     link: `${TOOLS_BROWSE_FOLDER}/team`,
     title: 'Team Building',
-    image: `${ASSETS_FOLDER}/team-building.png`,
+    image: `${ASSET_FOLDER}/team-building.png`,
     preHeader: 'Innovation Phase',
     categories: {
       teamwork: {
@@ -206,7 +207,7 @@ export const tools = {
           },
           {
             id: 'besesnes322h4wh4',
-            content: `${ASSETS_FOLDER}/tools/em-image1.png`,
+            content: `${ASSET_FOLDER}/tools/em-image1.png`,
             type: 'image',
           },
         ],
