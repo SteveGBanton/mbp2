@@ -38,14 +38,14 @@ const styles = () => ({
     height: '100%',
     padding: 0,
     margin: 0,
-    transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+    transition: 'all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)',
   },
   drawerClosed: {
     minWidth: 0,
     height: '100%',
     padding: 0,
     margin: 0,
-    transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+    transition: 'all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)',
   },
 });
 

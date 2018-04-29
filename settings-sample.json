@@ -1,6 +1,6 @@
 {
   "public": {
-    "assets": "http://localhost:1250",
+    "assets": "http://localhost:1250/assets",
     "website": "http://localhost:3000"
   },
   "private": {

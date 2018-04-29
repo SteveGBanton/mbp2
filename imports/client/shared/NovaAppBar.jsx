@@ -14,6 +14,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 import AccountCircleIcon from 'material-ui-icons/AccountCircle';
 
 import { noop } from '../../modules/utility';
+import { ASSET_FOLDER } from '../../startup/configuration';
 
 import { drawerHeight } from './DrawerNavigation';
 
@@ -164,7 +165,7 @@ class NovaAppBarComponent extends React.Component {
               </IconButton>
             }
             <Link className={classes.logoLink} to="/">
-              <img className={classes.logo} src="http://localhost:1250/assets/logo.png" alt="logo" />
+              <img className={classes.logo} src={`${ASSET_FOLDER}/logo.png`} alt="logo" />
             </Link>
           </div>
           {/* TODO: add auth */}
