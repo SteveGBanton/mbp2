@@ -11,7 +11,7 @@ const Public = ({
       render={props => (
         !authenticated ?
         (React.createElement(component, { ...props, loggingIn, authenticated })) :
-        (<Redirect to="/dashboard" />)
+        (<Redirect to="/tools" />)
       )}
     />
   </div>

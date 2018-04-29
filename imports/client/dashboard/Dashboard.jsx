@@ -27,11 +27,11 @@ const styles = () => ({
     zIndex: 1000 + 1,
   },
   content: {
-    height: '100%',
+    height: `calc(100vh - ${drawerHeight}px)`,
     width: '100%',
-    marginTop: drawerHeight,
     padding: 0,
-    margin: 0,
+    marginTop: drawerHeight,
+    overflow: 'auto',
   },
   drawerOpen: {
     minWidth: drawerWidth,
@@ -84,6 +84,8 @@ export class DashboardComponent extends React.Component {
             <DrawerNavigation
               drawerOpen={this.props.drawerOpen}
               history={this.props.history}
+              authenticated={authenticated}
+              user={user}
             />
           </div>
         </Hidden>
@@ -97,6 +99,8 @@ export class DashboardComponent extends React.Component {
             <DrawerNavigation
               drawerOpen={this.props.drawerOpen}
               history={this.props.history}
+              authenticated={authenticated}
+              user={user}
             />
           </div>
         </Hidden>
@@ -115,7 +119,7 @@ export class DashboardComponent extends React.Component {
                 designPhases,
                 tools,
               },
-            ) : <Redirect to="/" />)}
+            ) : <Redirect to="/login" />)}
           />
         </div>
         {this.state.firstTimeDialog ?
