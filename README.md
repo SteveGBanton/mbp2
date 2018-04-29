@@ -6,8 +6,6 @@ A react/meteor boilerplate for app prototyping.
 
 Going to work in MBP repo for Nova to build samples/tests here. When ready to deploy, make new repo and then clean up after.
 
-- [ ] Create intro page
-- [ ] Fix authorization - forwarding if not logged in etc.
 - [ ] Change localhost:1250 calls to use env var
 - [ ] Test google log in method
 - [ ] Add favorites function - all pages can be added
@@ -34,6 +32,8 @@ Going to work in MBP repo for Nova to build samples/tests here. When ready to de
 - [X] Fix router scroll to top issue
 - [X] Finish styling Tool page
 - [X] Update Calendar link on tool page & handle on steps
+- [X] Create intro page
+- [X] Fix authorization - forwarding if not logged in etc.
 
 ## Nice To Have Later
 

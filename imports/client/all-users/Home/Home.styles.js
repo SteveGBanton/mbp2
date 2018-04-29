@@ -2,7 +2,6 @@ import { drawerHeight } from '../../shared/DrawerNavigation';
 
 const styles = theme => ({
   root: {
-    height: '100%',
     width: '100%',
     display: 'flex',
     flexFlow: 'column nowrap',
@@ -13,6 +12,7 @@ const styles = theme => ({
     padding: 0,
     margin: 0,
     backgroundColor: theme.palette.colors.novaTealDark,
+    position: 'relative',
   },
   splashImage: {
     zIndex: 100,

@@ -18,11 +18,11 @@ const styles = () => ({
     zIndex: 1000 + 1,
   },
   content: {
-    height: '100%',
+    height: `calc(100vh - ${drawerHeight}px)`,
     width: '100%',
-    marginTop: drawerHeight,
     padding: 0,
-    margin: 0,
+    marginTop: drawerHeight,
+    overflow: 'auto',
   },
 });
 
@@ -37,7 +37,10 @@ const AllUserAccessC = ({
   ...rest
 }) => (
   <div className={classes.root}>
-    <NovaAppBar disableDrawerOpenButton />
+    <NovaAppBar
+      disableDrawerOpenButton
+      authenticated={authenticated}
+    />
     <div className={classes.content}>
       <Route
         {...rest}

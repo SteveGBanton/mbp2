@@ -128,7 +128,7 @@ export class SignupComponent extends React.Component {
             } else {
               Meteor.call('users.sendVerificationEmail');
               snackBarOpen('Welcome!');
-              history.push('/dashboard');
+              history.push('/signup');
             }
           },
         );

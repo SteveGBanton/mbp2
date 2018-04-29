@@ -4,18 +4,18 @@ const styles = theme => ({
     padding: 0,
     height: '100%',
     width: '100%',
+    overflow: 'hidden',
   },
   '@global': {
     body: {
       margin: 0,
       padding: 0,
       height: '100%',
-      overflow: 'auto',
+      maxWidth: '100%',
+      overflow: 'hidden',
       fontSize: theme.typography.fontSize,
       fontWeight: theme.typography.fontWeight,
       fontFamily: theme.typography.fontFamily,
-      maxWidth: '100%',
-      overflowX: 'hidden',
     },
     html: {
       height: '100%',
