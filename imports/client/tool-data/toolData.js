@@ -253,6 +253,7 @@ export const tools = {
       'camera',
       'pencil',
       'whiteboard',
+      'online',
     ],
   },
   unst: {

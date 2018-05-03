@@ -104,9 +104,7 @@ export class DashboardComponent extends React.Component {
             />
           </div>
         </Hidden>
-        <div
-          className={classes.content}
-        >
+        <div className={classes.content} id="content-scroll" >
           <Route
             {...rest}
             render={props => (authenticated ? React.createElement(

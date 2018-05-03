@@ -7,11 +7,15 @@ import { Accounts } from 'meteor/accounts-base';
 import { withTracker } from 'meteor/react-meteor-data';
 import { compose } from 'recompose';
 
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
 import Button from 'material-ui/Button';
+
+import OAuthProfile from './oAuthProfile';
 
 import { snackBarOpen } from '../../../modules/utility';
 
@@ -72,30 +76,47 @@ function getUserType(user) {
 }
 
 class Profile extends React.Component {
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.user && nextProps.user.profile && nextProps.user.profile) {
+      return {
+        name: nextProps.user.profile.name,
+      };
+    }
+    return null;
+  }
+
   state = ({
     formErrors: {},
     currentEmail: (this.props.user.emails) ? this.props.user.emails[0].address : '',
     verifiedEmail: (this.props.user.emails) ? this.props.user.emails[0].verified : '',
+    name: '',
+    industry: '',
+    position: '',
+    newPassword: '',
+    currentPassword: '',
   });
 
-  formValidate = () => {
-    const input = {};
+  handleChange = field => (e) => {
+    this.setState({
+      [field]: e.target.value,
+    });
+  };
 
-    if (this.emailAddress &&
-      this.emailAddress.input.value) input.emailAddress = this.emailAddress.input.value;
-    if (this.firstName &&
-      this.firstName.input.value) input.firstName = this.firstName.input.value;
-    if (this.lastName &&
-      this.lastName.input.value) input.lastName = this.lastName.input.value;
-    if (this.currentPassword &&
-      this.currentPassword.input.value) input.currentPassword = this.currentPassword.input.value;
-    if (this.newPassword &&
-      this.newPassword.input.value) input.newPassword = this.newPassword.input.value;
+  formValidate = () => {
+    const {
+      name,
+      industry,
+      position,
+      newPassword,
+      currentPassword,
+    } = this.state;
+
+    const input = {};
 
     const formErrors = fzValidator(input, rules, messages);
     let currentPwdRequired = true;
 
-    if ((this.newPassword && this.newPassword.input.value) && (this.currentPassword && this.currentPassword.input.value) === '') {
+    if (newPassword && currentPassword === '') {
       formErrors.currentPassword = 'Current password is required to change password';
     } else {
       currentPwdRequired = false;
@@ -109,29 +130,10 @@ class Profile extends React.Component {
     }
   };
 
-  handleSubmit = () => {
-    const { verifiedEmail } = this.state;
-    const { currentEmail } = this.state;
-    let emailChanged = false;
-
-    const profile = {
-      previousEmailAddress: currentEmail,
-      profile: {
-        name: {
-          first: this.firstName.input.value,
-          last: this.lastName.input.value,
-        },
-      },
-    };
-
-    if (this.emailAddress &&
-      this.emailAddress.input.value) profile.emailAddress = this.emailAddress.input.value;
-
-    if (this.emailAddress && this.emailAddress.input.value !== currentEmail) {
-      emailChanged = true;
-    }
-
-    Meteor.call('users.editProfile', profile, (error) => {
+  handleSubmit = (input, newPassword) => {
+    const { verifiedEmail, emailChanged, currentPassword } = this.state;
+    
+    Meteor.call('users.editProfile', input, (error) => {
       if (error) {
         snackBarOpen(error.reason);
       } else {
@@ -142,58 +144,111 @@ class Profile extends React.Component {
       }
     });
 
-    if (this.newPassword && this.newPassword.input.value) {
+    if (newPassword) {
       Accounts.changePassword(
-        this.currentPassword.input.value,
-        this.newPassword.input.value,
+        currentPassword,
+        newPassword,
         (error) => {
           if (error) {
             snackBarOpen(error.reason);
           } else {
-            this.currentPassword.input.value = '';
-            this.newPassword.input.value = '';
+            snackBarOpen('Password successfully changed!');
+            this.setState({
+              newPassword: '',
+              currentPassword: '',
+            });
           }
         },
       );
     }
   };
 
-  renderOAuthUser = (loading, user) => (
-    <div className="OAuthProfile">
-      {Object.keys(user.services).map(service => (
-        <div key={service} className={`LoggedInWith ${service}`}>
-          <div className="ServiceIcon"><i className={`fa fa-${service === 'facebook' ? 'facebook-official' : service}`} /></div>
-          <p>{`You're logged in with ${service} using the email address ${user.services[service].email}.`}</p>
-        </div>
-      ))}
-
-      <form className="profile-edit" onSubmit={event => event.preventDefault()}>
-
-        <div className="profile-edit-1">
-
-          <TextField
-            defaultValue={(user.profile && user.profile.name && user.profile.name.first) ? user.profile.name.first : ''}
-            name="firstName"
-            floatingLabelText="First Name"
-            ref={(input) => { this.firstName = input; }}
-            errorText={this.state.formErrors.firstName}
-          /><br />
-
-          <TextField
-            defaultValue={(user.profile && user.profile.name && user.profile.name.last) ? user.profile.name.last : ''}
-            name="lastName"
-            floatingLabelText="Last Name"
-            ref={(input) => { this.lastName = input; }}
-            errorText={this.state.formErrors.lastName}
-          /><br />
-
-          <div style={{ marginTop: 20 }}>
-            <Button type="submit" onClick={this.formValidate}>Update</Button>
-          </div>
-        </div>
-      </form>
-    </div>
-  );
+  renderOAuthUser = (loading, user) => {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        {user.services.facebook && user.services && (
+          <React.Fragment>
+            <Card className={classes.card}>
+              <CardContent>
+                <div className={classes.cardTitleText}>
+                  Logged in with <span className={classes.fb}>Facebook</span>
+                </div>
+                <Typography display="body1">
+                  You are logged in as <span className={classes.bold}>{user.services.facebook.name}</span> using the email address <span className={classes.bold}>{user.services.facebook.email}</span>.
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button
+                  onClick={() => Meteor.logout()}
+                  style={{ marginLeft: 'auto' }}
+                >
+                  Log out
+                </Button>
+              </CardActions>
+            </Card>
+            <Card className={classes.card}>
+              <CardContent>
+                <div className={classes.cardTitleText}>
+                  Change Name Used In Nova
+                </div>
+                <TextField
+                  id="name"
+                  label="First Name"
+                  className={classes.textField}
+                  value={this.state.name}
+                  onChange={this.handleChange('name')}
+                  margin="normal"
+                  style={{ marginRight: 20 }}
+                />
+              </CardContent>
+              <CardActions>
+                <Button
+                  type="submit"
+                  style={{ marginLeft: 'auto' }}
+                  onClick={this.formValidate}
+                >
+                  Update
+                </Button>
+              </CardActions>
+            </Card>
+          </React.Fragment>)
+        }
+        <Card className={classes.card}>
+          <CardContent>
+            <div className={classes.cardTitleText}>
+              Industry and Position
+            </div>
+            <Typography display="body1">
+              In what industry are you using Nova, and what is your positon?
+            </Typography>
+            <TextField
+              id="industry"
+              label="Industry"
+              className={classes.textField}
+              value={this.state.industry}
+              onChange={this.handleChange('industry')}
+              margin="normal"
+              style={{ marginRight: 20 }}
+            />
+            <TextField
+              id="position"
+              label="Position"
+              className={classes.textField}
+              value={this.state.position}
+              onChange={this.handleChange('position')}
+              margin="normal"
+            />
+          </CardContent>
+          <CardActions>
+            <Button type="submit" style={{ marginLeft: 'auto' }} onClick={this.formValidate}>
+              Update
+            </Button>
+          </CardActions>
+        </Card>
+      </React.Fragment>
+    );
+  };
 
   renderPasswordUser = (loading, user) => (
     <form className="profile-edit" onSubmit={event => event.preventDefault()}>
@@ -270,25 +325,36 @@ class Profile extends React.Component {
   );
 
   renderProfileForm = (loading, user) => (
-    !loading ? ({
+    !loading && user ? ({
       password: this.renderPasswordUser,
-      oauth: this.renderOAuthUser,
+      oauth: () => <OAuthProfile user={user} />,
     }[getUserType(user)])(loading, user) : <Loading />);
 
   render() {
-    const { loading, user } = this.props;
+    const { loading, user, classes } = this.props;
+    console.log(user)
     return (
-      <div className="Profile">
-        <h1>Edit Profile</h1>
-        {this.renderProfileForm(loading, user)}
+      <div className={classes.root}>
+        <div className={classes.form}>
+          <div className={classes.pageTitleText}>
+            Edit Profile
+          </div>
+          {this.renderProfileForm(loading, user)}
+
+        </div>
+        
       </div>
     );
   }
 }
 
+Profile.defaultProps = {
+  user: {},
+};
+
 Profile.propTypes = {
   loading: bool.isRequired,
-  user: shape({}).isRequired,
+  user: shape({}),
 };
 
 export default compose(

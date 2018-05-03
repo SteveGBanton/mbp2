@@ -77,18 +77,6 @@ export default function fzValidator(input, rules, messages) {
     return undefined;
   }
 
-  // function getField(inputField) {
-  //   const correctField = inputField.split('.');
-  //   // Only works to verify up to 2 levels deep
-  //   if (correctField.length === 2) {
-  //     return input[correctField[0]][correctField[1]];
-  //   }
-  //   if (correctField.length === 3) {
-  //     return input[correctField[0]][correctField[1]][correctField[2]];
-  //   }
-  //   return input[correctField[0]];
-  // }
-
   const formErrors = {};
 
   Object.keys(rules).forEach((field) => {

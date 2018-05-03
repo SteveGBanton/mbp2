@@ -180,7 +180,7 @@ class NovaAppBarComponent extends React.Component {
               >
                 <Grid item>
                   <Link className={classes.link} to="#" onClick={this.handleMenuOpen}>
-                    {user.profile.name}
+                    {user && user.profile && user.profile.name}
                   </Link>
                 </Grid>
                 <IconButton

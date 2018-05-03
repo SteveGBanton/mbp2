@@ -21,7 +21,7 @@ const Home = ({ classes, designPhases, history }) => (
           Welcome to Nova, the design thinking tool library.
         </div>
         <div className={classes.textHeaderDescription}>
-          Click below to sign in and start solving problems:
+          Click to sign in and start solving problems:
         </div>
         <Button
           variant="raised"

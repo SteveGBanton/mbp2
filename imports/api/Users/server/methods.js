@@ -100,10 +100,9 @@ export const usersEditProfile = new ValidatedMethod({
     previousEmailAddress: { type: String },
     emailAddress: { type: String },
     profile: { type: Object },
-    'profile.orgName': { type: String },
-    'profile.name': { type: Object },
-    'profile.name.first': { type: String },
-    'profile.name.last': { type: String },
+    'profile.industry': { type: String },
+    'profile.position': { type: String },
+    'profile.name': { type: String },
   }).validator(),
   run(profile) {
     return editProfile({ userId: this.userId, profile })
