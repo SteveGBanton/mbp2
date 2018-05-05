@@ -22,7 +22,8 @@ const styles = () => ({
     width: '100%',
     padding: 0,
     marginTop: drawerHeight,
-    overflow: 'auto',
+    overflowY: 'auto',
+    overflowX: 'hidden',
   },
 });
 
