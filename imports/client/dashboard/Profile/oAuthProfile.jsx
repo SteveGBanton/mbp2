@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
 import React from 'react';
-import { bool, shape } from 'prop-types';
+import { shape } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 
 import Card, { CardActions, CardContent } from 'material-ui/Card';
@@ -45,11 +45,19 @@ const messages = {
 };
 
 class oAuthProfile extends React.Component {
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      name: nextProps.user.profile.name ? nextProps.user.profile.name : '',
+      industry: nextProps.user.profile.industry ? nextProps.user.profile.industry : '',
+      position: nextProps.user.profile.position ? nextProps.user.profile.position : '',
+    };
+  }
+
   state = ({
     formErrors: {},
-    name: this.props.user.profile.name,
-    industry: this.props.user.profile.industry,
-    position: this.props.user.profile.position,
+    name: '',
+    industry: '',
+    position: '',
   });
 
   handleChange = field => (e) => {
@@ -74,17 +82,20 @@ class oAuthProfile extends React.Component {
     const formErrors = fzValidator(input, rules, messages);
 
     if (!formErrors) {
-      this.handleSubmit();
+      this.handleSubmit(input);
       this.setState({ formErrors });
     } else {
+      console.log(formErrors)
+      snackBarOpen('Sorry, please fix form errors before update!');
       this.setState({ formErrors });
     }
   };
 
   handleSubmit = (input) => {
-    Meteor.call('users.editProfileOAuth', input, (error) => {
+    Meteor.call('users.editProfileOAuth', { profile: { ...input } }, (error) => {
       if (error) {
-        snackBarOpen(error.reason);
+        console.log(error)
+        snackBarOpen(error.reason.reason);
       } else {
         snackBarOpen('Profile updated!');
       }
@@ -133,7 +144,7 @@ class oAuthProfile extends React.Component {
               onChange={this.handleChange('name')}
               margin="normal"
               style={{ marginRight: 20 }}
-              error={this.state.formErrors.name}
+              error={Boolean(this.state.formErrors.name)}
               helperText={this.state.formErrors.name}
             />
           </CardContent>
@@ -168,7 +179,7 @@ class oAuthProfile extends React.Component {
               onChange={this.handleChange('industry')}
               margin="normal"
               style={{ marginRight: 20 }}
-              error={this.state.formErrors.industry}
+              error={Boolean(this.state.formErrors.industry)}
               helperText={this.state.formErrors.industry}
             />
             <TextField
@@ -178,7 +189,7 @@ class oAuthProfile extends React.Component {
               value={this.state.position}
               onChange={this.handleChange('position')}
               margin="normal"
-              error={this.state.formErrors.position}
+              error={Boolean(this.state.formErrors.position)}
               helperText={this.state.formErrors.position}
             />
           </CardContent>

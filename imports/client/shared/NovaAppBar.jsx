@@ -20,11 +20,11 @@ import { drawerHeight } from './DrawerNavigation';
 
 const styles = theme => ({
   appBar: {
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#555555',
     height: drawerHeight,
   },
   logo: {
-    width: 90,
+    width: 75,
     margin: 'auto',
     padding: 0,
     display: 'block',
@@ -48,14 +48,14 @@ const styles = theme => ({
     marginRight: 20,
     '& div': {
       marginLeft: 20,
-      color: '#545454',
+      color: '#eee',
       '& a': {
         outline: 'none',
         fontWeight: 300,
         fontSize: 14,
         transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
         textDecoration: 'none',
-        color: '#545454',
+        color: '#eee',
         '&:hover': {
           color: theme.palette.colors.novaTealDark,
         },
@@ -67,19 +67,20 @@ const styles = theme => ({
     marginRight: -15,
     '& button': {
       transition: 'all 1s cubic-bezier(0.25, 0.8, 0.25, 1)',
+      color: '#eee',
       '&:hover': {
         color: theme.palette.colors.novaTealDark,
       },
     },
     '& div': {
-      color: '#545454',
+      color: '#eee',
       '& a': {
         outline: 'none',
         fontWeight: 300,
         fontSize: 14,
         transition: 'all 1s cubic-bezier(0.25, 0.8, 0.25, 1)',
         textDecoration: 'none',
-        color: '#545454',
+        color: '#eee',
         '&:hover': {
           color: theme.palette.colors.novaTealDark,
         },
@@ -160,6 +161,9 @@ class NovaAppBarComponent extends React.Component {
                 color="secondary"
                 aria-label="open drawer"
                 onClick={handleDrawerToggle}
+                style={{
+                  color: '#eee',
+                }}
               >
                 <MenuIcon />
               </IconButton>

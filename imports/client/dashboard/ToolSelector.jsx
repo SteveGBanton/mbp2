@@ -27,7 +27,12 @@ const ToolSelectorComponent = ({
       <Grid
         container
         justify="center"
-        style={{ maxWidth: 1200, width: '95%', padding: '50px 0 90px 0' }}
+        style={{
+          maxWidth: 1200,
+          width: '95%',
+          padding: '50px 0 90px 0',
+          userSelect: 'none',
+        }}
       >
         {
           phaseId &&

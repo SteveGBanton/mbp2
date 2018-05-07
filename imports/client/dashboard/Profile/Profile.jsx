@@ -332,7 +332,6 @@ class Profile extends React.Component {
 
   render() {
     const { loading, user, classes } = this.props;
-    console.log(user)
     return (
       <div className={classes.root}>
         <div className={classes.form}>
