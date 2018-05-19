@@ -23,11 +23,6 @@ const signupFormRules = {
     maxLength: 50,
     email: true,
   },
-  username: {
-    required: true,
-    maxLength: 15,
-    camelCase: true,
-  },
   password: {
     required: true,
     password: true,
@@ -40,11 +35,6 @@ const signupErrorMessages = {
     required: 'This field is required',
     email: 'Please enter a valid email',
     maxLength: 'Email field is too long!',
-  },
-  username: {
-    required: 'This field is required',
-    maxLength: 'Username is too long!',
-    camelCase: 'Username cannot contain spaces or special characters',
   },
   password: {
     required: 'This field is required',
@@ -95,24 +85,22 @@ export class SignupComponent extends React.Component {
     };
 
     const formErrors = fzValidator(input, signupFormRules, signupErrorMessages);
-
+    console.log(formErrors)
     if (!formErrors) {
       this.handleSubmit({
         email,
         password,
-        username,
       });
     } else {
       this.setState({ formErrors });
     }
   };
 
-  handleSubmit = ({ email, password, username }) => {
+  handleSubmit = ({ email, password }) => {
     const { history } = this.props;
     const newUser = {
       email,
       password,
-      username,
     };
 
     Meteor.call('users.createNewUser', newUser, (error) => {
@@ -189,6 +177,7 @@ export class SignupComponent extends React.Component {
                 OR
                 -
               </div>
+              {/*
               <Input
                 className={classes.marginTop}
                 id="choose-username"
@@ -209,7 +198,7 @@ export class SignupComponent extends React.Component {
                 </FormHelperText>
                 :
                 ''
-              }
+              } */}
               <Input
                 className={classes.marginTop}
                 id="choose-email"

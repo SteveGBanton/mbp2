@@ -132,9 +132,6 @@ class Routes extends React.Component {
           open={active}
           autoHideDuration={6000}
           onClose={snackBarClose}
-          SnackbarContentProps={{
-            'aria-describedby': 'message-id',
-          }}
           message={<span id="message-id">{message}</span>}
           action={[
             <IconButton

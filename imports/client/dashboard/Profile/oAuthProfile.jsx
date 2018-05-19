@@ -3,6 +3,7 @@
 import React from 'react';
 import { shape } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
+import classNames from 'classnames';
 
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
@@ -107,15 +108,25 @@ class oAuthProfile extends React.Component {
     return (
       <React.Fragment>
         <Card className={classes.card}>
-          <CardContent className={classes.headerColorFb}>
+          <CardContent className={classNames({
+            [classes.headerColorFb]: !!user.services.facebook,
+            [classes.headerColorGoogle]: !!user.services.google,
+          })}>
             <div className={classes.cardTitleText} style={{ color: '#fff' }}>
-              Logged in with Facebook
+              {user.services.facebook && 'Logged in with Facebook'}
+              {user.services.google && 'Logged in with Google'}
             </div>
           </CardContent>
           <CardContent>
-            <Typography display="body1">
-              You are logged in as <span className={classes.bold}>{user.services.facebook.name}</span> using the email address <span className={classes.bold}>{user.services.facebook.email}</span>.
-            </Typography>
+            {user.services.facebook ?
+              <Typography display="body1">
+                You are logged in as <span className={classes.bold}>{user.services.facebook.name}</span> using the email address <span className={classes.bold}>{user.services.facebook.email}</span>.
+              </Typography>
+              :
+              <Typography display="body1">
+                You are logged in {user.services.google.name ? <span>as <span className={classes.bold}>{user.services.google.name}</span></span> : ''} using the email address <span className={classes.bold}>{user.services.google.email}</span>.
+              </Typography>
+            }
           </CardContent>
           <CardActions>
             <Button

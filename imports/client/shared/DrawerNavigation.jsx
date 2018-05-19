@@ -51,7 +51,6 @@ const styles = () => ({
     padding: 0,
     display: 'block',
     paddingBottom: 20,
-
   },
 });
 
@@ -93,7 +92,7 @@ class DrawerNavigationComponent extends React.Component {
 
     const drawerMobile = (
       <MenuList role="menu">
-        <img className={classes.logo} src={`${ASSET_FOLDER}/logo.png`} alt="logo" />
+        <img className={classes.logo} src={`${ASSET_FOLDER}/logo-b.png`} alt="logo" />
         <MenuItem onClick={() => this.handleClickMobileMenu('/tools')}>
           <ListItemText disableTypography inset primary="Tool Finder" className={classes.listItem} />
         </MenuItem>

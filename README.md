@@ -6,8 +6,12 @@ A react/meteor boilerplate for app prototyping.
 
 Going to work in MBP repo for Nova to build samples/tests here. When ready to deploy, make new repo and then clean up after.
 
-- [ ] Update profile, login, signup pages.
-- [ ] Test google log in method
+- [X] Update profile page to be used with Google.
+- [X] Update profile to be used with email signup
+- [ ] Update login page styling
+- [ ] Update signup page styling
+- [ ] Forgot password form
+- [X] Test google log in method
 - [ ] Add all tools to app
 - [ ] Move app to own repo
 - [ ] Launch MVP - on heroku

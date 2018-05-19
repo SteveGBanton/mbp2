@@ -2,7 +2,11 @@ import { Accounts } from 'meteor/accounts-base';
 
 Accounts.onCreateUser((options, user) => {
   const userToCreate = user;
-  if (options.profile) userToCreate.profile = options.profile;
+  if (options.profile) {
+    userToCreate.profile = options.profile;
+  } else {
+    userToCreate.profile = {};
+  }
   userToCreate.firstLogin = true;
 
   return userToCreate;

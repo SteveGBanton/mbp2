@@ -35,6 +35,9 @@ const styles = theme => ({
   headerColorFb: {
     backgroundColor: theme.palette.primary.facebook,
   },
+  headerColorGoogle: {
+    backgroundColor: theme.palette.primary.google,
+  },
   headerColor: {
     paddingLeft: 70,
     position: 'relative',

@@ -16,6 +16,7 @@ import Icon from 'material-ui/Icon';
 import Button from 'material-ui/Button';
 
 import OAuthProfile from './oAuthProfile';
+import EmailProfile from './emailProfile';
 
 import { snackBarOpen } from '../../../modules/utility';
 
@@ -326,7 +327,7 @@ class Profile extends React.Component {
 
   renderProfileForm = (loading, user) => (
     !loading && user ? ({
-      password: this.renderPasswordUser,
+      password: () => <EmailProfile user={user} />,
       oauth: () => <OAuthProfile user={user} />,
     }[getUserType(user)])(loading, user) : <Loading />);
 
