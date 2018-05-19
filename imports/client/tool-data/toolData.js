@@ -16,6 +16,7 @@ export const designPhases = {
       define: {
         id: 'cat1',
         link: `${TOOLS_BROWSE_FOLDER}/market/define`,
+        image: `${ASSET_FOLDER}/categories/define-market.png`,
         title: 'Define Your Market',
         preHeader: 'Tool Category',
         tools: [
@@ -26,6 +27,7 @@ export const designPhases = {
       analyze: {
         id: 'cat2',
         link: `${TOOLS_BROWSE_FOLDER}/market/analyze`,
+        image: `${ASSET_FOLDER}/categories/analyze-problems.png`,
         title: 'Analyze Problems',
         preHeader: 'Tool Category',
         tools: [
@@ -38,6 +40,7 @@ export const designPhases = {
         id: 'cat3',
         link: `${TOOLS_BROWSE_FOLDER}/market/psych`,
         title: 'Understand User Psychology',
+        image: `${ASSET_FOLDER}/categories/understand-user-psychology.png`,
         preHeader: 'Tool Category',
         tools: [
           'dirh',
@@ -50,6 +53,7 @@ export const designPhases = {
       feedback: {
         id: 'cat4',
         link: `${TOOLS_BROWSE_FOLDER}/market/feedback`,
+        image: `${ASSET_FOLDER}/categories/get-feedback.png`,
         title: 'Get Feedback & Opinions',
         preHeader: 'Tool Category',
         tools: [
@@ -60,6 +64,7 @@ export const designPhases = {
       env: {
         id: 'cat5',
         link: `${TOOLS_BROWSE_FOLDER}/market/env`,
+        image: `${ASSET_FOLDER}/categories/define-market.png`,
         title: 'Define Your Market Environment',
         preHeader: 'Tool Category',
         tools: [
@@ -78,6 +83,7 @@ export const designPhases = {
       ideation: {
         id: 'cat6',
         link: `${TOOLS_BROWSE_FOLDER}/brainstorming/ideation`,
+        image: `${ASSET_FOLDER}/categories/start-ideation.png`,
         title: 'Start the Ideation Process',
         preHeader: 'Tool Category',
         tools: [
@@ -88,6 +94,7 @@ export const designPhases = {
       develop: {
         id: 'cat7',
         link: `${TOOLS_BROWSE_FOLDER}/brainstorming/develop`,
+        image: `${ASSET_FOLDER}/categories/developing-ideas.png`,
         title: 'Develop Ideas',
         preHeader: 'Tool Category',
         tools: [
@@ -108,6 +115,7 @@ export const designPhases = {
         id: 'cat8',
         link: `${TOOLS_BROWSE_FOLDER}/discuss/new`,
         title: 'Find New Ideas And Opportunities',
+        image: `${ASSET_FOLDER}/categories/find-opportunity.png`,
         preHeader: 'Tool Category',
         tools: [
           'act',
@@ -117,6 +125,7 @@ export const designPhases = {
       evaluate: {
         id: 'cat10',
         link: `${TOOLS_BROWSE_FOLDER}/discuss/evaluate`,
+        image: `${ASSET_FOLDER}/categories/evaluate-ideas.png`,
         title: 'Evaluate Ideas Reduce Business Risk',
         preHeader: 'Tool Category',
         tools: [
@@ -137,6 +146,7 @@ export const designPhases = {
       identify: {
         id: 'cat11',
         link: `${TOOLS_BROWSE_FOLDER}/project/identify`,
+        image: `${ASSET_FOLDER}/categories/reduce-risk.png`,
         title: 'Identify Project Problems/Risks',
         preHeader: 'Tool Category',
         tools: [
@@ -146,6 +156,7 @@ export const designPhases = {
       prioritization: {
         id: 'cat12',
         link: `${TOOLS_BROWSE_FOLDER}/project/prioritization`,
+        // TODO: prioritization
         title: 'Prioritization',
         preHeader: 'Tool Category',
         tools: [
@@ -164,6 +175,7 @@ export const designPhases = {
       teamwork: {
         id: 'cat13',
         link: `${TOOLS_BROWSE_FOLDER}/team/teamwork`,
+        image: `${ASSET_FOLDER}/categories/reinforce-teamwork.png`,
         title: 'Reinforce Teamwork',
         preHeader: 'Tool Category',
         tools: [
@@ -173,6 +185,8 @@ export const designPhases = {
       culture: {
         id: 'cat14',
         link: `${TOOLS_BROWSE_FOLDER}/team/culture`,
+        image: `${ASSET_FOLDER}/tools/evaluation-board.png`,
+        // TODO: Culture item
         title: 'Create Team Culture',
         preHeader: 'Tool Category',
         tools: [
@@ -188,7 +202,7 @@ export const tools = {
     link: `${TOOL_FOLDER}/em`,
     title: 'Extremes and Mainstreams',
     description: 'When trying to create a solution for a broad market, it is important to understand unusual/extreme users in addition to your mainstream users. This tool is a useful method to understand your extreme users and how they differ from the mainstream. When you study extreme users, you will be exposed to use cases and problem solving opportunities you may never have thought about, and will also uncover important insights about your mainstream users by contrast.',
-    image: '',
+    image: `${ASSET_FOLDER}/tools/extremes-and-mainstreams.png`,
     beforeYouStart: 'When trying to create a solution for a broad market, it is important to understand unusual/extreme users in addition to your mainstream users. This tool is a useful method to understand your extreme users and how they differ from the mainstream. When you study extreme users, you will be exposed to use cases and problem solving opportunities you may never have thought about, and will also uncover important insights about your mainstream users by contrast.',
     backgroundSize: '',
     backgroundPosition: '',
@@ -258,86 +272,104 @@ export const tools = {
   },
   unst: {
     link: `${TOOL_FOLDER}/unst`,
+    image: `${ASSET_FOLDER}/tools/universe-of-study.png`,
     title: 'Universe of Study',
     preHeader: 'Tool',
   },
   pe: {
     link: `${TOOL_FOLDER}/pe`,
+    image: `${ASSET_FOLDER}/tools/personas.png`,
     title: 'Personas',
     preHeader: 'Tool',
   },
   dirh: {
     link: `${TOOL_FOLDER}/dirh`,
+    image: `${ASSET_FOLDER}/tools/dialogue-research.png`,
     title: 'Dialogue Research',
     preHeader: 'Tool',
   },
   rsc: {
     link: `${TOOL_FOLDER}/rsc`,
+    image: `${ASSET_FOLDER}/tools/restructuring-challenge.png`,
     title: 'Restructure the Challenge',
     preHeader: 'Tool',
   },
   rflw: {
     link: `${TOOL_FOLDER}/rflw`,
+    image: `${ASSET_FOLDER}/tools/resource-flow.png`,
     title: 'Resource Flow',
     preHeader: 'Tool',
   },
   csrt: {
     link: `${TOOL_FOLDER}/csrt`,
+    image: `${ASSET_FOLDER}/tools/card-sort.png`,
     title: 'Card Sort',
     preHeader: 'Tool',
   },
   cll: {
     link: `${TOOL_FOLDER}/cll`,
+    image: `${ASSET_FOLDER}/tools/collage.png`,
     title: 'Collage',
     preHeader: 'Tool',
   },
   sere: {
     link: `${TOOL_FOLDER}/sere`,
+    image: `${ASSET_FOLDER}/tools/secondary-research.png`,
     title: 'Secondary Research',
     preHeader: 'Tool',
   },
   cra: {
     link: `${TOOL_FOLDER}/cra`,
+    image: `${ASSET_FOLDER}/tools/wild-associations.png`,
     title: 'Wild Associations',
     preHeader: 'Tool',
   },
   bci: {
     link: `${TOOL_FOLDER}/bci`,
+    image: `${ASSET_FOLDER}/tools/chinese-portrait.png`,
     title: 'Chinese Portrait',
     preHeader: 'Tool',
   },
   mac: {
     link: `${TOOL_FOLDER}/mac`,
+    image: `${ASSET_FOLDER}/tools/challenges.png`,
     title: 'Challenges',
     preHeader: 'Tool',
   },
   act: {
     link: `${TOOL_FOLDER}/act`,
+    image: `${ASSET_FOLDER}/tools/roles.png`,
+    // TODO: image
     title: 'Roles',
     preHeader: 'Tool',
   },
   sth: {
     link: `${TOOL_FOLDER}/sth`,
+    image: `${ASSET_FOLDER}/tools/six-thinking-hats.png`,
     title: 'Six Thinking Hats',
     preHeader: 'Tool',
   },
   ev: {
     link: `${TOOL_FOLDER}/ev`,
-    title: 'Evalutaion Board',
+    image: `${ASSET_FOLDER}/tools/evaluation-board.png`,
+    title: 'Evaluation Board',
     preHeader: 'Tool',
   },
   kano: {
     link: `${TOOL_FOLDER}/kano`,
+    image: `${ASSET_FOLDER}/tools/kano-board.png`,
     title: 'KANO Analysis',
     preHeader: 'Tool',
   },
   cnnb: {
     link: `${TOOL_FOLDER}/cnnb`,
+    image: `${ASSET_FOLDER}/tools/cannibal.png`,
     title: 'Cannibal',
     preHeader: 'Tool',
   },
   tmb: {
     link: `${TOOL_FOLDER}/tmb`,
+    image: `${ASSET_FOLDER}/tools/skills-resources.png`,
     title: 'Skills & Resources',
     preHeader: 'Tool',
   },
