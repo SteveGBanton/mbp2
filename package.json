@@ -5,11 +5,13 @@
     "start": "npm-run-all --parallel meteor-dev serve-static",
     "meteor-dev": "meteor --settings settings-development.json",
     "test": "meteor test --driver-package cultofcoders:mocha --port 3030",
-    "lint:watch": "esw -w --ext .js,.jsx imports",
+    "lint:watch": "esw -w --ext .js,.jsx imports --fix",
     "serve-static": "node imports/startup/serveAssets.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.40",
+    "@material-ui/core": "^1.0.0",
+    "@material-ui/icons": "^1.0.0",
     "bcrypt": "^2.0.0",
     "body-parser": "^1.18.2",
     "classnames": "^2.2.5",

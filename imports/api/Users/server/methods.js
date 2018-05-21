@@ -110,7 +110,7 @@ export const usersEditOAuthProfile = new ValidatedMethod({
   name: 'users.editProfileOAuth',
   validate: new SimpleSchema({
     profile: { type: Object },
-    'profile.industry': { type: String, optional: true  },
+    'profile.industry': { type: String, optional: true },
     'profile.position': { type: String, optional: true },
     'profile.name': { type: String },
   }).validator(),

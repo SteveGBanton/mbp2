@@ -1,11 +1,11 @@
 import React from 'react';
 import { shape, bool } from 'prop-types';
 
-import { withStyles } from 'material-ui/styles';
-import Drawer from 'material-ui/Drawer';
-import { ListItemText } from 'material-ui/List';
-import Hidden from 'material-ui/Hidden';
-import { MenuItem, MenuList } from 'material-ui/Menu';
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import { ListItemText } from '@material-ui/core/List';
+import Hidden from '@material-ui/core/Hidden';
+import { MenuItem, MenuList } from '@material-ui/core/Menu';
 
 import NovaAppBar from './NovaAppBar';
 import { drawerDashboardOpen, drawerDashboardClose } from '../../modules/utility';

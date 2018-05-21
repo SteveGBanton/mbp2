@@ -2,14 +2,15 @@ import React from 'react';
 import { shape } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import camelCase from 'lodash.camelcase';
 
-import Grid from 'material-ui/Grid';
-import { FormHelperText } from 'material-ui/Form';
-import Input from 'material-ui/Input';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
+import Grid from '@material-ui/core/Grid';
+import { FormHelperText } from '@material-ui/core/FormHelperText';
+import Input from '@material-ui/core/Input';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
 import { snackBarOpen } from '../../../modules/utility';
 
@@ -148,14 +149,14 @@ export class SignupComponent extends React.Component {
           className={classes.signupBox}
           elevation={14}
         >
-          
+
           <form onSubmit={event => event.preventDefault()}>
             <Grid
               container
               direction="column"
               alignItems="center"
             >
-              <h1>Create New Account</h1>
+              <h1>Signup</h1>
               <Button
                 type="submit"
                 onClick={signUpFacebook}

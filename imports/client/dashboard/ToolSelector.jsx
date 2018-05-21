@@ -1,6 +1,6 @@
 import React from 'react';
 import { shape } from 'prop-types';
-import Grid from 'material-ui/Grid';
+import Grid from '@material-ui/core/Grid';
 
 import MenuCard from '../shared/MenuCard';
 

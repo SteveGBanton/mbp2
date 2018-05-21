@@ -1,8 +1,8 @@
 import React from 'react';
 import { shape } from 'prop-types';
 import { Accounts } from 'meteor/accounts-base';
-import { CircularProgress } from 'material-ui/Progress';
-import Grid from 'material-ui/Grid';
+import { CircularProgress } from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
 
 import { ASSET_FOLDER } from '../../startup/configuration';
 import { snackBarOpen } from '../../modules/utility';

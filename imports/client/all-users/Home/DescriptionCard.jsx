@@ -1,9 +1,9 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
 
-import Grid from 'material-ui/Grid';
-import Divider from 'material-ui/Divider';
-import { withStyles } from 'material-ui/styles';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+import { withStyles } from '@material-ui/core/styles';
 
 import styles from './DescriptonCard.styles';
 

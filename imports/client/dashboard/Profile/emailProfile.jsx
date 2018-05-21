@@ -4,17 +4,16 @@ import React from 'react';
 import { Accounts } from 'meteor/accounts-base';
 import { shape } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import classNames from 'classnames';
 import get from 'lodash.get';
 
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Grid from 'material-ui/Grid';
-import IconButton from 'material-ui/IconButton';
-import Tooltip from 'material-ui/Tooltip';
+import Card, { CardActions, CardContent } from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import EmailIcon from 'material-ui-icons/Email';
 import CheckCircleIcon from 'material-ui-icons/CheckCircle';
@@ -147,7 +146,6 @@ class oAuthProfile extends React.Component {
       this.handleSubmit(input, passwords);
       this.setState({ formErrors });
     } else {
-      console.log(formErrors);
       snackBarOpen('Sorry, please fix form errors before update!');
       this.setState({ formErrors });
     }
@@ -384,6 +382,7 @@ class oAuthProfile extends React.Component {
 
 oAuthProfile.propTypes = {
   user: shape({}).isRequired,
+  classes: shape({}).isRequired,
 };
 
 export default withStyles(styles)(oAuthProfile);

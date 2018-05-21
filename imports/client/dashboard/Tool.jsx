@@ -3,10 +3,10 @@ import { string, shape } from 'prop-types';
 import escape from 'lodash.escape';
 import classNames from 'classnames';
 
-import Grid from 'material-ui/Grid';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import Tooltip from 'material-ui/Tooltip';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import MaterialsCard from './MaterialsCard';
 import styles from './Tool.styles';

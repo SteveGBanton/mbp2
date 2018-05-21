@@ -1,12 +1,12 @@
 import React from 'react';
 import { shape, bool } from 'prop-types';
 
-import Toolbar from 'material-ui/Toolbar';
-import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 
 const styles = {

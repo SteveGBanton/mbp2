@@ -5,12 +5,12 @@ import { shape } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import classNames from 'classnames';
 
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Grid from 'material-ui/Grid';
+import Card, { CardActions, CardContent } from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import { snackBarOpen } from '../../../modules/utility';
 import fzValidator from '../../../modules/fzValidator';
@@ -86,7 +86,6 @@ class oAuthProfile extends React.Component {
       this.handleSubmit(input);
       this.setState({ formErrors });
     } else {
-      console.log(formErrors)
       snackBarOpen('Sorry, please fix form errors before update!');
       this.setState({ formErrors });
     }
@@ -95,7 +94,6 @@ class oAuthProfile extends React.Component {
   handleSubmit = (input) => {
     Meteor.call('users.editProfileOAuth', { profile: { ...input } }, (error) => {
       if (error) {
-        console.log(error)
         snackBarOpen(error.reason.reason);
       } else {
         snackBarOpen('Profile updated!');
@@ -111,7 +109,8 @@ class oAuthProfile extends React.Component {
           <CardContent className={classNames({
             [classes.headerColorFb]: !!user.services.facebook,
             [classes.headerColorGoogle]: !!user.services.google,
-          })}>
+          })}
+          >
             <div className={classes.cardTitleText} style={{ color: '#fff' }}>
               {user.services.facebook && 'Logged in with Facebook'}
               {user.services.google && 'Logged in with Google'}
@@ -120,7 +119,14 @@ class oAuthProfile extends React.Component {
           <CardContent>
             {user.services.facebook ?
               <Typography display="body1">
-                You are logged in as <span className={classes.bold}>{user.services.facebook.name}</span> using the email address <span className={classes.bold}>{user.services.facebook.email}</span>.
+                You are logged in as
+                <span className={classes.bold}>
+                  {` ${user.services.facebook.name} `}
+                </span>
+                using the email address
+                <span className={classes.bold}>
+                  {` ${user.services.facebook.email}.`}
+                </span>
               </Typography>
               :
               <Typography display="body1">
@@ -217,6 +223,7 @@ class oAuthProfile extends React.Component {
 
 oAuthProfile.propTypes = {
   user: shape({}).isRequired,
+  classes: shape({}).isRequired,
 };
 
 export default withStyles(styles)(oAuthProfile);

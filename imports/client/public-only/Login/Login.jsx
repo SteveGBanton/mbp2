@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Icon from 'material-ui/Icon';
-import Paper from 'material-ui/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import Paper from '@material-ui/core/Paper';
 
 import { snackBarOpen } from '../../../modules/utility';
 import fzValidator from '../../../modules/fzValidator';

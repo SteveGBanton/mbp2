@@ -9,10 +9,10 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import { compose } from 'recompose';
 
-import IconButton from 'material-ui/IconButton';
-import Snackbar from 'material-ui/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from 'material-ui-icons/Close';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import { snackBarClose } from '../../modules/utility';
 
