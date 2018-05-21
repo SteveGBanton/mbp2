@@ -85,7 +85,6 @@ export class SignupComponent extends React.Component {
     };
 
     const formErrors = fzValidator(input, signupFormRules, signupErrorMessages);
-    console.log(formErrors)
     if (!formErrors) {
       this.handleSubmit({
         email,
@@ -140,6 +139,7 @@ export class SignupComponent extends React.Component {
     const { classes } = this.props;
     return (
       <Grid
+        className={classes.root}
         container
         justify="center"
         alignItems="center"
@@ -148,15 +148,16 @@ export class SignupComponent extends React.Component {
           className={classes.signupBox}
           elevation={14}
         >
-          <h2>Create New Account</h2>
+          
           <form onSubmit={event => event.preventDefault()}>
             <Grid
               container
               direction="column"
+              alignItems="center"
             >
+              <h1>Create New Account</h1>
               <Button
                 type="submit"
-                fullWidth
                 onClick={signUpFacebook}
                 className={classes.facebook}
               >
@@ -164,19 +165,11 @@ export class SignupComponent extends React.Component {
               </Button>
               <Button
                 type="submit"
-                fullWidth
                 onClick={signUpGoogle}
                 className={classes.google}
               >
                 Google Sign Up
               </Button>
-              <div
-                className={classes.orText}
-              >
-                -
-                OR
-                -
-              </div>
               {/*
               <Input
                 className={classes.marginTop}
@@ -249,9 +242,9 @@ export class SignupComponent extends React.Component {
               >
                 Sign Up
               </Button>
+              <p>Already have an account? <Link to="/login">Log In</Link>.</p>
             </Grid>
           </form>
-          <p>Already have an account? <Link to="/login">Log In</Link>.</p>
         </Paper>
       </Grid>
     );

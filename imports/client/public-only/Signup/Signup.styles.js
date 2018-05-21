@@ -1,9 +1,16 @@
 const styles = theme => ({
+  root: {
+    background: `linear-gradient(150deg,${theme.palette.colors.novaTeal},${theme.palette.colors.novaYellow})`,
+    height: '100vh',
+    width: '100%',
+    overflow: 'hidden',
+  },
   signupBox: {
-    borderRadius: 9,
+    borderRadius: 5,
+    height: 500,
+    width: 700,
+    margin: 10,
     padding: '30px 50px 30px 50px',
-    marginTop: 100,
-    width: 320,
     boxSizing: 'border-box',
   },
   orText: {
@@ -14,7 +21,8 @@ const styles = theme => ({
     alignItems: 'center',
   },
   facebook: {
-    borderRadius: 0,
+    borderRadius: 3,
+    margin: 3,
     backgroundColor: theme.palette.primary.facebook,
     color: '#FFF',
     '&:hover': {
@@ -24,7 +32,8 @@ const styles = theme => ({
   },
   google: {
     backgroundColor: theme.palette.primary.google,
-    borderRadius: 0,
+    margin: 3,
+    borderRadius: 3,
     color: '#FFF',
     '&:hover': {
       backgroundColor: theme.palette.primary.google,
