@@ -53,10 +53,17 @@ export const createNewUser = new ValidatedMethod({
   validate: new SimpleSchema({
     email: { type: String },
     password: { type: String },
+    verifyPassword: { type: String },
   }).validator(),
   run(newUser) {
     const id = Accounts.createUser(newUser);
     try {
+      if (newUser.password !== newUser.verifyPassword) {
+        throw new Meteor.Error(
+          'accounts.createuser.passwordsnomatch',
+          'Sorry, passwords do not match',
+        );
+      }
       Roles.addUsersToRoles(id, ['user'], newUser.email);
       return id;
     } catch (exception) {
@@ -124,7 +131,7 @@ export const usersEditOAuthProfile = new ValidatedMethod({
           name: {
             required: true,
             maxLength: 30,
-            minLength: 3,
+            minLength: 2,
           },
           position: {
             maxLength: 30,
@@ -137,7 +144,7 @@ export const usersEditOAuthProfile = new ValidatedMethod({
           name: {
             required: 'Sorry, name is required',
             maxLength: 'Sorry, name is too long!',
-            minLength: 'Sorry, name must be at least 3 characters',
+            minLength: 'Sorry, name must be at least 2 characters',
           },
           position: {
             maxLength: 'Sorry, position is too long!',
@@ -186,7 +193,7 @@ export const usersEditProfileEmail = new ValidatedMethod({
           'profile.name': {
             required: true,
             maxLength: 30,
-            minLength: 3,
+            minLength: 2,
           },
           'profile.position': {
             maxLength: 30,
@@ -203,7 +210,7 @@ export const usersEditProfileEmail = new ValidatedMethod({
           'profile.name': {
             required: 'Sorry, name is required',
             maxLength: 'Sorry, name is too long!',
-            minLength: 'Sorry, name must be at least 3 characters',
+            minLength: 'Sorry, name must be at least 2 characters',
           },
           'profile.position': {
             maxLength: 'Sorry, position is too long!',

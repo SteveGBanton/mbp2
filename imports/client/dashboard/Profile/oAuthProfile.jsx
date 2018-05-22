@@ -5,7 +5,9 @@ import { shape } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import classNames from 'classnames';
 
-import Card, { CardActions, CardContent } from '@material-ui/core/Card';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -20,7 +22,7 @@ import { ASSET_FOLDER } from '../../../startup/configuration';
 const rules = {
   name: {
     required: true,
-    minLength: 3,
+    minLength: 2,
     maxLength: 30,
   },
   industry: {
@@ -33,8 +35,8 @@ const rules = {
 
 const messages = {
   name: {
-    required: 'Please enter a name at least 3 characters long',
-    minLength: 'Please enter at least 3 characters for your name',
+    required: 'Please enter a name at least 2 characters long',
+    minLength: 'Please enter at least 2 characters for your name',
     maxLength: 'Please enter no more than 30 characters',
   },
   industry: {

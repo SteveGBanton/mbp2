@@ -49,8 +49,9 @@ export default function fzValidator(input, rules, messages) {
 
   function valPassword(pass) {
     if (pass !== '') {
-      const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{9,}$/;
-      return re.test(pass);
+      const re = /^(.{0,8}|[^0-9]*|[^A-Z]*|[^a-z]*)$/;
+      // const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{9,}$/;
+      return !re.test(pass);
     }
     return true;
   }

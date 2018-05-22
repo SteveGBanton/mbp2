@@ -3,9 +3,10 @@ import { shape, bool } from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import { ListItemText } from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
 import Hidden from '@material-ui/core/Hidden';
-import { MenuItem, MenuList } from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 
 import NovaAppBar from './NovaAppBar';
 import { drawerDashboardOpen, drawerDashboardClose } from '../../modules/utility';

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { shape } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
+import { Link } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Input from '@material-ui/core/Input';
+import Divider from '@material-ui/core/Divider';
+
+import { ASSET_FOLDER } from '../../../startup/configuration';
 
 import { snackBarOpen } from '../../../modules/utility';
 import fzValidator from '../../../modules/fzValidator';
@@ -14,7 +19,7 @@ import fzValidator from '../../../modules/fzValidator';
 import styles from './Login.styles';
 
 const rules = {
-  emailAddress: {
+  email: {
     required: true,
     email: true,
   },
@@ -24,7 +29,7 @@ const rules = {
 };
 
 const messages = {
-  emailAddress: {
+  email: {
     required: 'Please enter your email address.',
     email: 'Is this email address correct?',
   },
@@ -33,22 +38,47 @@ const messages = {
   },
 };
 
-export class login extends Component {
-  state = ({
+function signUpFacebook() {
+  Meteor.loginWithFacebook({
+    requestPermissions: ['public_profile', 'email'],
+  }, (err) => {
+    if (err) {
+      // handle error
+    } else {
+      // successful login!
+    }
+  });
+}
+
+function signUpGoogle() {
+  Meteor.loginWithGoogle({
+    requestPermissions: ['email'],
+  }, (err) => {
+    if (err) {
+      // handle error
+    } else {
+      // successful login!
+    }
+  });
+}
+
+export class LoginC extends Component {
+  state = {
+    email: '',
+    password: '',
     formErrors: {
       password: '',
-      emailAddress: '',
+      email: '',
     },
-  });
+  };
 
   formValidate = () => {
     const input = {
-      emailAddress: this.emailAddress.value,
-      password: this.password.value,
+      email: this.state.email,
+      password: this.state.password,
     };
 
     const formErrors = fzValidator(input, rules, messages);
-
     if (!formErrors) {
       this.handleSubmit();
     } else {
@@ -59,7 +89,7 @@ export class login extends Component {
   handleSubmit = () => {
     const { history } = this.props;
 
-    Meteor.loginWithPassword(this.emailAddress.value, this.password.value, (error) => {
+    Meteor.loginWithPassword(this.state.email, this.state.password, (error) => {
       if (error) {
         snackBarOpen('Please check your username or password.');
       } else {
@@ -69,107 +99,118 @@ export class login extends Component {
     });
   };
 
-  signUpFacebook = () => {
-    Meteor.loginWithFacebook({
-      requestPermissions: ['public_profile', 'email'],
-    }, (err) => {
-      if (err) {
-        // console.log(err);
-        // handle error
-      } else {
-        // console.log(Meteor.user());
-        // successful login!
-      }
-    });
-  };
-
-  signUpGoogle = () => {
-    Meteor.loginWithGoogle({
-      requestPermissions: ['email'],
-    }, (err) => {
-      if (err) {
-        // handle error
-      } else {
-        // successful login!
-      }
+  handleChangeField = field => (e) => {
+    this.setState({
+      [field]: e.target.value,
     });
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <Paper className="Login">
-        <h2>Sign In To Your Account</h2>
-
-        <form onSubmit={event => event.preventDefault()}>
-
-          <Button
-            type="submit"
-            fullWidth
-            onClick={this.signUpFacebook}
-            style={{ margin: '10px 0 0 0', backgroundColor: '#3B5998' }}
-          >
-            <span style={{ color: 'white' }}>
-              Facebook Sign In
-            </span>
-          </Button>
-
-          <Button
-            type="submit"
-            fullWidth
-            onClick={this.signUpGoogle}
-            style={{ margin: '10px 0 0 0', backgroundColor: '#EA4335' }}
-          >
-            <span style={{ color: 'white' }}>Google Sign In</span>
-          </Button>
-
-          <div style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexFlow: 'row nowrap',
-              marginTop: 20,
-            }}
-          >
-            <Icon className="material-icons">
-              remove
-            </Icon>
-            OR
-            <Icon className="material-icons">
-              remove
-            </Icon>
-          </div>
-
-          <TextField
-            name="username"
-            floatingLabelText="Email Address"
-            inputRef={(input) => { this.emailAddress = input; }}
-            errorText={this.state.formErrors.emailAddress}
-          /> <br />
-
-          <TextField
-            name="password"
-            type="password"
-            floatingLabelText="Password"
-            inputRef={(password) => { this.password = password; }}
-            errorText={this.state.formErrors.password}
+      <Grid
+        className={classes.root}
+        container
+        alignItems="center"
+        direction="column"
+        wrap="nowrap"
+      >
+        <a href="/">
+          <img
+            className={classes.logo}
+            src={`${ASSET_FOLDER}/logo-b.png`}
+            alt="logo"
           />
-
-          <Button
-            type="submit"
-            fullWidth
-            onClick={this.formValidate}
-            style={{ margin: '35px 0 20px 0' }}
-          >
-            Log In
-          </Button>
-        </form>
-      </Paper>);
+        </a>
+        <Paper
+          className={classes.signupBox}
+          elevation={14}
+        >
+          <form onSubmit={event => event.preventDefault()}>
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+            >
+              <div className={classes.headlineText}>Login</div>
+              <Button
+                type="submit"
+                onClick={signUpFacebook}
+                className={classes.facebook}
+              >
+                Facebook Login
+              </Button>
+              <Button
+                type="submit"
+                onClick={signUpGoogle}
+                className={classes.google}
+              >
+                Google Login
+              </Button>
+              <Grid item style={{ width: '100%', height: 5, margin: 25 }}>
+                <Divider light style={{ color: '#000' }} />
+              </Grid>
+              <Input
+                disableUnderline
+                className={classes.input}
+                id="choose-email"
+                autoComplete="email"
+                placeholder="Email Address"
+                value={this.state.email}
+                onChange={this.handleChangeField('email')}
+                error={!!this.state.formErrors.email}
+                inputProps={{
+                  maxLength: 50,
+                }}
+              />
+              {this.state.formErrors.email ?
+                <FormHelperText
+                  error
+                >
+                  {this.state.formErrors.email}
+                </FormHelperText>
+                :
+                ''
+              }
+              <Input
+                disableUnderline
+                className={classes.input}
+                id="choose-password"
+                type="password"
+                placeholder="Password"
+                autoComplete="new-password"
+                value={this.state.password}
+                onChange={this.handleChangeField('password')}
+                error={!!this.state.formErrors.password}
+                inputProps={{
+                  maxLength: 30,
+                }}
+              />
+              {this.state.formErrors.password ?
+                <FormHelperText
+                  error
+                >
+                  {this.state.formErrors.password}
+                </FormHelperText>
+                :
+                ''
+              }
+              <Button className={classes.signup} onClick={this.formValidate}>
+                Login
+              </Button>
+            </Grid>
+          </form>
+        </Paper>
+        <p>{"Don't"} have an account yet? <Link to="/signup">Signup</Link>.</p>
+        <p>Forgot password? <Link to="/forgot">Reset your Password</Link>.</p>
+      </Grid>
+    );
   }
 }
 
-login.propTypes = {
-  history: PropTypes.shape({}).isRequired,
+LoginC.propTypes = {
+  history: shape({}).isRequired,
+  classes: shape({}).isRequired,
 };
 
-export default withStyles(styles)(login);
+export default withStyles(styles)(LoginC);

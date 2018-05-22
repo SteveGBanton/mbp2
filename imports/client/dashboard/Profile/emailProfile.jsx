@@ -6,7 +6,9 @@ import { shape } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import get from 'lodash.get';
 
-import Card, { CardActions, CardContent } from '@material-ui/core/Card';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -27,7 +29,7 @@ const rules = {
   'profile.name': {
     required: true,
     maxLength: 30,
-    minLength: 3,
+    minLength: 2,
   },
   'profile.position': {
     maxLength: 30,
@@ -35,7 +37,7 @@ const rules = {
   'profile.industry': {
     maxLength: 30,
   },
-  emailAddress: {
+  email: {
     email: true,
   },
   newPassword: {
@@ -45,8 +47,8 @@ const rules = {
 
 const messages = {
   'profile.name': {
-    required: 'Please enter a name at least 3 characters long',
-    minLength: 'Please enter at least 3 characters for your name',
+    required: 'Please enter a name at least 2 characters long',
+    minLength: 'Please enter at least 2 characters for your name',
     maxLength: 'Please enter no more than 30 characters',
   },
   'profile.industry': {
@@ -59,7 +61,7 @@ const messages = {
     required: 'Current password is required to change profile.',
   },
   newPassword: {
-    password: 'Keep your account safe: at least 9 characters required, at least one uppercase letter and one number. Special characters allowed: $%@#£€*?&',
+    password: 'Keep your account safe: please enter at least 9 characters, one uppercase letter and one number.',
   },
 };
 
@@ -91,6 +93,7 @@ class oAuthProfile extends React.Component {
     newPassword: '',
     verifyNewPassword: '',
     currentPassword: '',
+    email: '',
   });
 
   handleChange = field => (e) => {
@@ -268,7 +271,7 @@ class oAuthProfile extends React.Component {
           </CardContent>
           <CardContent>
             <TextField
-              id="emailAddress"
+              id="email"
               label="Email Address"
               className={classes.textField}
               value={this.state.email}

@@ -34,6 +34,9 @@ import Signup from '../public-only/Signup/Signup';
 // All users pages
 import Home from '../all-users/Home/Home';
 import VerifyEmail from '../all-users/VerifyEmail';
+import ForgotPassword from '../all-users/ForgotPassword/ForgotPassword';
+import ResetPassword from '../all-users/ResetPassword/ResetPassword';
+
 
 // Shared
 import NotFound from '../shared/NotFound/NotFound';
@@ -78,6 +81,18 @@ class Routes extends React.Component {
                     exact
                     path="/signup"
                     component={Signup}
+                    {...props}
+                  />
+                  <Public
+                    exact
+                    path="/forgot"
+                    component={ForgotPassword}
+                    {...props}
+                  />
+                  <Public
+                    exact
+                    path="/reset-password/:token"
+                    component={ResetPassword}
                     {...props}
                   />
                   <Dashboard

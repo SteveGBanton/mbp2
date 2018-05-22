@@ -3,14 +3,24 @@ const styles = theme => ({
     background: `linear-gradient(150deg,${theme.palette.colors.novaTeal},${theme.palette.colors.novaYellow})`,
     height: '100vh',
     width: '100%',
-    overflow: 'hidden',
+    paddingTop: '5vw',
+  },
+  input: {
+    fontWeight: 300,
+    borderBottom: '3px dotted rgba(0,0,0,0.05)',
+    margin: 10,
+    width: 250,
+  },
+  logo: {
+    width: 90,
+    marginBottom: 20,
   },
   signupBox: {
     borderRadius: 5,
-    height: 500,
-    width: 700,
     margin: 10,
-    padding: '30px 50px 30px 50px',
+    padding: 50,
+    maxWidth: 600,
+    width: '90%',
     boxSizing: 'border-box',
   },
   orText: {
@@ -21,6 +31,7 @@ const styles = theme => ({
     alignItems: 'center',
   },
   facebook: {
+    width: 200,
     borderRadius: 3,
     margin: 3,
     backgroundColor: theme.palette.primary.facebook,
@@ -31,6 +42,7 @@ const styles = theme => ({
     },
   },
   google: {
+    width: 200,
     backgroundColor: theme.palette.primary.google,
     margin: 3,
     borderRadius: 3,
@@ -40,8 +52,15 @@ const styles = theme => ({
       opacity: 0.9,
     },
   },
-  marginTop: {
-    marginTop: 15,
+  signup: {
+    width: 160,
+    marginTop: 30,
+    backgroundColor: 'rgba(0,0,0,0.05)',
+  },
+  headlineText: {
+    fontSize: '2.5rem',
+    fontWeight: 300,
+    marginBottom: 30,
   },
 });
 

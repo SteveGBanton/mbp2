@@ -1,7 +1,7 @@
 import React from 'react';
 import { shape } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { withStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
@@ -14,16 +14,11 @@ import Divider from '@material-ui/core/Divider';
 import { ASSET_FOLDER } from '../../../startup/configuration';
 import { snackBarOpen } from '../../../modules/utility';
 
-import styles from './Signup.styles';
+import styles from './ResetPassword.styles';
 
 import fzValidator from '../../../modules/fzValidator';
 
 const signupFormRules = {
-  email: {
-    required: true,
-    maxLength: 50,
-    email: true,
-  },
   password: {
     required: true,
     password: true,
@@ -31,15 +26,12 @@ const signupFormRules = {
   },
   verifyPassword: {
     required: true,
+    password: true,
+    maxLength: 30,
   },
 };
 
 const signupErrorMessages = {
-  email: {
-    required: 'This field is required',
-    email: 'Please enter a valid email',
-    maxLength: 'Email field is too long!',
-  },
   password: {
     required: 'This field is required',
     password: 'Keep your account safe: please enter at least 9 characters, one uppercase letter and one number.',
@@ -52,43 +44,17 @@ const signupErrorMessages = {
   },
 };
 
-function signUpFacebook() {
-  Meteor.loginWithFacebook({
-    requestPermissions: ['public_profile', 'email'],
-  }, (err) => {
-    if (err) {
-      // handle error
-    } else {
-      // successful login!
-    }
-  });
-}
-
-function signUpGoogle() {
-  Meteor.loginWithGoogle({
-    requestPermissions: ['email'],
-  }, (err) => {
-    if (err) {
-      // handle error
-    } else {
-      // successful login!
-    }
-  });
-}
-
-export class SignupComponent extends React.Component {
+export class ForgotPasswordC extends React.Component {
   state = ({
     formErrors: {},
-    verifyPassword: '',
-    email: '',
     password: '',
+    verifyPassword: '',
   });
 
   formValidate = () => {
-    const { email, password, verifyPassword } = this.state;
+    const { password, verifyPassword } = this.state;
 
     const input = {
-      email,
       password,
       verifyPassword,
     };
@@ -104,8 +70,6 @@ export class SignupComponent extends React.Component {
 
     if (!formErrors) {
       this.handleSubmit({
-        verifyPassword,
-        email,
         password,
       });
     } else {
@@ -113,31 +77,16 @@ export class SignupComponent extends React.Component {
     }
   };
 
-  handleSubmit = ({ email, password, verifyPassword }) => {
-    const { history } = this.props;
-    const newUser = {
-      email,
-      password,
-      verifyPassword,
-    };
+  handleSubmit = ({ password }) => {
+    const { match, history } = this.props;
+    const { token } = match.params;
 
-    Meteor.call('users.createNewUser', newUser, (error) => {
+    Accounts.resetPassword(token, password, (error) => {
       if (error) {
         snackBarOpen(error.reason);
       } else {
-        Meteor.loginWithPassword(
-          email,
-          password,
-          (loginError) => {
-            if (loginError) {
-              snackBarOpen('Error Logging In');
-            } else {
-              Meteor.call('users.sendVerificationEmail');
-              snackBarOpen('Welcome!');
-              history.push('/tools');
-            }
-          },
-        );
+        snackBarOpen('Password reset successful!');
+        history.push('/profile');
       }
     });
   };
@@ -175,46 +124,11 @@ export class SignupComponent extends React.Component {
               direction="column"
               alignItems="center"
             >
-              <div className={classes.headlineText}>Signup</div>
-              <Button
-                type="submit"
-                onClick={signUpFacebook}
-                className={classes.facebook}
-              >
-                Facebook Sign up
-              </Button>
-              <Button
-                type="submit"
-                onClick={signUpGoogle}
-                className={classes.google}
-              >
-                Google Sign up
-              </Button>
+              <div className={classes.headlineText}>Reset Password Form</div>
+              To reset your password, enter a new one below!
               <Grid item style={{ width: '100%', height: 5, margin: 25 }}>
                 <Divider light style={{ color: '#000' }} />
               </Grid>
-              <Input
-                disableUnderline
-                className={classes.input}
-                id="choose-email"
-                autoComplete="email"
-                placeholder="Email Address"
-                value={this.state.email}
-                onChange={this.handleChangeField('email')}
-                error={!!this.state.formErrors.email}
-                inputProps={{
-                  maxLength: 50,
-                }}
-              />
-              {this.state.formErrors.email ?
-                <FormHelperText
-                  error
-                >
-                  {this.state.formErrors.email}
-                </FormHelperText>
-                :
-                ''
-              }
               <Input
                 disableUnderline
                 className={classes.input}
@@ -253,20 +167,20 @@ export class SignupComponent extends React.Component {
                 ''
               }
               <Button className={classes.signup} onClick={this.formValidate}>
-                Sign up
+                Enter
               </Button>
             </Grid>
           </form>
         </Paper>
-        <p>Already have an account? <Link to="/login">Log In</Link>.</p>
       </Grid>
     );
   }
 }
 
-SignupComponent.propTypes = {
+ForgotPasswordC.propTypes = {
   history: shape({}).isRequired,
   classes: shape({}).isRequired,
+  match: shape({}).isRequired,
 };
 
-export default withStyles(styles)(SignupComponent);
+export default withStyles(styles)(ForgotPasswordC);

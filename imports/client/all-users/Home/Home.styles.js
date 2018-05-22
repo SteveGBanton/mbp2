@@ -11,10 +11,17 @@ const styles = theme => ({
     height: `calc(100vh - ${drawerHeight}px)`,
     padding: 0,
     margin: 0,
-    backgroundColor: theme.palette.colors.novaTealDark,
+    background: `linear-gradient(150deg,${theme.palette.colors.novaTealDark},${theme.palette.colors.novaTeal})`,
+    // backgroundColor: theme.palette.colors.novaTealDark,
     position: 'relative',
   },
+  '@keyframes my-animation': {
+    '0%': { transform: 'translateY(0px)' },
+    '50%': { transform: 'translateY(-15px)' },
+    '100%': { transform: 'translateY(0px)' },
+  },
   splashImage: {
+    animation: 'my-animation 5s linear infinite',
     zIndex: 100,
     position: 'absolute',
     top: 0,

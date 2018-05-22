@@ -7,6 +7,18 @@ const styles = theme => ({
     overflow: 'hidden',
   },
   '@global': {
+    a: {
+      color: '#444',
+      textDecoration: 'none',
+      '&:visited': {
+        textDecoration: 'none',
+        color: '#444',
+      },
+      '&:hover': {
+        textDecoration: 'underline',
+        color: '#555',
+      },
+    },
     body: {
       margin: 0,
       padding: 0,
