@@ -1,6 +1,6 @@
 import React from 'react';
 import { string, shape } from 'prop-types';
-import escape from 'lodash.escape';
+import marked from 'marked';
 import classNames from 'classnames';
 
 import Grid from '@material-ui/core/Grid';
@@ -17,7 +17,7 @@ const deliverHTML = (content) => {
     return (
       <Typography
         variant="body1"
-        dangerouslySetInnerHTML={{ __html: escape(content) }}
+        dangerouslySetInnerHTML={{ __html: marked(content) }}
       />);
   }
   const clean = content.map((item) => {
@@ -26,7 +26,7 @@ const deliverHTML = (content) => {
         <Typography
           key={item.id}
           variant="body1"
-          dangerouslySetInnerHTML={{ __html: escape(item.content) }}
+          dangerouslySetInnerHTML={{ __html: marked(item.content) }}
         />);
     } else if (item.type === 'image') {
       return (
@@ -36,7 +36,7 @@ const deliverHTML = (content) => {
           justify="center"
           alignItems="center"
         >
-          <img style={{ maxWidth: '100%', maxHeight: 300 }} src={item.content} alt="" />
+          <img style={{ maxWidth: '100%', maxHeight: (item.maxHeight || 300) }} src={item.content} alt="" />
         </Grid>
       );
     }
@@ -153,7 +153,7 @@ const ToolComponent = ({
                 What You Will Need
             </Typography>
             {tool.materials &&
-              <Grid container justify="center">
+              <Grid container>
                 {tool.materials.map(item => (
                   <MaterialsCard key={item} item={item} />
                 ))}
@@ -170,9 +170,8 @@ const ToolComponent = ({
                 <Typography
                   style={{ marginTop: 30 }}
                   variant="body1"
-                >
-                  {tool.beforeYouStart}
-                </Typography>
+                  dangerouslySetInnerHTML={{ __html: marked(tool.beforeYouStart) }}
+                />
               </Grid>
             }
             <Typography
@@ -200,24 +199,28 @@ const ToolComponent = ({
                   container
                 >
                   {deliverHTML(item.content)}
-                  <Tooltip
-                    id="calendar-tooltip"
-                    title="Add Step To Google Calendar"
-                    enterDelay={200}
-                  >
-                    <a
-                      href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}+Step+${item.stepNo}&details=Nova+Tool+Reference:+${WEBSITE_URL}${match.url}%23${item.stepNo}`}
-                      target="_blank"
+                  <Grid style={{ width: '100%' }} item>
+                    <Tooltip
+                      id="calendar-tooltip"
+                      title="Add Step To Google Calendar"
+                      enterDelay={200}
                     >
-                      <img
-                        style={{ marginTop: 10, marginRight: 5 }}
-                        alt="cal"
-                        src={`${ASSET_FOLDER}/icons/calendar.png`}
+                      <a
+                        href={`https://calendar.google.com/calendar/r/eventedit?text=${tool.title}+Step+${item.stepNo}&details=Nova+Tool+Reference:+${WEBSITE_URL}${match.url}%23${item.stepNo}`}
+                        target="_blank"
                         width="40"
                         height="40"
-                      />
-                    </a>
-                  </Tooltip>
+                      >
+                        <img
+                          style={{ marginTop: 10, marginRight: 5 }}
+                          alt="cal"
+                          src={`${ASSET_FOLDER}/icons/calendar.png`}
+                          width="40"
+                          height="40"
+                        />
+                      </a>
+                    </Tooltip>
+                  </Grid>
                 </Grid>
               </Grid>
             ))}

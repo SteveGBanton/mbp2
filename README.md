@@ -13,7 +13,9 @@ Going to work in MBP repo for Nova to build samples/tests here. When ready to de
 - [X] Forgot password form
 - [X] Reset password form
 - [X] Test google log in method
-- [ ] Add all tools to app
+- [ ] Add all tools to app - raw data, light markup
+- [ ] Add all link to all tools
+- [ ] Add pictures to all tools
 - [ ] Move app to own repo
 - [ ] Launch MVP - on heroku
 - [ ] Add favorites function - all pages can be added

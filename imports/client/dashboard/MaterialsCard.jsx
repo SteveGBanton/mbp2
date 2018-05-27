@@ -61,7 +61,7 @@ const getCard = {
   },
   camera: {
     image: 'camera.png',
-    text: 'Camera',
+    text: 'Recording Device',
   },
   pencil: {
     image: 'pencil.png',
@@ -73,7 +73,7 @@ const getCard = {
   },
   online: {
     image: 'online.png',
-    text: 'Online Resources',
+    text: 'Data Resources',
   },
 };
 

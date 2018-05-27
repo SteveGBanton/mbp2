@@ -1,7 +1,22 @@
 import { ASSET_FOLDER } from '../../startup/configuration';
+import rscTool from './tools/rsc';
+import rflwTool from './tools/rflw';
+import csrtTool from './tools/csrt';
+import cllTool from './tools/cll';
+import sereTool from './tools/sere';
+import craTool from './tools/cra';
+import bciTool from './tools/bci';
+import macTool from './tools/mac';
+import actTool from './tools/act';
+import sthTool from './tools/sth';
+import evTool from './tools/ev';
+import dirhTool from './tools/dirh';
+import peTool from './tools/pe';
+import unstTool from './tools/unst';
+import emTool from './tools/em';
 
-const TOOLS_BROWSE_FOLDER = '/tools';
-const TOOL_FOLDER = '/tool';
+export const TOOLS_BROWSE_FOLDER = '/tools';
+export const TOOL_FOLDER = '/tool';
 
 export const designPhases = {
   market: {
@@ -156,7 +171,7 @@ export const designPhases = {
       prioritization: {
         id: 'cat12',
         link: `${TOOLS_BROWSE_FOLDER}/project/prioritization`,
-        // TODO: prioritization
+        image: `${ASSET_FOLDER}/categories/prioritization.png`,
         title: 'Prioritization',
         preHeader: 'Tool Category',
         tools: [
@@ -185,8 +200,7 @@ export const designPhases = {
       culture: {
         id: 'cat14',
         link: `${TOOLS_BROWSE_FOLDER}/team/culture`,
-        image: `${ASSET_FOLDER}/tools/evaluation-board.png`,
-        // TODO: Culture item
+        image: `${ASSET_FOLDER}/categories/team-culture.png`,
         title: 'Create Team Culture',
         preHeader: 'Tool Category',
         tools: [
@@ -198,67 +212,26 @@ export const designPhases = {
 };
 
 export const tools = {
-  em: {
-    link: `${TOOL_FOLDER}/em`,
-    title: 'Extremes and Mainstreams',
-    description: 'When trying to create a solution for a broad market, it is important to understand unusual/extreme users in addition to your mainstream users. This tool is a useful method to understand your extreme users and how they differ from the mainstream. When you study extreme users, you will be exposed to use cases and problem solving opportunities you may never have thought about, and will also uncover important insights about your mainstream users by contrast.',
-    image: `${ASSET_FOLDER}/tools/extremes-and-mainstreams.png`,
-    beforeYouStart: 'When trying to create a solution for a broad market, it is important to understand unusual/extreme users in addition to your mainstream users. This tool is a useful method to understand your extreme users and how they differ from the mainstream. When you study extreme users, you will be exposed to use cases and problem solving opportunities you may never have thought about, and will also uncover important insights about your mainstream users by contrast.',
-    backgroundSize: '',
-    backgroundPosition: '',
+  em: emTool,
+  unst: unstTool,
+  pe: peTool,
+  dirh: dirhTool,
+  rsc: rscTool,
+  rflw: rflwTool,
+  csrt: csrtTool,
+  cll: cllTool,
+  sere: sereTool,
+  cra: craTool,
+  bci: bciTool,
+  mac: macTool,
+  act: actTool,
+  sth: sthTool,
+  ev: evTool,
+  kano: {
+    link: `${TOOL_FOLDER}/kano`,
+    image: `${ASSET_FOLDER}/tools/kano-board.png`,
+    title: 'KANO Analysis',
     preHeader: 'Tool',
-    purpose: 'Concept Ideation',
-    time: '30m to 2h',
-    team: 'Team 2+',
-    steps: [
-      {
-        id: 'geafeagv',
-        content: [
-          {
-            id: 'shsrhs4646345ebrsb',
-            content: 'Write down the different groups of people that use your product or service. Define extreme and mainstream audiences, and define their approximate size by percentage of your total users.Extreme users may be small groups who use your product or service in an unusual way, may be considered ‘power users’, or may otherwise have characteristics that are not part of your mainstream audience.',
-            type: 'text',
-          },
-          {
-            id: 'besesnes322h4wh4',
-            content: `${ASSET_FOLDER}/tools/em-image1.png`,
-            type: 'image',
-          },
-        ],
-        type: 'mixed',
-        stepNo: 1,
-      },
-      {
-        id: 'gearnrsnrs',
-        content: 'Next, define [REF] a persona for each of these audiences. If you are working in teams, you can divide the audiences between them.',
-        stepNo: 2,
-      },
-      {
-        id: 'nsnrs3255',
-        content: 'Start preliminary research by asking sales people, looking at statistics, etc., in order to begin to define your personas.',
-        stepNo: 3,
-      },
-      {
-        id: 'jdntd3255',
-        content: 'When you have a basic definition for your extreme and mainstream users, the next step is to understand the difference between each audience as well as what they have in common. The best way to do this is through interviews. Prepare an interview or questionnaire [REF. Interview Tool] for at least one user in each audience segment.',
-        stepNo: 4,
-      },
-      {
-        id: 'bsh43hsns',
-        content: 'List each discrete audience observation on its own sticky note for use in the next step. Try to list 50 or more for each audience, and add a user number and observation number to each note to keep track of observation sources. eg. "User3 #5, likes the way tasks are organized in the system".',
-        stepNo: 5,
-      },
-      {
-        id: 'begbe35hs',
-        content: 'When all interviews have been carried out, hold a meeting to discuss and analyze findings. Because the purpose of this meeting is essentially to organize information and to reveal important insights, you may optionally use the [REF. Affinity Diagramming] tool to meaningfully cluster observations and show differences between groups (create columns for each audience segment). This is usually only necessary if you have gathered a lot of data that is difficult to sift through. If not using an Affinity Diagram: use the meeting to define key differences and similarities between your extreme and mainstream audiences.',
-        stepNo: 6,
-      },
-      {
-        id: 'ksesb326',
-        content: 'These answers can be useful beyond your department. Make sure you think about how the answers might affect your organization in terms of marketing, sales, products, price points, advertising, work culture, interior design, communications, etc. You can also expand use of the data you’ve gathered by using discussion tools such as [REF. Six Thinking Hats] to brainstorm new ideas and solve any problems you’ve uncovered.',
-        stepNo: 7,
-      },
-    ],
     materials: [
       'board',
       'crafting',
@@ -269,108 +242,220 @@ export const tools = {
       'whiteboard',
       'online',
     ],
-  },
-  unst: {
-    link: `${TOOL_FOLDER}/unst`,
-    image: `${ASSET_FOLDER}/tools/universe-of-study.png`,
-    title: 'Universe of Study',
-    preHeader: 'Tool',
-  },
-  pe: {
-    link: `${TOOL_FOLDER}/pe`,
-    image: `${ASSET_FOLDER}/tools/personas.png`,
-    title: 'Personas',
-    preHeader: 'Tool',
-  },
-  dirh: {
-    link: `${TOOL_FOLDER}/dirh`,
-    image: `${ASSET_FOLDER}/tools/dialogue-research.png`,
-    title: 'Dialogue Research',
-    preHeader: 'Tool',
-  },
-  rsc: {
-    link: `${TOOL_FOLDER}/rsc`,
-    image: `${ASSET_FOLDER}/tools/restructuring-challenge.png`,
-    title: 'Restructure the Challenge',
-    preHeader: 'Tool',
-  },
-  rflw: {
-    link: `${TOOL_FOLDER}/rflw`,
-    image: `${ASSET_FOLDER}/tools/resource-flow.png`,
-    title: 'Resource Flow',
-    preHeader: 'Tool',
-  },
-  csrt: {
-    link: `${TOOL_FOLDER}/csrt`,
-    image: `${ASSET_FOLDER}/tools/card-sort.png`,
-    title: 'Card Sort',
-    preHeader: 'Tool',
-  },
-  cll: {
-    link: `${TOOL_FOLDER}/cll`,
-    image: `${ASSET_FOLDER}/tools/collage.png`,
-    title: 'Collage',
-    preHeader: 'Tool',
-  },
-  sere: {
-    link: `${TOOL_FOLDER}/sere`,
-    image: `${ASSET_FOLDER}/tools/secondary-research.png`,
-    title: 'Secondary Research',
-    preHeader: 'Tool',
-  },
-  cra: {
-    link: `${TOOL_FOLDER}/cra`,
-    image: `${ASSET_FOLDER}/tools/wild-associations.png`,
-    title: 'Wild Associations',
-    preHeader: 'Tool',
-  },
-  bci: {
-    link: `${TOOL_FOLDER}/bci`,
-    image: `${ASSET_FOLDER}/tools/chinese-portrait.png`,
-    title: 'Chinese Portrait',
-    preHeader: 'Tool',
-  },
-  mac: {
-    link: `${TOOL_FOLDER}/mac`,
-    image: `${ASSET_FOLDER}/tools/challenges.png`,
-    title: 'Challenges',
-    preHeader: 'Tool',
-  },
-  act: {
-    link: `${TOOL_FOLDER}/act`,
-    image: `${ASSET_FOLDER}/tools/roles.png`,
-    // TODO: image
-    title: 'Roles',
-    preHeader: 'Tool',
-  },
-  sth: {
-    link: `${TOOL_FOLDER}/sth`,
-    image: `${ASSET_FOLDER}/tools/six-thinking-hats.png`,
-    title: 'Six Thinking Hats',
-    preHeader: 'Tool',
-  },
-  ev: {
-    link: `${TOOL_FOLDER}/ev`,
-    image: `${ASSET_FOLDER}/tools/evaluation-board.png`,
-    title: 'Evaluation Board',
-    preHeader: 'Tool',
-  },
-  kano: {
-    link: `${TOOL_FOLDER}/kano`,
-    image: `${ASSET_FOLDER}/tools/kano-board.png`,
-    title: 'KANO Analysis',
-    preHeader: 'Tool',
+    purpose: 'Market Research',
+    description: '',
+    beforeYouStart: '',
+    backgroundSize: '',
+    backgroundPosition: '',
+    time: '60-90m',
+    team: 'You, team 2+',
+    steps: [
+      {
+        id: 'step1',
+        content: 'Contact clients or people who represent your audience for interviews (use the [REF. Universe of Study] to establish your audience). Ask them to meet for 30-60 min to talk about the subject you are working on.',
+        type: 'mixed',
+        stepNo: 1,
+      },
+      {
+        id: 'step2',
+        content: 'This interview can be in groups or done individually. Make sure you are not talking about difficult or sensitive topics if you decide to do a group interview.',
+        stepNo: 2,
+      },
+      {
+        id: 'step3',
+        content: 'To prepare for the interview, create a quick introduction to the topic, and create a list of questions you would like to ask. Keep in mind that the purpose of this tool is to understand how the customer uses their resources. It can be used with other tools at the same interview (such as Card Sort), but not necessarily. By the end of the interview, you want to understand their priorities and how money or time affects their decisions.',
+        type: 'mixed',
+        stepNo: 3,
+      },
+      {
+        id: 'step4',
+        content: 'At the interview, make sure you are recording, and give each interviewee a piece of paper and a pen. ',
+        stepNo: 4,
+      },
+      {
+        id: 'step5',
+        content: 'Invite them to start by asking them to create a list of everything that brings money into their household/workplace, or saves them money or time. Give them 5-10 min to answer.',
+        type: 'mixed',
+        stepNo: 5,
+      },
+      {
+        id: 'step6',
+        content: 'Second, ask them to list or draw everything that takes money, time, or opportunity away.',
+        type: 'mixed',
+        stepNo: 6,
+      },
+      {
+        id: 'step10',
+        content: [
+          {
+            id: 'step101',
+            content: 'Next, split your target into groups, and create a table like the one below.If you are working with a team you want want to discuss all the segments and make sure you are breaking up the target into logical groups.The ideal range per group is 3 to 10 people.In this case we need 45 people.',
+            type: 'text',
+          },
+          {
+            id: 'step102',
+            content: `${ASSET_FOLDER}/tools/unst/table.png`,
+            maxHeight: 800,
+            type: 'image',
+          },
+        ],
+        type: 'mixed',
+        stepNo: 9,
+      },
+    ],
   },
   cnnb: {
     link: `${TOOL_FOLDER}/cnnb`,
     image: `${ASSET_FOLDER}/tools/cannibal.png`,
     title: 'Cannibal',
     preHeader: 'Tool',
+    materials: [
+      'board',
+      'crafting',
+      'deck',
+      'stickies',
+      'camera',
+      'pencil',
+      'whiteboard',
+      'online',
+    ],
+    purpose: 'Market Research',
+    description: '',
+    beforeYouStart: '',
+    backgroundSize: '',
+    backgroundPosition: '',
+    time: '60-90m',
+    team: 'You, team 2+',
+    steps: [
+      {
+        id: 'step1',
+        content: 'Contact clients or people who represent your audience for interviews (use the [REF. Universe of Study] to establish your audience). Ask them to meet for 30-60 min to talk about the subject you are working on.',
+        type: 'mixed',
+        stepNo: 1,
+      },
+      {
+        id: 'step2',
+        content: 'This interview can be in groups or done individually. Make sure you are not talking about difficult or sensitive topics if you decide to do a group interview.',
+        stepNo: 2,
+      },
+      {
+        id: 'step3',
+        content: 'To prepare for the interview, create a quick introduction to the topic, and create a list of questions you would like to ask. Keep in mind that the purpose of this tool is to understand how the customer uses their resources. It can be used with other tools at the same interview (such as Card Sort), but not necessarily. By the end of the interview, you want to understand their priorities and how money or time affects their decisions.',
+        type: 'mixed',
+        stepNo: 3,
+      },
+      {
+        id: 'step4',
+        content: 'At the interview, make sure you are recording, and give each interviewee a piece of paper and a pen. ',
+        stepNo: 4,
+      },
+      {
+        id: 'step5',
+        content: 'Invite them to start by asking them to create a list of everything that brings money into their household/workplace, or saves them money or time. Give them 5-10 min to answer.',
+        type: 'mixed',
+        stepNo: 5,
+      },
+      {
+        id: 'step6',
+        content: 'Second, ask them to list or draw everything that takes money, time, or opportunity away.',
+        type: 'mixed',
+        stepNo: 6,
+      },
+      {
+        id: 'step10',
+        content: [
+          {
+            id: 'step101',
+            content: 'Next, split your target into groups, and create a table like the one below.If you are working with a team you want want to discuss all the segments and make sure you are breaking up the target into logical groups.The ideal range per group is 3 to 10 people.In this case we need 45 people.',
+            type: 'text',
+          },
+          {
+            id: 'step102',
+            content: `${ASSET_FOLDER}/tools/unst/table.png`,
+            maxHeight: 800,
+            type: 'image',
+          },
+        ],
+        type: 'mixed',
+        stepNo: 9,
+      },
+    ],
   },
   tmb: {
     link: `${TOOL_FOLDER}/tmb`,
     image: `${ASSET_FOLDER}/tools/skills-resources.png`,
     title: 'Skills & Resources',
     preHeader: 'Tool',
+    materials: [
+      'board',
+      'crafting',
+      'deck',
+      'stickies',
+      'camera',
+      'pencil',
+      'whiteboard',
+      'online',
+    ],
+    purpose: 'Market Research',
+    description: '',
+    beforeYouStart: '',
+    backgroundSize: '',
+    backgroundPosition: '',
+    time: '60-90m',
+    team: 'You, team 2+',
+    steps: [
+      {
+        id: 'step1',
+        content: 'Contact clients or people who represent your audience for interviews (use the [REF. Universe of Study] to establish your audience). Ask them to meet for 30-60 min to talk about the subject you are working on.',
+        type: 'mixed',
+        stepNo: 1,
+      },
+      {
+        id: 'step2',
+        content: 'This interview can be in groups or done individually. Make sure you are not talking about difficult or sensitive topics if you decide to do a group interview.',
+        stepNo: 2,
+      },
+      {
+        id: 'step3',
+        content: 'To prepare for the interview, create a quick introduction to the topic, and create a list of questions you would like to ask. Keep in mind that the purpose of this tool is to understand how the customer uses their resources. It can be used with other tools at the same interview (such as Card Sort), but not necessarily. By the end of the interview, you want to understand their priorities and how money or time affects their decisions.',
+        type: 'mixed',
+        stepNo: 3,
+      },
+      {
+        id: 'step4',
+        content: 'At the interview, make sure you are recording, and give each interviewee a piece of paper and a pen. ',
+        stepNo: 4,
+      },
+      {
+        id: 'step5',
+        content: 'Invite them to start by asking them to create a list of everything that brings money into their household/workplace, or saves them money or time. Give them 5-10 min to answer.',
+        type: 'mixed',
+        stepNo: 5,
+      },
+      {
+        id: 'step6',
+        content: 'Second, ask them to list or draw everything that takes money, time, or opportunity away.',
+        type: 'mixed',
+        stepNo: 6,
+      },
+      {
+        id: 'step10',
+        content: [
+          {
+            id: 'step101',
+            content: 'Next, split your target into groups, and create a table like the one below.If you are working with a team you want want to discuss all the segments and make sure you are breaking up the target into logical groups.The ideal range per group is 3 to 10 people.In this case we need 45 people.',
+            type: 'text',
+          },
+          {
+            id: 'step102',
+            content: `${ASSET_FOLDER}/tools/unst/table.png`,
+            maxHeight: 800,
+            type: 'image',
+          },
+        ],
+        type: 'mixed',
+        stepNo: 9,
+      },
+    ],
   },
 };

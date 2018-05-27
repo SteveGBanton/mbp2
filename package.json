@@ -21,6 +21,7 @@
     "lodash.camelcase": "^4.3.0",
     "lodash.escape": "^4.0.1",
     "lodash.get": "^4.4.2",
+    "marked": "^0.4.0",
     "match-sorter": "^2.0.2",
     "material-ui": "^1.0.0-beta.37",
     "material-ui-icons": "^1.0.0-beta.36",

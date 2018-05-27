@@ -89,8 +89,8 @@ const styles = theme => ({
     },
   },
   menu: {
-    top: 37,
-    left: -5,
+    top: 32,
+    left: 15,
   },
   menuPaper: {
     backgroundColor: '#EEE',
@@ -163,6 +163,7 @@ class NovaAppBarComponent extends React.Component {
                 aria-label="open drawer"
                 onClick={handleDrawerToggle}
                 style={{
+                  width: 24,
                   color: '#eee',
                 }}
               >
@@ -192,6 +193,11 @@ class NovaAppBarComponent extends React.Component {
                   aria-haspopup="true"
                   color="secondary"
                   onClick={this.handleMenuOpen}
+                  style={{
+                    width: 24,
+                    color: '#eee',
+                    margin: '0 10px 0 10px',
+                  }}
                 >
                   <AccountCircleIcon />
                 </IconButton>
