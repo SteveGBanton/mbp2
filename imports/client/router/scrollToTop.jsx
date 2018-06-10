@@ -30,6 +30,8 @@ class ScrollToTop extends React.Component {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       } else {
+        const contentContainer = document.getElementById('content-scroll');
+        if (contentContainer) contentContainer.scrollTop = 0;
         window.scrollTo(0, 0);
       }
     }

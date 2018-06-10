@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import camelCase from 'lodash.camelcase';
 import editProfile from './edit-profile';
 import rateLimit from '../../../modules/rate-limit';
+import validator from '../../../modules/fzValidator';
 
 export const changeCurrentOrgRole = new ValidatedMethod({
   name: 'users.changeCurrentOrgRole',
@@ -53,28 +53,18 @@ export const createNewUser = new ValidatedMethod({
   validate: new SimpleSchema({
     email: { type: String },
     password: { type: String },
-    username: { type: String },
+    verifyPassword: { type: String },
   }).validator(),
   run(newUser) {
-    const { username } = newUser;
     const id = Accounts.createUser(newUser);
-    const verifiedUsername = camelCase(username);
     try {
-      if (verifiedUsername !== username) {
+      if (newUser.password !== newUser.verifyPassword) {
         throw new Meteor.Error(
-          'accounts.createuser.usernameError',
-          'Invalid username',
+          'accounts.createuser.passwordsnomatch',
+          'Sorry, passwords do not match',
         );
       }
-      Roles.addUsersToRoles(id, ['user'], verifiedUsername);
-      Meteor.users.update(id, {
-        $set: {
-          current: {
-            currentRole: 'user',
-            currentOrg: verifiedUsername,
-          },
-        },
-      });
+      Roles.addUsersToRoles(id, ['user'], newUser.email);
       return id;
     } catch (exception) {
       Meteor.users.remove(id);
@@ -100,10 +90,9 @@ export const usersEditProfile = new ValidatedMethod({
     previousEmailAddress: { type: String },
     emailAddress: { type: String },
     profile: { type: Object },
-    'profile.orgName': { type: String },
-    'profile.name': { type: Object },
-    'profile.name.first': { type: String },
-    'profile.name.last': { type: String },
+    'profile.industry': { type: String },
+    'profile.position': { type: String },
+    'profile.name': { type: String },
   }).validator(),
   run(profile) {
     return editProfile({ userId: this.userId, profile })
@@ -124,12 +113,147 @@ export const usersCheckUsername = new ValidatedMethod({
   },
 });
 
+export const usersEditOAuthProfile = new ValidatedMethod({
+  name: 'users.editProfileOAuth',
+  validate: new SimpleSchema({
+    profile: { type: Object },
+    'profile.industry': { type: String, optional: true },
+    'profile.position': { type: String, optional: true },
+    'profile.name': { type: String },
+  }).validator(),
+  run(data) {
+    const { profile } = data;
+    const { userId } = this;
+    try {
+      const errors = validator(
+        { ...profile },
+        {
+          name: {
+            required: true,
+            maxLength: 30,
+            minLength: 2,
+          },
+          position: {
+            maxLength: 30,
+          },
+          industry: {
+            maxLength: 30,
+          },
+        },
+        {
+          name: {
+            required: 'Sorry, name is required',
+            maxLength: 'Sorry, name is too long!',
+            minLength: 'Sorry, name must be at least 2 characters',
+          },
+          position: {
+            maxLength: 'Sorry, position is too long!',
+          },
+          industry: {
+            maxLength: 'Sorry, industry is too long!',
+          },
+        },
+      );
+      if (errors === false) {
+        Meteor.users.update(userId, {
+          $set: {
+            profile,
+          },
+        });
+      } else {
+        throw new Meteor.Error('422', 'Sorry, name is required');
+      }
+    } catch (exception) {
+      throw new Meteor.Error('500', exception);
+    }
+  },
+});
+
+export const usersEditProfileEmail = new ValidatedMethod({
+  name: 'users.editProfileEmail',
+  validate: new SimpleSchema({
+    email: { type: String },
+    profile: { type: Object },
+    'profile.industry': { type: String, optional: true },
+    'profile.position': { type: String, optional: true },
+    'profile.name': { type: String },
+  }).validator(),
+  run(data) {
+    const { userId } = this;
+    const user = Meteor.user();
+    const previousEmailAddress = user.emails[0].address;
+    try {
+      const errors = validator(
+        data,
+        {
+          email: {
+            required: true,
+            email: true,
+          },
+          'profile.name': {
+            required: true,
+            maxLength: 30,
+            minLength: 2,
+          },
+          'profile.position': {
+            maxLength: 30,
+          },
+          'profile.industry': {
+            maxLength: 30,
+          },
+        },
+        {
+          email: {
+            required: 'Email is required',
+            email: 'Please enter a valid email',
+          },
+          'profile.name': {
+            required: 'Sorry, name is required',
+            maxLength: 'Sorry, name is too long!',
+            minLength: 'Sorry, name must be at least 2 characters',
+          },
+          'profile.position': {
+            maxLength: 'Sorry, position is too long!',
+          },
+          'profile.industry': {
+            maxLength: 'Sorry, industry is too long!',
+          },
+        },
+      );
+
+      if (errors === false) {
+        Meteor.users.update(userId, {
+          $set: {
+            'emails.0.address': data.email,
+            profile: data.profile,
+          },
+        });
+
+        if (data.email !== previousEmailAddress) {
+          Meteor.users.update(userId, {
+            $set: {
+              'emails.0.verified': false,
+            },
+          });
+        }
+      } else {
+        // TODO: get first error from errors and send it back, or pass errors back!
+        throw new Meteor.Error('422', 'Sorry, could not update profile!');
+      }
+    } catch (exception) {
+      throw new Meteor.Error('500', exception.reason);
+    }
+  },
+});
+
+
 rateLimit({
   methods: [
     'users.editProfile',
     'users.changeCurrentOrgRole',
     'users.createNewAdminUser',
     'users.checkUsername',
+    'users.editProfileOAuth',
   ],
   limit: 5,
   timeRange: 1000,

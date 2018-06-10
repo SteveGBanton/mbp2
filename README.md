@@ -6,12 +6,19 @@ A react/meteor boilerplate for app prototyping.
 
 Going to work in MBP repo for Nova to build samples/tests here. When ready to deploy, make new repo and then clean up after.
 
-- [ ] Change localhost:1250 calls to use env var
-- [ ] Test google log in method
-- [ ] Add favorites function - all pages can be added
-- [ ] Add all tools to app
+- [X] Update profile page to be used with Google.
+- [X] Update profile to be used with email signup
+- [X] Update login page styling
+- [X] Update signup page styling
+- [X] Forgot password form
+- [X] Reset password form
+- [X] Test google log in method
+- [ ] Add all tools to app - raw data, light markup
+- [ ] Add all link to all tools
+- [ ] Add pictures to all tools
 - [ ] Move app to own repo
-- [ ] Launch MVP - on Nodechef?
+- [ ] Launch MVP - on heroku
+- [ ] Add favorites function - all pages can be added
 - [ ] Add timer to tools page
 - [ ] Add card shuffle tool to app
 - [X] Upgrade material to v1
@@ -34,6 +41,7 @@ Going to work in MBP repo for Nova to build samples/tests here. When ready to de
 - [X] Update Calendar link on tool page & handle on steps
 - [X] Create intro page
 - [X] Fix authorization - forwarding if not logged in etc.
+- [X] Change localhost:1250 calls to use env var
 
 ## Nice To Have Later
 

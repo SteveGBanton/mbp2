@@ -49,8 +49,9 @@ export default function fzValidator(input, rules, messages) {
 
   function valPassword(pass) {
     if (pass !== '') {
-      const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{9,}$/;
-      return re.test(pass);
+      const re = /^(.{0,8}|[^0-9]*|[^A-Z]*|[^a-z]*)$/;
+      // const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{9,}$/;
+      return !re.test(pass);
     }
     return true;
   }
@@ -77,18 +78,6 @@ export default function fzValidator(input, rules, messages) {
     return undefined;
   }
 
-  // function getField(inputField) {
-  //   const correctField = inputField.split('.');
-  //   // Only works to verify up to 2 levels deep
-  //   if (correctField.length === 2) {
-  //     return input[correctField[0]][correctField[1]];
-  //   }
-  //   if (correctField.length === 3) {
-  //     return input[correctField[0]][correctField[1]][correctField[2]];
-  //   }
-  //   return input[correctField[0]];
-  // }
-
   const formErrors = {};
 
   Object.keys(rules).forEach((field) => {
@@ -109,7 +98,7 @@ export default function fzValidator(input, rules, messages) {
         case 'maxLength':
           if (getField(field)) {
             if (!valMaxLength(getField(field), rules[field][subrule])) {
-              formErrors[field] = messages[field].maxlength;
+              formErrors[field] = messages[field].maxLength;
             }
           }
           break;

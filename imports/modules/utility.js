@@ -6,7 +6,7 @@ export function snackBarClose() {
 }
 
 export function snackBarOpen(message) {
-  Session.set('snackBar', { active: true, message });
+  Session.set('snackBar', { active: true, message: String(message) });
 }
 
 export function drawerDashboardClose() {

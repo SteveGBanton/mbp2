@@ -1,9 +1,9 @@
 import React from 'react';
 import { string, shape } from 'prop-types';
 
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 import { ASSET_FOLDER } from '../../startup/configuration';
 
@@ -13,7 +13,8 @@ const styles = () => ({
     borderRadius: 6,
     margin: '30px 10px 0 10px',
     width: 130,
-    height: 160,
+    height: 90,
+    marginTop: 70,
     position: 'relative',
   },
   cardName: {
@@ -23,20 +24,20 @@ const styles = () => ({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    height: '20%',
+    height: '40%',
     backgroundColor: '#EEE',
   },
   image: {
     borderTopRightRadius: 6,
     borderTopLeftRadius: 6,
     position: 'absolute',
-    top: 0,
+    top: -40,
     left: 0,
     width: '100%',
     height: '80%',
     '& img': {
-      maxHeight: '60%',
-      maxWidth: '60%',
+      maxHeight: '130%',
+      maxWidth: '90%',
     },
   },
 });
@@ -60,7 +61,7 @@ const getCard = {
   },
   camera: {
     image: 'camera.png',
-    text: 'Camera',
+    text: 'Recording Device',
   },
   pencil: {
     image: 'pencil.png',
@@ -69,6 +70,10 @@ const getCard = {
   whiteboard: {
     image: 'whiteboard.png',
     text: 'Whiteboard',
+  },
+  online: {
+    image: 'online.png',
+    text: 'Data Resources',
   },
 };
 

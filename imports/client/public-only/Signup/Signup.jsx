@@ -2,15 +2,16 @@ import React from 'react';
 import { shape } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { withStyles } from 'material-ui/styles';
-import camelCase from 'lodash.camelcase';
+import { withStyles } from '@material-ui/core/styles';
 
-import Grid from 'material-ui/Grid';
-import { FormHelperText } from 'material-ui/Form';
-import Input from 'material-ui/Input';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
+import Grid from '@material-ui/core/Grid';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Input from '@material-ui/core/Input';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
+import { ASSET_FOLDER } from '../../../startup/configuration';
 import { snackBarOpen } from '../../../modules/utility';
 
 import styles from './Signup.styles';
@@ -23,15 +24,13 @@ const signupFormRules = {
     maxLength: 50,
     email: true,
   },
-  username: {
-    required: true,
-    maxLength: 15,
-    camelCase: true,
-  },
   password: {
     required: true,
     password: true,
     maxLength: 30,
+  },
+  verifyPassword: {
+    required: true,
   },
 };
 
@@ -41,14 +40,14 @@ const signupErrorMessages = {
     email: 'Please enter a valid email',
     maxLength: 'Email field is too long!',
   },
-  username: {
-    required: 'This field is required',
-    maxLength: 'Username is too long!',
-    camelCase: 'Username cannot contain spaces or special characters',
-  },
   password: {
     required: 'This field is required',
-    password: 'Keep your account safe: at least 9 characters required, at least one uppercase letter and one number. Special characters allowed: $%@#£€*?&',
+    password: 'Keep your account safe: please enter at least 9 characters, one uppercase letter and one number.',
+    maxLength: 'Password can be at most 30 characters!',
+  },
+  verifyPassword: {
+    required: 'This field is required',
+    password: 'Keep your account safe: please enter at least 9 characters, one uppercase letter and one number.',
     maxLength: 'Password can be at most 30 characters!',
   },
 };
@@ -80,39 +79,46 @@ function signUpGoogle() {
 export class SignupComponent extends React.Component {
   state = ({
     formErrors: {},
-    username: '',
+    verifyPassword: '',
     email: '',
     password: '',
   });
 
   formValidate = () => {
-    const { email, password, username } = this.state;
+    const { email, password, verifyPassword } = this.state;
 
     const input = {
       email,
       password,
-      username,
+      verifyPassword,
     };
 
-    const formErrors = fzValidator(input, signupFormRules, signupErrorMessages);
+    let formErrors = fzValidator(input, signupFormRules, signupErrorMessages);
+
+    if (password !== verifyPassword && formErrors === false) {
+      formErrors = {};
+      formErrors.verifyPassword = 'Passwords must match!';
+    } else if (password !== verifyPassword) {
+      formErrors.verifyPassword = 'Passwords must match!';
+    }
 
     if (!formErrors) {
       this.handleSubmit({
+        verifyPassword,
         email,
         password,
-        username,
       });
     } else {
       this.setState({ formErrors });
     }
   };
 
-  handleSubmit = ({ email, password, username }) => {
+  handleSubmit = ({ email, password, verifyPassword }) => {
     const { history } = this.props;
     const newUser = {
       email,
       password,
-      username,
+      verifyPassword,
     };
 
     Meteor.call('users.createNewUser', newUser, (error) => {
@@ -128,7 +134,7 @@ export class SignupComponent extends React.Component {
             } else {
               Meteor.call('users.sendVerificationEmail');
               snackBarOpen('Welcome!');
-              history.push('/signup');
+              history.push('/tools');
             }
           },
         );
@@ -137,81 +143,59 @@ export class SignupComponent extends React.Component {
   };
 
   handleChangeField = field => (e) => {
-    if (field === 'username') {
-      this.setState({
-        [field]: camelCase(e.target.value),
-      });
-    } else {
-      this.setState({
-        [field]: e.target.value,
-      });
-    }
+    this.setState({
+      [field]: e.target.value,
+    });
   };
 
   render() {
     const { classes } = this.props;
     return (
       <Grid
+        className={classes.root}
         container
-        justify="center"
         alignItems="center"
+        direction="column"
+        wrap="nowrap"
       >
+        <a href="/">
+          <img
+            className={classes.logo}
+            src={`${ASSET_FOLDER}/logo-b.png`}
+            alt="logo"
+          />
+        </a>
         <Paper
           className={classes.signupBox}
           elevation={14}
         >
-          <h2>Create New Account</h2>
           <form onSubmit={event => event.preventDefault()}>
             <Grid
               container
               direction="column"
+              alignItems="center"
             >
+              <div className={classes.headlineText}>Signup</div>
               <Button
                 type="submit"
-                fullWidth
                 onClick={signUpFacebook}
                 className={classes.facebook}
               >
-                Facebook Sign Up
+                Facebook Sign up
               </Button>
               <Button
                 type="submit"
-                fullWidth
                 onClick={signUpGoogle}
                 className={classes.google}
               >
-                Google Sign Up
+                Google Sign up
               </Button>
-              <div
-                className={classes.orText}
-              >
-                -
-                OR
-                -
-              </div>
+              <Grid item style={{ width: '100%', height: 5, margin: 25 }}>
+                <Divider light style={{ color: '#000' }} />
+              </Grid>
               <Input
-                className={classes.marginTop}
-                id="choose-username"
-                placeholder="Pick A Username"
-                autoComplete="username"
-                value={this.state.username}
-                onChange={this.handleChangeField('username')}
-                error={!!this.state.formErrors.username}
-                inputProps={{
-                  maxLength: 15,
-                }}
-              />
-              {this.state.formErrors.username ?
-                <FormHelperText
-                  error
-                >
-                  {this.state.formErrors.username}
-                </FormHelperText>
-                :
-                ''
-              }
-              <Input
-                className={classes.marginTop}
+                disableUnderline
+                className={classes.input}
                 id="choose-email"
                 autoComplete="email"
                 placeholder="Email Address"
@@ -232,7 +216,8 @@ export class SignupComponent extends React.Component {
                 ''
               }
               <Input
-                className={classes.marginTop}
+                disableUnderline
+                className={classes.input}
                 id="choose-password"
                 type="password"
                 placeholder="Password"
@@ -244,26 +229,36 @@ export class SignupComponent extends React.Component {
                   maxLength: 30,
                 }}
               />
-              {this.state.formErrors.password ?
+              <Input
+                disableUnderline
+                className={classes.input}
+                id="verify-password"
+                type="password"
+                placeholder="Verify Password"
+                autoComplete="new-password"
+                value={this.state.verifyPassword}
+                onChange={this.handleChangeField('verifyPassword')}
+                error={!!this.state.formErrors.verifyPassword}
+                inputProps={{
+                  maxLength: 30,
+                }}
+              />
+              {this.state.formErrors.password || this.state.formErrors.verifyPassword ?
                 <FormHelperText
                   error
                 >
-                  {this.state.formErrors.password}
+                  {this.state.formErrors.password || this.state.formErrors.verifyPassword}
                 </FormHelperText>
                 :
                 ''
               }
-              <Button
-                className={classes.marginTop}
-                fullWidth
-                onClick={this.formValidate}
-              >
-                Sign Up
+              <Button className={classes.signup} onClick={this.formValidate}>
+                Sign up
               </Button>
             </Grid>
           </form>
-          <p>Already have an account? <Link to="/login">Log In</Link>.</p>
         </Paper>
+        <p>Already have an account? <Link to="/login">Log In</Link>.</p>
       </Grid>
     );
   }

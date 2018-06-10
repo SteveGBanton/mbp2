@@ -1,6 +1,6 @@
 import React from 'react';
 import { shape } from 'prop-types';
-import Grid from 'material-ui/Grid';
+import Grid from '@material-ui/core/Grid';
 
 import MenuCard from '../shared/MenuCard';
 
@@ -27,7 +27,12 @@ const ToolSelectorComponent = ({
       <Grid
         container
         justify="center"
-        style={{ maxWidth: 1200, width: '95%', padding: '50px 0 90px 0' }}
+        style={{
+          maxWidth: 1200,
+          width: '95%',
+          padding: '50px 0 90px 0',
+          userSelect: 'none',
+        }}
       >
         {
           phaseId &&

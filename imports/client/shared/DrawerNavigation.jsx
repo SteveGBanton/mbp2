@@ -1,11 +1,12 @@
 import React from 'react';
 import { shape, bool } from 'prop-types';
 
-import { withStyles } from 'material-ui/styles';
-import Drawer from 'material-ui/Drawer';
-import { ListItemText } from 'material-ui/List';
-import Hidden from 'material-ui/Hidden';
-import { MenuItem, MenuList } from 'material-ui/Menu';
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import ListItemText from '@material-ui/core/ListItemText';
+import Hidden from '@material-ui/core/Hidden';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 
 import NovaAppBar from './NovaAppBar';
 import { drawerDashboardOpen, drawerDashboardClose } from '../../modules/utility';
@@ -51,7 +52,6 @@ const styles = () => ({
     padding: 0,
     display: 'block',
     paddingBottom: 20,
-
   },
 });
 
@@ -93,7 +93,7 @@ class DrawerNavigationComponent extends React.Component {
 
     const drawerMobile = (
       <MenuList role="menu">
-        <img className={classes.logo} src={`${ASSET_FOLDER}/logo.png`} alt="logo" />
+        <img className={classes.logo} src={`${ASSET_FOLDER}/logo-b.png`} alt="logo" />
         <MenuItem onClick={() => this.handleClickMobileMenu('/tools')}>
           <ListItemText disableTypography inset primary="Tool Finder" className={classes.listItem} />
         </MenuItem>

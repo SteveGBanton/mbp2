@@ -3,12 +3,13 @@ import { func, shape, bool, string } from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import Grid from 'material-ui/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Grid from '@material-ui/core/Grid';
 
 import MenuIcon from 'material-ui-icons/Menu';
 import AccountCircleIcon from 'material-ui-icons/AccountCircle';
@@ -20,11 +21,11 @@ import { drawerHeight } from './DrawerNavigation';
 
 const styles = theme => ({
   appBar: {
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#333',
     height: drawerHeight,
   },
   logo: {
-    width: 90,
+    width: 75,
     margin: 'auto',
     padding: 0,
     display: 'block',
@@ -48,14 +49,14 @@ const styles = theme => ({
     marginRight: 20,
     '& div': {
       marginLeft: 20,
-      color: '#545454',
+      color: '#eee',
       '& a': {
         outline: 'none',
         fontWeight: 300,
         fontSize: 14,
         transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
         textDecoration: 'none',
-        color: '#545454',
+        color: '#eee',
         '&:hover': {
           color: theme.palette.colors.novaTealDark,
         },
@@ -67,19 +68,20 @@ const styles = theme => ({
     marginRight: -15,
     '& button': {
       transition: 'all 1s cubic-bezier(0.25, 0.8, 0.25, 1)',
+      color: '#eee',
       '&:hover': {
         color: theme.palette.colors.novaTealDark,
       },
     },
     '& div': {
-      color: '#545454',
+      color: '#eee',
       '& a': {
         outline: 'none',
         fontWeight: 300,
         fontSize: 14,
         transition: 'all 1s cubic-bezier(0.25, 0.8, 0.25, 1)',
         textDecoration: 'none',
-        color: '#545454',
+        color: '#eee',
         '&:hover': {
           color: theme.palette.colors.novaTealDark,
         },
@@ -87,8 +89,8 @@ const styles = theme => ({
     },
   },
   menu: {
-    top: 37,
-    left: -5,
+    top: 32,
+    left: 15,
   },
   menuPaper: {
     backgroundColor: '#EEE',
@@ -160,6 +162,10 @@ class NovaAppBarComponent extends React.Component {
                 color="secondary"
                 aria-label="open drawer"
                 onClick={handleDrawerToggle}
+                style={{
+                  width: 24,
+                  color: '#eee',
+                }}
               >
                 <MenuIcon />
               </IconButton>
@@ -180,13 +186,18 @@ class NovaAppBarComponent extends React.Component {
               >
                 <Grid item>
                   <Link className={classes.link} to="#" onClick={this.handleMenuOpen}>
-                    {user.profile.name}
+                    {user && user.profile && user.profile.name}
                   </Link>
                 </Grid>
                 <IconButton
                   aria-haspopup="true"
                   color="secondary"
                   onClick={this.handleMenuOpen}
+                  style={{
+                    width: 24,
+                    color: '#eee',
+                    margin: '0 10px 0 10px',
+                  }}
                 >
                   <AccountCircleIcon />
                 </IconButton>

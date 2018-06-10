@@ -9,10 +9,10 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Roles } from 'meteor/alanning:roles';
 import { compose } from 'recompose';
 
-import IconButton from 'material-ui/IconButton';
-import Snackbar from 'material-ui/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from 'material-ui-icons/Close';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import { snackBarClose } from '../../modules/utility';
 
@@ -34,6 +34,9 @@ import Signup from '../public-only/Signup/Signup';
 // All users pages
 import Home from '../all-users/Home/Home';
 import VerifyEmail from '../all-users/VerifyEmail';
+import ForgotPassword from '../all-users/ForgotPassword/ForgotPassword';
+import ResetPassword from '../all-users/ResetPassword/ResetPassword';
+
 
 // Shared
 import NotFound from '../shared/NotFound/NotFound';
@@ -78,6 +81,18 @@ class Routes extends React.Component {
                     exact
                     path="/signup"
                     component={Signup}
+                    {...props}
+                  />
+                  <Public
+                    exact
+                    path="/forgot"
+                    component={ForgotPassword}
+                    {...props}
+                  />
+                  <Public
+                    exact
+                    path="/reset-password/:token"
+                    component={ResetPassword}
                     {...props}
                   />
                   <Dashboard
@@ -132,9 +147,6 @@ class Routes extends React.Component {
           open={active}
           autoHideDuration={6000}
           onClose={snackBarClose}
-          SnackbarContentProps={{
-            'aria-describedby': 'message-id',
-          }}
           message={<span id="message-id">{message}</span>}
           action={[
             <IconButton

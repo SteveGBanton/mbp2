@@ -1,9 +1,10 @@
 import React from 'react';
 import { shape } from 'prop-types';
 import { Accounts } from 'meteor/accounts-base';
-import { CircularProgress } from 'material-ui/Progress';
-import Grid from 'material-ui/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
 
+import { ASSET_FOLDER } from '../../startup/configuration';
 import { snackBarOpen } from '../../modules/utility';
 
 class VerifyEmail extends React.Component {
@@ -19,12 +20,12 @@ class VerifyEmail extends React.Component {
           error: `${error.reason}. Please try again.`,
         });
         setTimeout(() => {
-          history.push('/');
+          history.push('/tools');
         }, 4000);
       } else {
         setTimeout(() => {
           snackBarOpen('Successful verification, thanks!');
-          history.push('/dashboard');
+          history.push('/tools');
         }, 1500);
       }
     });
@@ -46,11 +47,36 @@ class VerifyEmail extends React.Component {
             justify="center"
             alignItems="center"
           >
+            <img
+              width="140px"
+              style={{
+                display: 'block',
+                paddingBottom: 30,
+              }}
+              src={`${ASSET_FOLDER}/logo-b.png`}
+              alt="logo"
+            />
             <CircularProgress thickness={8} style={{ margin: 20 }} />
             Verifying Email...
           </Grid>
           :
-          this.state.error
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <img
+              width="140px"
+              style={{
+                display: 'block',
+                paddingBottom: 30,
+              }}
+              src={`${ASSET_FOLDER}/logo-b.png`}
+              alt="logo"
+            />
+            Sorry - {this.state.error}
+          </Grid>
         }
       </Grid>
     );

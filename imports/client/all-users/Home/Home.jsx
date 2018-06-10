@@ -1,8 +1,8 @@
 import React from 'react';
 import { shape } from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
-import Grid from 'material-ui/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import MenuCard from '../../shared/MenuCard';
 import styles from './Home.styles';
@@ -21,7 +21,7 @@ const Home = ({ classes, designPhases, history }) => (
           Welcome to Nova, the design thinking tool library.
         </div>
         <div className={classes.textHeaderDescription}>
-          Click below to sign in and start solving problems:
+          Click to sign in and start solving problems:
         </div>
         <Button
           variant="raised"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shape } from 'prop-types';
 
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import styles from './Logout.styles';
 
 const Logout = ({ classes }) => (

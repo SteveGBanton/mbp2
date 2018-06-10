@@ -6,13 +6,13 @@ import Dialog, {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from 'material-ui/Dialog';
-import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
+} from '@material-ui/core/Dialog';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { withTracker } from 'meteor/react-meteor-data';
 import { compose } from 'recompose';
-import Hidden from 'material-ui/Hidden';
+import Hidden from '@material-ui/core/Hidden';
 
 import { designPhases, tools } from '../tool-data/toolData';
 import DrawerNavigation, { drawerWidth, drawerHeight } from '../shared/DrawerNavigation';
@@ -104,9 +104,7 @@ export class DashboardComponent extends React.Component {
             />
           </div>
         </Hidden>
-        <div
-          className={classes.content}
-        >
+        <div className={classes.content} id="content-scroll" >
           <Route
             {...rest}
             render={props => (authenticated ? React.createElement(

@@ -1,7 +1,7 @@
 import React from 'react';
 import { bool, func, shape } from 'prop-types';
 import { Route, withRouter } from 'react-router-dom';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
 
 import NovaAppBar from '../shared/NovaAppBar';
@@ -22,7 +22,8 @@ const styles = () => ({
     width: '100%',
     padding: 0,
     marginTop: drawerHeight,
-    overflow: 'auto',
+    overflowY: 'auto',
+    overflowX: 'hidden',
   },
 });
 

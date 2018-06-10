@@ -3,9 +3,9 @@ import { shape, string } from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import { withStyles, withTheme } from 'material-ui/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 
 import styles from './MenuCard.styles';
 

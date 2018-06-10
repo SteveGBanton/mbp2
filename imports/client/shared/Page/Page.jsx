@@ -5,7 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { compose } from 'recompose';
 
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import PageHeader from './PageHeader/PageHeader';
 import Content from './Content/Content';
