@@ -16,12 +16,11 @@ export default {
   description: 'This technique is used to solve difficult problems by adoping new perspectives and allowing you to create better hypotheses.',
   beforeYouStart: `The reason a problem seems difficult is often because we have been asking the wrong questions. Using this tool, you will first discover if you have been narrowing the possibilities for a solution by defining the problem in a way that is not useful. 
 
-  This may happen when you have defined the tool, rather than the problem. For example, imagine that you want to reach a balloon that has floated up to the ceiling. You might say the problem is that you don’t have a chair. This is a kind of ‘problem blindness’.
+This may happen when you have defined the tool, rather than the problem. For example, imagine that you want to reach a balloon that has floated up to the ceiling. You might say the problem is that you don’t have a chair. This is a kind of ‘problem blindness’.
 
-  In this situation you are closing your options to a chair, and limiting your chance of finding another solution due to the way you are defining your problem. But you could potentially retrieve the balloon using other creative means such as using a long stick, or using a fan, etc. This may seem like an unlikely example, but it is actually a very common problem, especially with long-term ongoing problems that have been inherited from previous teams.
+In this situation you are closing your options to a chair, and limiting your chance of finding another solution due to the way you are defining your problem. But you could potentially retrieve the balloon using other creative means such as using a long stick, or using a fan, etc. This is an unlikely example - but it describes a common problem, especially with long-term ongoing problems that have been inherited from previous teams.
 
-  After you make sure you have not defined the problem in a way that is impeding your ability to solve it, you will find ways to define your problem that will help you to solve it.
-  `,
+Using this tool, you will make sure you have not defined the problem in a way that is impeding your ability to solve it, and then you will find ways to define your problem that will help you to solve it.`,
   backgroundSize: '',
   backgroundPosition: '',
   time: '30-60m',
@@ -29,7 +28,7 @@ export default {
   steps: [
     {
       id: 'rsc3aah4a',
-      content: 'Write your problem or challenge at the center of the paper or whiteboard. It should be a short, single sentence. You can create it as a question, as well. For example: Improve my user experience design (UX), or How can we improve our UX design?',
+      content: 'Write your problem or challenge at the center of the paper or whiteboard. It should be a short, single sentence. You can create it as a question, as well. For example: Improve my user experience design, or How can we improve our UX design?',
       type: 'mixed',
       stepNo: 1,
     },
@@ -74,10 +73,11 @@ If your team is large and you have different answers discuss and vote on the bes
       id: 'rsc3aahgea4a',
       content: `Finally, write down some of the possible solutions to the problem on sticky notes and stick them to a board. If there are a lot of possible solutions, it is a good idea group them together visually.
 
-You may or may not find a useful definition for the problem. We often need to go through multiple discussions to figure out a useful definition. Keep notes from this session even if you didn't narrow the problem enough to drive an impact in decision making. If you had any useful ideas, you may want to move forward with other techniques such as Prioritization [REF], or Prototype Sessions [REF].
-      `,
+You may or may not find a useful definition for the problem. We often need to go through multiple discussions to figure out a useful definition. Keep notes from this session even if you didn't narrow the problem enough to drive an impact in decision making.`,
       type: 'mixed',
       stepNo: 5,
     },
   ],
 };
+
+// rsc3aahgea4a  If you had any useful ideas, you may want to move forward with other techniques such as Prioritization [REF], or Prototype Sessions [REF]

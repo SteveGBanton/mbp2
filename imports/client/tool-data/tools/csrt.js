@@ -1,4 +1,4 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
@@ -32,7 +32,7 @@ export default {
     },
     {
       id: 'step3',
-      content: 'Put together small group interviews or one-on-one interviews. You may provide incentive to take part in interviews such as a gift card or membership. Use the [REF. Universe of Study] tool to make sure you have an optimal sample size.',
+      content: `Put together small group interviews or one-on-one interviews. You may provide incentive to take part in interviews such as a gift card or membership. Use the [Universe of Study](${WEBSITE_URL}/tool/unst) tool to make sure you have an optimal sample size.`,
       type: 'mixed',
       stepNo: 3,
     },
@@ -76,12 +76,11 @@ When asking an interviewee about a timeline or story, make sure to provide blank
     {
       id: 'step8',
       content: `
-After you have gathered data from each participant, you may use the data in any of the following tools:
-
-[REF. Storyboards] - to synthesize the data into single visual narratives that may translate into specific design alternatives.
-[REF. Six Thinking Hats] - to brainstorm new ideas based on gathered data.`,
+After you have gathered data from each participant, you may use [Six Thinking Hats](${WEBSITE_URL}/tool/sth) to brainstorm new ideas based on gathered data.`,
       type: 'mixed',
       stepNo: 8,
     },
   ],
 };
+
+// ADD REF [Storyboards](${WEBSITE_URL}/tool/discuss) - to synthesize the data into single visual narratives that may translate into specific design alternatives.

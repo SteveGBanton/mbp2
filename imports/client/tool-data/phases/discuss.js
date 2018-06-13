@@ -6,7 +6,6 @@ export default {
   title: 'Discussion',
   image: `${ASSET_FOLDER}/discussion.png`,
   preHeader: 'Innovation Phase',
-  // backgroundColor: '#7a7a7a',
   categories: {
     new: {
       id: 'cat8',
@@ -23,7 +22,7 @@ export default {
       id: 'cat10',
       link: `${TOOLS_BROWSE_FOLDER}/discuss/evaluate`,
       image: `${ASSET_FOLDER}/categories/evaluate-ideas.png`,
-      title: 'Evaluate Ideas Reduce Business Risk',
+      title: 'Evaluate Ideas & Reduce Risk',
       preHeader: 'Tool Category',
       tools: [
         'ev',

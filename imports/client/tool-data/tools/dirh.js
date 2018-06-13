@@ -1,4 +1,4 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
@@ -20,7 +20,7 @@ export default {
   steps: [
     {
       id: 'diahgeafeae',
-      content: `Determine who you want to talk to, and what you want them to talk about. Use the [Universe Of Study](${TOOL_FOLDER}/unst) technique first, if you have not yet defined the group you will be studying.`,
+      content: `Determine who you want to talk to, and what you want them to talk about. Use the [Universe Of Study](${WEBSITE_URL}/tool/unst) technique first, if you have not yet defined the group you will be studying.`,
       type: 'mixed',
       stepNo: 1,
     },
@@ -75,4 +75,4 @@ If you want deeper answer make you sure you have open follow-up questions like:
       stepNo: 7,
     },
   ],
-}
+};

@@ -41,7 +41,7 @@ export default {
       content: [
         {
           id: 'step31',
-          content: 'Each member discusses findings with the group.Cover information in the following categories(use our board  or the CANVAS MODEL):',
+          content: 'Each member discusses findings with the group. Cover information in the following categories (use our board or the CANVAS MODEL):',
           type: 'text',
         },
         {
