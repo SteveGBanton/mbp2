@@ -1,13 +1,13 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
 export default {
   link: `${TOOL_FOLDER}/em`,
   title: 'Extremes and Mainstreams',
-  description: 'When trying to create a solution for a broad market, it is important to understand unusual/extreme users in addition to your mainstream users. This tool is a useful method to understand your extreme users and how they differ from the mainstream. When you study extreme users, you will be exposed to use cases and problem solving opportunities you may never have thought about, and will also uncover important insights about your mainstream users by contrast.',
+  description: 'When trying to create a solution for a broad market, it is important to understand unusual/extreme users in addition to your mainstream users. When you study extreme users, you will be exposed to use cases and problem solving opportunities you may never have thought about, and will also uncover important insights about your mainstream users by contrast. This tool provides a useful method to understand your extreme users and how they differ from the mainstream.',
   image: `${ASSET_FOLDER}/tools/extremes-and-mainstreams.png`,
-  beforeYouStart: 'When trying to create a solution for a broad market, it is important to understand unusual/extreme users in addition to your mainstream users. This tool is a useful method to understand your extreme users and how they differ from the mainstream. When you study extreme users, you will be exposed to use cases and problem solving opportunities you may never have thought about, and will also uncover important insights about your mainstream users by contrast.',
+  beforeYouStart: '',
   backgroundSize: '',
   backgroundPosition: '',
   preHeader: 'Tool',
@@ -20,7 +20,7 @@ export default {
       content: [
         {
           id: 'shsrhs4646345ebrsb',
-          content: 'Write down the different groups of people that use your product or service. Define extreme and mainstream audiences, and define their approximate size by percentage of your total users.Extreme users may be small groups who use your product or service in an unusual way, may be considered ‘power users’, or may otherwise have characteristics that are not part of your mainstream audience.',
+          content: 'Write down the different groups of people that use your product or service. Define extreme and mainstream audiences, and define their approximate size by percentage of your total users. Extreme users may be small groups who use your product or service in an unusual way, may be considered ‘power users’, or may otherwise have characteristics that are not part of your mainstream audience.',
           type: 'text',
         },
         {
@@ -34,7 +34,7 @@ export default {
     },
     {
       id: 'gearnrsnrs',
-      content: 'Next, define [REF] a persona for each of these audiences. If you are working in teams, you can divide the audiences between them.',
+      content: `Next, define a [Persona](${WEBSITE_URL}/tool/pe)  for each of these audiences. If you are working in teams, you can divide the audiences between them.`,
       stepNo: 2,
     },
     {
@@ -44,7 +44,7 @@ export default {
     },
     {
       id: 'jdntd3255',
-      content: 'When you have a basic definition for your extreme and mainstream users, the next step is to understand the difference between each audience as well as what they have in common. The best way to do this is through interviews. Prepare an interview or questionnaire [REF. Interview Tool] for at least one user in each audience segment.',
+      content: 'When you have a basic definition for your extreme and mainstream users, the next step is to understand the difference between each audience as well as what they have in common. The best way to do this is through interviews. Prepare an interview or questionnaire for at least one user in each audience segment.',
       stepNo: 4,
     },
     {
@@ -54,12 +54,12 @@ export default {
     },
     {
       id: 'begbe35hs',
-      content: 'When all interviews have been carried out, hold a meeting to discuss and analyze findings. Because the purpose of this meeting is essentially to organize information and to reveal important insights, you may optionally use the [REF. Affinity Diagramming] tool to meaningfully cluster observations and show differences between groups (create columns for each audience segment). This is usually only necessary if you have gathered a lot of data that is difficult to sift through. If not using an Affinity Diagram: use the meeting to define key differences and similarities between your extreme and mainstream audiences.',
+      content: 'When all interviews have been carried out, hold a meeting to discuss and analyze findings. Because the purpose of this meeting is essentially to organize information and to reveal important insights. This is usually only necessary if you have gathered a lot of data that is difficult to sift through. If not using an Affinity Diagram: use the meeting to define key differences and similarities between your extreme and mainstream audiences.',
       stepNo: 6,
     },
     {
       id: 'ksesb326',
-      content: 'These answers can be useful beyond your department. Make sure you think about how the answers might affect your organization in terms of marketing, sales, products, price points, advertising, work culture, interior design, communications, etc. You can also expand use of the data you’ve gathered by using discussion tools such as [REF. Six Thinking Hats] to brainstorm new ideas and solve any problems you’ve uncovered.',
+      content: `These answers can be useful beyond your department. Make sure you think about how the answers might affect your organization in terms of marketing, sales, products, price points, advertising, work culture, interior design, communications, etc. You can also expand use of the data you’ve gathered by using discussion tools such as [Six Thinking Hats](${WEBSITE_URL}/tool/sth) to brainstorm new ideas and solve any problems you’ve uncovered.`,
       stepNo: 7,
     },
   ],
@@ -74,3 +74,6 @@ export default {
     'online',
   ],
 };
+
+// [REF. Interview Tool] jdntd3255
+// ...you may optionally use the [REF. Affinity Diagramming] tool to meaningfully cluster observations and show differences between groups (create columns for each audience segment) begbe35hs

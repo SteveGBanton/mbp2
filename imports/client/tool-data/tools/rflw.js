@@ -1,4 +1,4 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
@@ -12,7 +12,7 @@ export default {
     'pencil',
   ],
   purpose: 'Market Research',
-  description: 'This method will help you understand how an audience uses their resources, and how their expenses affect their decisions and their lives.',
+  description: 'This method will help you understand how an audience uses their resources, and how their expenses affect their lives and decisions.',
   beforeYouStart: '',
   backgroundSize: '',
   backgroundPosition: '',
@@ -27,7 +27,7 @@ export default {
     },
     {
       id: 'step3',
-      content: 'To prepare for the interview, create a quick introduction to the topic, and create a list of questions you would like to ask. Keep in mind that the purpose of this tool is to understand how the customer uses their resources. It can be used with other tools at the same interview (such as Card Sort), but not necessarily. By the end of the interview, you want to understand their priorities and how money or time affects their decisions.',
+      content: `To prepare for the interview, create a quick introduction to the topic, and create a list of questions you would like to ask. Keep in mind that the purpose of this tool is to understand how the customer uses their resources. It can be used with other tools at the same interview (such as [Card Sort](${WEBSITE_URL}/tool/csrt)), but not necessarily. By the end of the interview, you want to understand their priorities and how money or time affects their decisions.`,
       type: 'mixed',
       stepNo: 2,
     },
@@ -72,7 +72,7 @@ Dig deeper by asking questions like:
     },
     {
       id: 'step9',
-      content: 'After you have gathered data from each participant, you may use the data in any of the following tools: Storyboards - to synthesize the data into single visual narratives that may translate into specific design alternatives. Six Thinking Hats - to brainstorm new ideas based on gathered data.',
+      content: `After you have gathered data from each participant, you may use the data in other tools such as [Six Thinking Hats](${WEBSITE_URL}/tool/sth) to brainstorm new ideas based on gathered data.`,
       type: 'mixed',
       stepNo: 8,
     },

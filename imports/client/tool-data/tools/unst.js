@@ -1,4 +1,4 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
@@ -29,7 +29,7 @@ export default {
       content: [
         {
           id: 'unstgeafeageafea2',
-          content: 'Next, split your target into groups, and create a table like the one below.If you are working with a team you want want to discuss all the segments and make sure you are breaking up the target into logical groups.The ideal range per group is 3 to 10 people.In this case we need 45 people.',
+          content: 'Next, split your target into groups, and create a table like the one below.If you are working with a team you want want to discuss all the segments and make sure you are breaking up the target into logical groups. The ideal range per group is 3 to 10 people.In this case we need 45 people.',
           type: 'text',
         },
         {
@@ -51,7 +51,7 @@ export default {
       content: [
         {
           id: 'unstga4bsn4s',
-          content: 'Create your research hypothesis and prepare to use a research technique for your study. Choose the appropriate technique by asking yourself the following question: Can I find this information online and will it be relevant, specific and updated? If yes, please use our secondary market research techniques, such as Secondary Research Technique or Personas. If the answer is no, you may consider using one of the following techniques: Surveys, Collage, Shadowing, Voice of the Customer, Card Sort, Dialogue Research or Interview techniques.',
+          content: `Create your research hypothesis and prepare to use a research technique for your study. Choose the appropriate technique by asking yourself the following question: Can I find this information online and will it be relevant, specific and updated? If yes, please use our secondary market research techniques, such as [Secondary Research](${WEBSITE_URL}/tool/sere) or [Personas](${WEBSITE_URL}/tool/pe). If the answer is no, you may consider using one of the following techniques: [Collage](${WEBSITE_URL}/tool/cll), [Card Sort](${WEBSITE_URL}/tool/scrt), [Dialogue Research](${WEBSITE_URL}/tool/dirh).`,
           type: 'text',
         },
         {
@@ -64,3 +64,5 @@ export default {
     },
   ],
 };
+
+// unstaea4geag step4 - REF add more references.

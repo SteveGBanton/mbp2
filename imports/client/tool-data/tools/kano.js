@@ -1,4 +1,4 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
@@ -13,7 +13,9 @@ export default {
     'whiteboard',
   ],
   purpose: 'Prioritization',
-  description: 'Kano analysis is a customer satisfaction model that can be used to prioritize the implementation of key product features (once they have already been defined). It can also be used to determine the priority of marketing projects (eg. should we prioritize the product packaging product, or the new online customer portal) as they relate to the value provided to the customer. Ideally, you should prioritize projects that provide more value to your customer. Kano classifies customer preferences into five categories as they are perceived by the customer, so you can understand which product features or ideas you or your team should pursue first. It was developed in the 1980s by Professor Noriaki Kano, a quality management educator.',
+  description: `Kano analysis is a customer satisfaction model that can be used to prioritize the implementation of key product features (once they have already been defined). It can also be used to determine the priority of marketing projects (eg. should we prioritize the product packaging product, or the new online customer portal) as they relate to the value provided to the customer.
+  
+Ideally, you should prioritize projects that provide more value to your customer. Kano classifies customer preferences into five categories as they are perceived by the customer, so you can understand which product features or ideas you or your team should pursue first. It was developed in the 1980s by Professor Noriaki Kano, a quality management educator.`,
   beforeYouStart: '',
   backgroundSize: '',
   backgroundPosition: '',
@@ -125,7 +127,7 @@ Make a table with the feature name in the first column and the case in which it 
       content: [
         {
           id: 'step701',
-          content: 'To review the options and discuss further the team can use tools like: [REF. SIX THINKING HATS] for discussion or [REF. ROLES] or other task for Project Management. ',
+          content: `To review the options and discuss further the team can use tools like: [Six Thinking Hats](${WEBSITE_URL}/tool/sth)  for discussion or [Roles](${WEBSITE_URL}/tool/act) or other task for Project Management.`,
           type: 'text',
         },
       ],

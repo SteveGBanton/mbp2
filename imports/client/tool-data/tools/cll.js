@@ -1,4 +1,4 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
@@ -16,7 +16,7 @@ export default {
     'online',
   ],
   purpose: 'Market Research',
-  description: 'Use this tool to understand an audience\'s values, behaviours, opinions, and processes.A collection of collages and descriptions from their creators will give you a visual idea of how your audience sees their world or how they see a topic.',
+  description: 'Use this tool to understand an audience\'s values, behaviours, opinions, and processes. A collection of collages and descriptions from their creators will give you a visual idea of how your audience sees their world or how they see a topic.',
   beforeYouStart: '',
   backgroundSize: '',
   backgroundPosition: '',
@@ -53,7 +53,7 @@ export default {
     },
     {
       id: 'step6',
-      content: 'After you have completed the group interview and gathered notes, go on to use a Discussion Tool or Organization Tool to synthesize and draw insights from the data. [ADD MORE]',
+      content: `After you have completed the group interview and gathered notes, go on to use a [Discussion Tool](${WEBSITE_URL}/tools/discuss) or [Project Planning Tool](${WEBSITE_URL}/tools/project) to synthesize and draw insights from the data.`,
       type: 'mixed',
       stepNo: 6,
     },

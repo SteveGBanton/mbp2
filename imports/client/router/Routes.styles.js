@@ -9,6 +9,7 @@ const styles = theme => ({
   '@global': {
     a: {
       color: '#444',
+      fontWeight: 700,
       textDecoration: 'none',
       '&:visited': {
         textDecoration: 'none',

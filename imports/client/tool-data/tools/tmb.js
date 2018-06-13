@@ -12,7 +12,7 @@ export default {
   ],
   purpose: 'Market Research',
   description: '',
-  beforeYouStart: `How do you know when you have an effective team?
+  beforeYouStart: `First of all, how do you know when you have an effective team?
 
 An effective team has the following 6 characteristics. Here, we'll illustrate each characteristic by comparison with an excellent example of teamwork in nature: Canadian geese.
 
@@ -90,7 +90,7 @@ This team building exercise can be used to instill these traits into any team.
     },
     {
       id: 'step4',
-      content: `Create a structured meeting schedule to give everyone the option to discuss and ask for help. A great way to implement this is to use a method taken from Scrum [REF.XX Project Management].
+      content: `Create a structured meeting schedule to give everyone the option to discuss and ask for help. A great way to implement this is to use a method taken from Scrum.
 
 Meet periodically for 10 min so each member can:
 
@@ -112,3 +112,5 @@ Weekly or daily meetings are appropriate, where each member has 2-5 min to expla
     },
   ],
 };
+
+// step4 Scrum - REF project mgmgt

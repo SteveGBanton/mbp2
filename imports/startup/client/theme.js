@@ -33,7 +33,7 @@ const theme = createMuiTheme({
     display1: {
       fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
       fontWeight: 300,
-      fontSize: '1.6rem',
+      fontSize: '1.3rem',
       color: '#fff',
     },
     display2: {

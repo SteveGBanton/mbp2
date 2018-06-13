@@ -1,4 +1,4 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
@@ -13,7 +13,7 @@ export default {
     'pencil',
   ],
   purpose: 'Market Research',
-  description: 'To find business solutions using lateral thinking.',
+  description: 'Use this tool to find business solutions using lateral thinking.',
   beforeYouStart: '',
   backgroundSize: '',
   backgroundPosition: '',
@@ -62,7 +62,7 @@ export default {
     },
     {
       id: 'step8',
-      content: 'Once a solution has been selected, each team separates again to develop the idea. Other tools can be used at this stage such as [KANO ANALISIS] or [6 Thinking Hats], or another Challenge card can be presented. (10-15 min)',
+      content: `Once a solution has been selected, each team separates again to develop the idea. Other tools can be used at this stage such as [Kano Analysis](${WEBSITE_URL}/tool/sth) or [Six Thinking Hats](${WEBSITE_URL}/tool/sth), or another Challenge card can be presented. (10-15 min)`,
       type: 'mixed',
       stepNo: 8,
     },

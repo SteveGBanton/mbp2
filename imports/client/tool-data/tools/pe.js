@@ -1,4 +1,4 @@
-import { ASSET_FOLDER } from '../../../startup/configuration';
+import { ASSET_FOLDER, WEBSITE_URL } from '../../../startup/configuration';
 
 const TOOL_FOLDER = '/tool';
 
@@ -44,8 +44,8 @@ export default {
       stepNo: 4,
     },
     {
-      id: 'perstge4w4',
-      content: 'You will know when you have enough information when you feel like you know about this person and their beliefs, passions, aspirations, fears, hobbies, etc. Please continue finding information until you feel like the personality of your persona is fully-formed and could be real.',
+      id: 'perstge4wfage5',
+      content: 'Choose a real name for each customer or use the most common name that comes up in your customer files. This will help your team to have empathy for the customer as if it were a real person.',
       type: 'text',
       stepNo: 5,
     },
@@ -80,10 +80,12 @@ export default {
       stepNo: 10,
     },
     {
-      id: 'perst4wh4wjh4',
-      content: 'Now that you have an accurate Persona, there are many other tools you will be able to use. For example, you can also use the method [REF. Role Playing] or the [REF. Empathy Board] to understand more about this customer, and to test ideas or prototypes.',
+      id: 'step11',
+      content: `Now that you have an accurate Persona, there are many other tools you will be able to use. For example, you can also use the [Roles](${WEBSITE_URL}/tool/act) to understand more about this customer, and to test ideas or prototypes.`,
       type: 'text',
       stepNo: 11,
     },
   ],
 };
+
+// step11 or the [REF. Empathy Board]
