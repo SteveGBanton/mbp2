@@ -1,6 +1,5 @@
 import React from 'react';
 import { shape } from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import { withStyles } from '@material-ui/core/styles';
 
